@@ -7,7 +7,9 @@ import { TuneList } from './TuneList';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TuneList />
+    <Router>
+      <TuneList />  
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

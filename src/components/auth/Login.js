@@ -2,8 +2,8 @@ import React, { useRef } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import { Button, Divider } from "semantic-ui-react"
-import logo from "../../img/ibs-logo_words.png"
-import video from "../../video/ibs-video.mp4"
+// import logo from "../../img/logo_words.png"
+// import video from "../../video/video.mp4"
 import "./Login.css"
 
 export const Login = props => {
@@ -23,7 +23,7 @@ export const Login = props => {
         existingUserCheck()
             .then(exists => {
                 if (exists) {
-                    localStorage.setItem("nutty_user", exists.id)
+                    localStorage.setItem("tunes_user", exists.id)
                     history.push("/")
                 } else {
                     existDialog.current.showModal()
@@ -42,7 +42,7 @@ export const Login = props => {
 
                     <section>
                         <form className="form--login" onSubmit={handleLogin}>
-                            <img src={logo} alt="tune list logo" className="logo" />
+                            {/* <img src={logo} alt="tune list logo" className="logo" /> */}
                             <h1>TuneList</h1>
 
                             <Divider />
@@ -72,9 +72,9 @@ export const Login = props => {
                     </section>
                 </main>
 
-                <video className="videoTag" autoPlay loop muted>
+                {/* <video className="videoTag" autoPlay loop muted>
                     <source src={video} type="video/mp4" />
-                </video>
+                </video> */}
             </div>
         </>
     )

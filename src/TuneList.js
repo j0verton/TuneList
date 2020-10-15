@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { ApplicationViews } from "./ApplicationViews";
-import { NavBar } from "./nav/NavBar";
-import { Login } from "./auth/Login";
-import { Register } from "./auth/Register";
+import { NavBar } from "./components/nav/NavBar";
+import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
+
 export const TuneList = () => (
     <>
       <Route
         render={() => {
-          if (localStorage.getItem("user")) {
+          if (localStorage.getItem("tunes_user")) {
             return (
               <>
                 <NavBar />

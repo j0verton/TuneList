@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { Button } from "semantic-ui-react"
-import video from "../../video/ibs-video.mp4"
+// import video from "../../video/ibs-video.mp4"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -39,14 +39,14 @@ export const Register = (props) => {
                         },
                         body: JSON.stringify({
                             email: email.current.value,
-                            name: `${firstName.current.value} ${lastName.current.value}`,
+
                             username: username.current.value
                         })
                     })
                         .then(_ => _.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("nutty_user", createdUser.id)
+                                localStorage.setItem("tunes_user", createdUser.id)
                                 history.push("/")
                             }
                         })
@@ -69,7 +69,7 @@ export const Register = (props) => {
                     </dialog>
 
                     <form className="form--login" onSubmit={handleRegister}>
-                        <h1 className="h3 mb-3 font-weight-normal">Please Register for IBS</h1>
+                        <h1 className="h3 mb-3 font-weight-normal">Please Register for TuneList</h1>
                         <fieldset>
                             <label htmlFor="firstName"> First Name </label>
                             <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
@@ -103,10 +103,10 @@ export const Register = (props) => {
                         </div>
                     </form>
                 </main>
-
+{/* 
                 <video className="videoTag" autoPlay loop muted>
                     <source src={video} type="video/mp4" />
-                </video>
+                </video> */}
             </div>
         </>
     )
