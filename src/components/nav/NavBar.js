@@ -27,7 +27,7 @@ export const NavBar = (props) => {
                     <Link className="navbar__link" to="/messages"><Icon name="comments" />Messages</Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/search"><Icon name="comments" />Search Tunes</Link>
+                    <Link className="navbar__link" to="/tunes/create"><Icon name="comments" />Add a Tune</Link>
                 </li>
                 <li className="navbar__item active logout">
                     <Link className="navbar__link" onClick={() => {

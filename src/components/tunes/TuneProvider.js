@@ -1,10 +1,12 @@
 import React, { useState, createContext } from "react"
 
-export const TuneContext = props => {
-    const [tunes, setTunes] = useState([])
+export const TuneContext = createContext()
 
+export const TuneProvider = props => {
+    const [tunes, setTunes] = useState([])
+    const [tune, setTune] = useState({})
     const getTunes = () => {
-        return fetch('http://localhost:8088/news?_expand=user')
+        return fetch('http://localhost:8088/tunes?_expand=user')
         .then(response => response.json())
         .then(res=> res.reverse())
         .then(setTunes)
@@ -12,7 +14,7 @@ export const TuneContext = props => {
     
     // adds new Tunes to database
     const saveTune = tuneObj => {
-        return fetch('http://localhost:8088/news', {
+        return fetch('http://localhost:8088/tunes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,7 +25,7 @@ export const TuneContext = props => {
     
     // allows user to edit their Tunes
     const editTune = tuneObj => {
-        return fetch(`http://localhost:8088/news/${tuneObj.id}`, {
+        return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
@@ -39,13 +41,17 @@ export const TuneContext = props => {
         }).then(getTunes)
     }
 
-    const getTuneById = (id) => {
-        return fetch(`http://localhost:8088/news/${id}?_expand=user`)
+    const getTuneById = id => {
+        return fetch(`http://localhost:8088/tunes/${id}?_expand=user&_embed=tuneCollections`)
             .then(res => res.json())
+            .then(res => {
+                console.log("res", res)
+                return res
+            })
     }
 
     const getTunesByUserId = (userId) => {
-        return fetch(`http://localhost:8088/news/${userId}?_expand=tunes`)
+        return fetch(`http://localhost:8088/tunes/${userId}?_embed=tunes&_embed=collections`)
             .then(res => res.json())
     }
 

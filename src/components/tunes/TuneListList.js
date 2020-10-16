@@ -4,37 +4,34 @@ import { Article } from "./Article.js"
 import "./Article.css"
 import { useHistory } from "react-router-dom"
 import { Button, Checkbox, Divider } from "semantic-ui-react"
-import { useInterval } from "../useInterval"
 
 export const TunesList = (props) => {
     const {tunes, getTunes } = useContext(ArticleContext)
     const [update, setUpdate] = useState(false)
     const history = useHistory()
 
-    useInterval(getArticles, update ? 3000 : null)
-
     useEffect(() => {
-        getArticles()
+        getTunes()
     }, [])
     return (
         <>
-            <div className="articlesContainer">
-                <div className="articlesHeader">
-                    <Button primary onClick={() => history.push("/articles/create")}>
-                        Add Article
+            <div className="tunesContainer">
+                <div className="tunesHeader">
+                    <Button primary onClick={() => history.push("/tunes/create")}>
+                        Add a Tune
                     </Button>
-
+{/* 
                     <Checkbox toggle
                         onChange={() => setUpdate(!update)}
                         label={update ? "Disable real-time updates" : "Allow real-time updates"}
-                    />
+                    /> */}
                 </div>
 
                 <Divider />
 
-                <div className="articles">
+                <div className="tunes">
                     {
-                        articles?.map(article => <Article key={article.id} article={article} />)
+                        tunes?.map(tune => <Tune key={tune.id} tune={tune} />)
                     }
                 </div>
             </div>
