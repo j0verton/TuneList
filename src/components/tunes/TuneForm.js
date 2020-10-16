@@ -64,60 +64,61 @@ export const TuneForm = () => {
         <>
             <div className="tuneFormContainer">
                 <Form className="tuneForm"
-                    onSubmit={e=> {
-                        e.preventDefault()
-                        contructNewTune()
-                    }}>
-            <Header as='h2' className="tuneForm__title">New Tune</Header>
-            <Form.Input
-                required
-                label='Tune Title'
-                placeholder='Tune Title'
-                id='tuneTitle'
-                name='title'
-                onChange={handleControlledInputChange}
-                defaultValue={tune.title}
-            />
-            <Form.Input
-                required
-                label='Tune Key'
-                placeholder='Tune Key'
-                id='tuneKey'
-                name='key'
-                onChange={handleControlledInputChange}
-                defaultValue={tune.key}
-            />
-            <Form.Input
-                required
-                label='Tune Tuning'
-                placeholder='Tune Tuning'
-                id='tuneTuning'
-                name='tuning'
-                onChange={handleControlledInputChange}
-                defaultValue={tune.tuning}
-            />
-            <Form.Input
-                required
-                label='Tune Key'
-                placeholder='Tune Key'
-                id='tuneKey'
-                name='key'
-                onChange={handleControlledInputChange}
-                defaultValue={tune.key}
-            />
-            <Form.Input
-                required
-                label='Tune Key'
-                placeholder='Tune Key'
-                id='tuneKey'
-                name='key'
-                onChange={handleControlledInputChange}
-                defaultValue={tune.key}
-            />
+                        onSubmit={e=> {
+                            e.preventDefault()
+                            contructNewTune()
+                }} />
+                <Header as='h2' className="tuneForm__title">New Tune</Header>
+                <Form.Input
+                    required
+                    label='Tune Title'
+                    placeholder='Tune Title'
+                    id='tuneTitle'
+                    name='title'
+                    onChange={handleControlledInputChange}
+                    defaultValue={tune.title}
+                />
+                <Form.Input
+                    required
+                    label='Tune Key'
+                    placeholder='Tune Key'
+                    id='tuneKey'
+                    name='key'
+                    onChange={handleControlledInputChange}
+                    defaultValue={tune.key}
+                />
+                <Form.Input
+                    required
+                    label='Tune Tuning'
+                    placeholder='Tune Tuning'
+                    id='tuneTuning'
+                    name='tuning'
+                    onChange={handleControlledInputChange}
+                    defaultValue={tune.tuning}
+                />
+                <Form.Input
+                    required
+                    label='Tune Key'
+                    placeholder='Tune Key'
+                    id='tuneKey'
+                    name='key'
+                    onChange={handleControlledInputChange}
+                    defaultValue={tune.key}
+                />
+                <Form.Input
+                    required
+                    label='Tune Key'
+                    placeholder='Tune Key'
+                    id='tuneKey'
+                    name='key'
+                    onChange={handleControlledInputChange}
+                    defaultValue={tune.key}
+                />
 
 
 
             </div>
+            </>
 
     )
 }
