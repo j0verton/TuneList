@@ -10,12 +10,9 @@ export const NavBar = (props) => {
             <ul className="navbar">
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/">
-                        home
+                        Home
                         {/* <Image src={logo} alt="IBS logo" className="navbar__logo" /> */}
                     </Link>
-                </li>
-                <li className="navbar__item active">
-                    <Link className="navbar__link" to="/events"><Icon name="calendar alternate" />Events</Link>
                 </li>
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/tunes"><Icon name="newspaper" />Tunes</Link>
@@ -24,14 +21,17 @@ export const NavBar = (props) => {
                     <Link className="navbar__link" to="/friends"><Icon name="address book" />Friends</Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/tasks"><Icon name="list alternate" />Tasks</Link>
+                    <Link className="navbar__link" to="/tasks"><Icon name="list alternate" />Message Board</Link>
                 </li>
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/messages"><Icon name="comments" />Messages</Link>
                 </li>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/search"><Icon name="comments" />Search Tunes</Link>
+                </li>
                 <li className="navbar__item active logout">
                     <Link className="navbar__link" onClick={() => {
-                        localStorage.removeItem("nutty_user")
+                        localStorage.removeItem("tunes_user")
                     }}
                         to="/login"><Icon name="eject" />Logout</Link>
                 </li>
