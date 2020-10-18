@@ -162,9 +162,6 @@ export const TuneForm = () => {
                     className="btn btn-primary"
                     onClick={() => history.push(`/tunes`)}>
                 Cancel </Button>
-
-
-
                 </Form>
             </div>
             </>

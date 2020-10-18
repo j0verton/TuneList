@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { TuneForm } from "./components/tunes/TuneForm"
 import { TuneProvider } from "./components/tunes/TuneProvider"
+import { Tune } from "./components/tunes/TuneCard"
 import { Home } from "./Home"
 
 export const ApplicationViews = (props) => {
@@ -20,6 +21,12 @@ export const ApplicationViews = (props) => {
             <TuneProvider>
                 <Route exact path="/tunes/edit/:tuneId(\d)">
                     <TuneForm />
+                </Route>
+            </TuneProvider>
+        
+            <TuneProvider>
+                <Route exact path="/tunes">
+                    <Tune />
                 </Route>
             </TuneProvider>
         </>

@@ -1,21 +1,19 @@
 import React, { useContext, useEffect, useState } from "react"
-import "./tune.css"
+import "./Tune.css"
 import { Button, Container, Divider, Header, Icon } from 'semantic-ui-react'
-import { TuneContext } from "./tuneProvider"
+import { TuneContext } from "./TuneProvider"
 import { useHistory } from "react-router-dom"
-import { FriendContext } from "../friend/FriendProvider"
 
 export const Tune = ({ tune }) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { deleteTune } = useContext(TuneContext)
+    const { getTunesByUserId } = useContext(TuneContext)
 
     const history = useHistory()
     const [ modal, showModal ] = useState(false)
 
     useEffect(()=> {
-        getTunes()
-    }, []) 
-
+        getTunesByUserId()
+    }, [])
 
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
     return (
@@ -26,9 +24,7 @@ export const Tune = ({ tune }) => {
                 <Header as='h4'>{tune.key/tune.tuning}</Header>
                 </Container>
 
-
-
-                <p>
+                {/* <p>
                     Posted by: {tune.user.usename}
                     <Button size='mini' className="addButton"
                         onClick={()=>showModal(true)}
@@ -36,7 +32,8 @@ export const Tune = ({ tune }) => {
                         <Icon name="user"></Icon>
                         {tune.user.username}
                     </Button>
-                </p>
+                </p> */}
+
                 <p>{tune.synopsis}</p>
                 <div className="tune--actions">
                     <a href={tune.url} target="_blank">

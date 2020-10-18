@@ -55,9 +55,14 @@ export const TuneProvider = props => {
             .then(res => res.json())
     }
 
+    const getCollectionsByUserId = (userId) => {
+        return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
+            .then(res => res.json())
+    }
+    http://localhost:8088/collections?userId=1&_embed=tuneCollections
     return (
         <TuneContext.Provider value={{
-            tunes, getTunes, saveTune, deleteTune, editTune, getTuneById, getTunesByUserId
+            tunes, getTunes, saveTune, deleteTune, editTune, getTuneById, getTunesByUserId, getCollectionsByUserId
         }}>
             {props.children}
         </TuneContext.Provider>
