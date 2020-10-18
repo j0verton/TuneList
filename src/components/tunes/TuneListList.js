@@ -11,12 +11,16 @@ export const TunesList = (props) => {
     // const [update, setUpdate] = useState(false)
     const history = useHistory()
 
-    const tabs = [
+    const makeTabs = () => {
 
-    ]
+    }
+    const tabs = collections.map(collection => {
+        return { menuItem: collection.name, render: () => <Tab.Pane>{ListCard(collection.tuneCollections)}</Tab.Pane>}
+    })
+
 
     useEffect(() => {
-        getTunes()
+        getCollectionsByUserId()
     }, [])
 
     return (
