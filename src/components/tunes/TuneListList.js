@@ -18,7 +18,6 @@ export const TunesList = (props) => {
         return { menuItem: collection.name, render: () => <Tab.Pane>{ListCard(collection.tuneCollections)}</Tab.Pane>}
     })
 
-
     useEffect(() => {
         getCollectionsByUserId()
     }, [])
