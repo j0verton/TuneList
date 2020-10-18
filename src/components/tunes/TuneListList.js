@@ -4,10 +4,12 @@ import { Article } from "./Article.js"
 import "./Article.css"
 import { useHistory } from "react-router-dom"
 import { Button, Checkbox, Divider } from "semantic-ui-react"
+import { CollectionContext } from "../collections/CollectionsProvider"
+import { TuneContext } from "./TuneProvider"
 
 export const TunesList = (props) => {
-    const {tunes, getTunesByUserId, getCollectionsByUserId } = useContext(ArticleContext)
-    const [collections, setCollections] = useState([])
+    const {tunes, getTunesByUserId } = useContext(TuneContext)
+    const {collections, getCollectionsByUserId} = useContext(CollectionContext)
     // const [update, setUpdate] = useState(false)
     const history = useHistory()
 
@@ -20,6 +22,7 @@ export const TunesList = (props) => {
 
     useEffect(() => {
         getCollectionsByUserId()
+        .then
     }, [])
 
     return (
