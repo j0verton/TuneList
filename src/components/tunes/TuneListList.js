@@ -8,8 +8,9 @@ import { CollectionContext } from "../collections/CollectionsProvider"
 import { TuneContext } from "./TuneProvider"
 
 export const TunesList = (props) => {
-    const {tunes, getTunesByUserId } = useContext(TuneContext)
+    const {tunes, getTunesByUserId, getTuneById } = useContext(TuneContext)
     const {collections, getCollectionsByUserId} = useContext(CollectionContext)
+    const [ userCollections, setUserCollections ] = useState([])
     // const [update, setUpdate] = useState(false)
     const history = useHistory()
 
@@ -22,8 +23,18 @@ export const TunesList = (props) => {
 
     useEffect(() => {
         getCollectionsByUserId()
-        .then
+        .then(res => {
+            res.map(collection => {
+                return collection.tuneCollections.map(tune=>{    
+                    return getTuneById(tune.tuneId)
+                })
+            })
+        })
+        .then(setUserCollections)
     }, [])
+    useEffect(() => {
+        getTunesByUserId(localStorage.getItem("tunes_user")
+    }
 
     return (
         <>

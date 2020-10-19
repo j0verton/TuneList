@@ -5,12 +5,13 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const getTunes = () => {
-        return fetch('http://localhost:8088/tunes?_expand=user')
-        .then(response => response.json())
-        .then(res=> res.reverse())
-        .then(setTunes)
-    }
+
+    // const getTunes = () => {
+    //     return fetch('http://localhost:8088/tunes?_expand=user')
+    //     .then(response => response.json())
+    //     .then(res=> res.reverse())
+    //     .then(setTunes)
+    // }
     
     // adds new Tunes to database
     const saveTune = tuneObj => {
@@ -53,13 +54,14 @@ export const TuneProvider = props => {
     const getTunesByUserId = (userId) => {
         return fetch(`http://localhost:8088/tunes/${userId}?_embed=tunes&_embed=collections`)
             .then(res => res.json())
+            .then(setTunes)
     }
 
     const getCollectionsByUserId = (userId) => {
         return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
             .then(res => res.json())
     }
-    http://localhost:8088/collections?userId=1&_embed=tuneCollections
+S
     return (
         <TuneContext.Provider value={{
             tunes, getTunes, saveTune, deleteTune, editTune, getTuneById, getTunesByUserId, getCollectionsByUserId

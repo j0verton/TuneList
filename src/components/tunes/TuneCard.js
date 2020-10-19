@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom"
 
 export const Tune = ({ tune }) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { getTunesByUserId } = useContext(TuneContext)
+    const { getTunesByUserId, deleteTune } = useContext(TuneContext)
 
     const history = useHistory()
     const [ modal, showModal ] = useState(false)
