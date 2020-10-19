@@ -5,7 +5,6 @@ import { TuneContext } from "./TuneProvider"
 import { Link, useHistory } from "react-router-dom"
 import { TuneCard } from "./TuneCard"
 
-
 export const ListCard = ({tunesArr}) => {
     const [ modal, showModal ] = useState(false)
 
@@ -13,9 +12,10 @@ export const ListCard = ({tunesArr}) => {
         <>
         {console.log("tunesArr", tunesArr)}
         {tunesArr.map(tune => {
-            return <><Header as='h3' className="tuneEntry">
+            console.log("tune in list card",tune)
+            return <><Button as='h3' onClick={()=>showModal(true)} tuneObj={tune} className="tuneEntry">
             <p >{tune.name}</p>
-        </Header>
+        </Button>
         {modal ? <TuneCard tune={tune} closeModal={()=>showModal(false)}/> : null }
         </>
         })
@@ -25,5 +25,3 @@ export const ListCard = ({tunesArr}) => {
     ) : null
     
 }
-
-// onClick={()=>showModal(true)}

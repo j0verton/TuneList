@@ -14,42 +14,34 @@ export const TuneCard = (tuneObj) => {
     const [open, setOpen] = useState(false)
     useEffect(()=> {
         getTuneById(tuneId)
+        console.log("tuneObj",tuneObj)
+        console.log("tune",tune)
     }, [])
 
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
     return (
-            <Modal
-                size="mini"
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-                open={true}
-                className="tune--container"
-            >
+        <Modal
+        closeIcon
+        size="mini"
+        open={true}
+        onClose={() => showModal(false)}
+        onOpen={() => showModal(true)}
+        className="tune--container"
+        >
                 <Modal.Content className="tune--headercontainer">
-                <Header as='h3'>{tune.name}</Header>
-                <Header as='h4'>{tune.key/tune.tuning}</Header>
+                <Header as='h3'>{tuneObj.tune.name}</Header>
+                <Header as='h4'>{tuneObj.tune.key/tuneObj.tune.tuning}</Header>
                 </Modal.Content>
-                <p>source: {tune.source}</p>
-                <p>{tune.notes}</p>
-                <a href={tune.link}>listen</a>
-
-
-                {/* <p>
-                    Posted by: {tune.user.usename}
-                    <Button size='mini' className="addButton"
-                        onClick={()=>showModal(true)}
-                        >
-                        <Icon name="user"></Icon>
-                        {tune.user.username}
-                    </Button>
-                </p> */}
+                <p>source: {tuneObj.tune.source}</p>
+                <p>{tuneObj.tune.notes}</p>
+                <a href={tuneObj.tune.link}>listen</a>
                 <Modal.Actions>
                     <Button icon onClick={() => {
-                        history.push(`/tunes/edit/${tune?.id}`)
+                        history.push(`/tunes/edit/${tuneObj?.tune.id}`)
                     }}><Icon name='edit outline' /></Button>
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
-                            deleteTune(tune.id)
+                            deleteTune(tuneObj.tune.id)
                         }}><Icon name='trash alternate outline' /></Button>
                 </Modal.Actions>
             </Modal>
