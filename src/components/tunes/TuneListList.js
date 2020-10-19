@@ -68,7 +68,8 @@ export const TunesList = (props) => {
 
             })
             setUserCollections(mergedCollection)
-            console.log("userCollections",mergedCollection)
+            console.log("mergedCollection", mergedCollection )
+            // console.log("userCollections", userCollections)
         }
         }, [ collections ])
 
