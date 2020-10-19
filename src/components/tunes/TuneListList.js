@@ -16,49 +16,27 @@ export const TunesList = (props) => {
     
     const [panes, setPanes] = useState([])
 
-    // async function mergeCollection() {
-    //     if (collections){
-    //         let mergedCollection = await collections.map(collection => {
-    //             return collection.tuneCollections.map( async cTune =>{
-    //                 // console.log("cTune", cTune)
-    //                 let resTune = await getTuneById(cTune.tuneId)
-    //                 console.log("restUne",resTune)
-    //                 return resTune
-    //             })
-    //         })
-    //         // console.log("mergedCollection", mergedCollection)
-    //         .then(setUserCollections(mergedCollection))
-    //         console.log("userCollections", userCollections)
-    //     } else {
-    //         console.log("else - empty collections")
-    //     }
-    // }
-
-
     useEffect(()=> {
         if(userCollections){
         let tabs = userCollections.map(collection => {
             return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard tunesArr={collection.tuneCollections} />}</Tab.Pane>}
         })
-        console.log("tabs",tabs)
         setPanes(tabs)
     }
     },[userCollections, tunes])
-
-    useEffect(()=> {
-        getCollectionsByUserId(localStorage.getItem("tunes_user"))
-    }, [])
     
     useEffect(()=> {
         getTunesByUserId(localStorage.getItem("tunes_user"))
         .then(allUserTunes => {
-            console.log("allUserTunes",allUserTunes)
             setTunes(allUserTunes)})
-
-    }, []) 
+        .then(()=> {
+            getCollectionsByUserId(localStorage.getItem("tunes_user"))
+        })
+        }, []) 
 
     useEffect(() => {
-        if (collections && tunes){
+        if (collections.length && tunes.length){
+            // debugger
             let mergedCollection = collections.map(collection => {
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
@@ -68,10 +46,10 @@ export const TunesList = (props) => {
 
             })
             setUserCollections(mergedCollection)
-            console.log("mergedCollection", mergedCollection )
+            // console.log("mergedCollection", mergedCollection )
             // console.log("userCollections", userCollections)
         }
-        }, [ collections ])
+        }, [ collections, tunes ])
 
     return panes ? (
         <Tab panes={panes} />

@@ -12,17 +12,18 @@ export const ListCard = ({tunesArr}) => {
     return tunesArr[0] ? (
         <>
         {console.log("tunesArr", tunesArr)}
-         {tunesArr.forEach(tune => {
-            let jsxTune = <> <Header as='h3' className="tuneEntry">
-            <p onClick={()=>showModal(true)}>{tune.name}</p>
+        {tunesArr.map(tune => {
+            return <><Header as='h3' className="tuneEntry">
+            <p >{tune.name}</p>
         </Header>
         {modal ? <TuneCard tune={tune} closeModal={()=>showModal(false)}/> : null }
         </>
-        return ({jsxTune})
-
-    })}
+        })
+        }
     </>
-    )
-    : null
+    
+    ) : null
     
 }
+
+// onClick={()=>showModal(true)}
