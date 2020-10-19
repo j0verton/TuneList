@@ -3,8 +3,8 @@ import React, { useState, createContext } from "react"
 export const CollectionContext = createContext()
 
 export const CollectionProvider = props => {
-    const [collection, setCollection] = useState([])
-    const [collection, setcollection] = useState({})
+
+    const [collections, setcollections] = useState([])
     const getCollections = () => {
         return fetch('http://localhost:8088/collections?_expand=user')
         .then(response => response.json())
@@ -41,23 +41,24 @@ export const CollectionProvider = props => {
         }).then(getCollections)
     }
 
-    const getcollectionById = id => {
-        return fetch(`http://localhost:8088/collections/${id}?_expand=user&_embed=collectionCollections`)
+    const getCollectionById = id => {
+        return fetch(`http://localhost:8088/collections/${id}?_expand=user&_embed=tuneCollections`)
             .then(res => res.json())
-            .then(res => {
-                console.log("res", res)
-                return res
-            })
     }
+            
+            const getCollectionsByUserId = (userId) => {
+                return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
+                .then(res => res.json())
+                // .then(res => {
+                //     console.log("getCollectionsByUserId res", res)
+                //         return res
+                // })
+            }
 
-    const getCollectionsByUserId = (userId) => {
-        return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=collectionCollections`)
-            .then(res => res.json())
-    }
-    http://localhost:8088/collections?userId=1&_embed=collectionCollections
+
     return (
         <CollectionContext.Provider value={{
-            collections, getCollections, saveCollection, deleteCollection, editcollection, getCollectionById, getCollectionsByUserId
+            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId
         }}>
             {props.children}
         </CollectionContext.Provider>

@@ -45,10 +45,7 @@ export const TuneProvider = props => {
     const getTuneById = id => {
         return fetch(`http://localhost:8088/tunes/${id}?_expand=user&_embed=tuneCollections`)
             .then(res => res.json())
-            .then(res => {
-                console.log("res", res)
-                return res
-            })
+            // .then(setTune)
     }
 
     const getTunesByUserId = (userId) => {
