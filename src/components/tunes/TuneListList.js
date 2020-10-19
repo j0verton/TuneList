@@ -61,10 +61,7 @@ export const TunesList = (props) => {
         if (collections && tunes){
             let mergedCollection = collections.map(collection => {
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
-                    // console.log("cTune", cTune)
-                    console.log("tunes", tunes)
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
-                    console.log("restUne",resTune)
                     return resTune
                 })
                 return collection
