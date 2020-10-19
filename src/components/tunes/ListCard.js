@@ -7,15 +7,10 @@ import { Link, useHistory } from "react-router-dom"
 
 export const ListCard = (tunesCollectionsArr) => {
 
-    const { getTunebyId } = useContext(TuneContext)
-
-    useEffect = (() => {
-
-    })
     return (
-        tunesCollectionsArr.forEach(tune => {
+        tunesCollectionsArr.tuneCollections.forEach(tune => {
         <Header as='h3' className="tune">
-            <Link to={`/tunes/card/${tune.tuneId}`}></Link>
+            <Link to={`/tunes/card/${tune.tuneId}`}>{tune.name}</Link>
         </Header>
         })
     )

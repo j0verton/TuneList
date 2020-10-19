@@ -2,17 +2,18 @@ import React, { useContext, useEffect, useState } from "react"
 import "./Tune.css"
 import { Button, Container, Divider, Header, Icon } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 
-export const Tune = ({ tune }) => {
+export const Tune = () => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { getTunesByUserId, deleteTune } = useContext(TuneContext)
+    const { tune, getTunesByUserId, getTuneById, deleteTune } = useContext(TuneContext)
 
     const history = useHistory()
     const [ modal, showModal ] = useState(false)
+    const tuneId = useParams()
 
     useEffect(()=> {
-        getTunesByUserId()
+        getTuneById(tuneId)
     }, [])
 
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
@@ -23,6 +24,10 @@ export const Tune = ({ tune }) => {
                 <Header as='h3'>{tune.name}</Header>
                 <Header as='h4'>{tune.key/tune.tuning}</Header>
                 </Container>
+                <p>source: {tune.source}</p>
+                <p>{tune.notes}</p>
+                <a href={tune.link}>listen</a>
+
 
                 {/* <p>
                     Posted by: {tune.user.usename}
@@ -33,15 +38,10 @@ export const Tune = ({ tune }) => {
                         {tune.user.username}
                     </Button>
                 </p> */}
-
-                <p>{tune.synopsis}</p>
                 <div className="tune--actions">
-                    <a href={tune.url} target="_blank">
-                        Read More
-                </a>
                     <div className="formBtns">
                         {/* if the tune was posted by the current user it renders buttons for edit or delete */}
-                        {tune.user.id === parseInt(localStorage.getItem("nutty_user")) ?
+                        {tune.userid === parseInt(localStorage.getItem("tunes_user")) ?
                             <>
                                 <Button icon onClick={() => {
                                     history.push(`/tunes/edit/${tune?.id}`)

@@ -25,7 +25,7 @@ export const TunesList = (props) => {
         getCollectionsByUserId()
         .then(res => {
             res.map(collection => {
-                return collection.tuneCollections.map(tune=>{    
+                return collection.tuneCollections.map(tune=>{
                     return getTuneById(tune.tuneId)
                 })
             })
