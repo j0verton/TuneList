@@ -45,13 +45,13 @@ export const TuneProvider = props => {
     const getTuneById = id => {
         return fetch(`http://localhost:8088/tunes/${id}?_expand=user&_embed=tuneCollections`)
             .then(res => res.json())
-            // .then(setTune)
+            .then(setTune)
     }
 
     const getTunesByUserId = (userId) => {
-        return fetch(`http://localhost:8088/tunes/${userId}?_embed=tunes&_embed=collections`)
+        return fetch(`http://localhost:8088/tunes/?userId=${userId}&_embed=tunes&_embed=collections`)
             .then(res => res.json())
-            .then(setTunes)
+            // .then(setTunes)
     }
 
     return (

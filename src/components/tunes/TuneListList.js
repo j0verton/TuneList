@@ -7,13 +7,33 @@ import { TuneContext } from "./TuneProvider"
 import { ListCard } from "./ListCard"
 
 export const TunesList = (props) => {
-    const { getTuneById } = useContext(TuneContext)
+    const { getTunesByUserId } = useContext(TuneContext)
     const {collections, getCollectionsByUserId} = useContext(CollectionContext)
+    const [tunes, setTunes]= useState([])
     const [ userCollections, setUserCollections ] = useState([])
     // const [update, setUpdate] = useState(false)
     const history = useHistory()
-
+    
     const [panes, setPanes] = useState([])
+
+    // async function mergeCollection() {
+    //     if (collections){
+    //         let mergedCollection = await collections.map(collection => {
+    //             return collection.tuneCollections.map( async cTune =>{
+    //                 // console.log("cTune", cTune)
+    //                 let resTune = await getTuneById(cTune.tuneId)
+    //                 console.log("restUne",resTune)
+    //                 return resTune
+    //             })
+    //         })
+    //         // console.log("mergedCollection", mergedCollection)
+    //         .then(setUserCollections(mergedCollection))
+    //         console.log("userCollections", userCollections)
+    //     } else {
+    //         console.log("else - empty collections")
+    //     }
+    // }
+
 
     useEffect(()=> {
         if(userCollections){
@@ -23,35 +43,36 @@ export const TunesList = (props) => {
         console.log("tabs",tabs)
         setPanes(tabs)
     }
-    },[userCollections])
+    },[userCollections, tunes])
 
     useEffect(()=> {
         getCollectionsByUserId(localStorage.getItem("tunes_user"))
     }, [])
     
-    useEffect(() => {
-        console.log("collections",collections)
-        async function mergeCollection() {
-            if (collections){
-                return collections.map(collection => {
-                    return collection.tuneCollections.map( async cTune =>{
-                        // console.log("cTune", cTune)
-                        let resTune = await getTuneById(cTune.tuneId)
-                        console.log("restUne",resTune)
-                        return resTune
-                    })
-                })
-                // console.log("mergedCollection", mergedCollection)
-                .then(mergedCollection => {
+    useEffect(()=> {
+        getTunesByUserId(localStorage.getItem("tunes_user"))
+        .then(allUserTunes => {
+            console.log("allUserTunes",allUserTunes)
+            setTunes(allUserTunes)})
 
-                    setUserCollections(mergedCollection)
-                    console.log("userCollections", userCollections)
+    }, []) 
+
+    useEffect(() => {
+        if (collections && tunes){
+            let mergedCollection = collections.map(collection => {
+                collection.tuneCollections = collection.tuneCollections.map(cTune =>{
+                    // console.log("cTune", cTune)
+                    console.log("tunes", tunes)
+                    let resTune = tunes.find(tune => tune.id===cTune.tuneId)
+                    console.log("restUne",resTune)
+                    return resTune
                 })
-            } else {
-                console.log("else - empty collections")
-            }
+                return collection
+
+            })
+            setUserCollections(mergedCollection)
+            console.log("userCollections",mergedCollection)
         }
-        mergeCollection()
         }, [ collections ])
 
     return panes ? (
