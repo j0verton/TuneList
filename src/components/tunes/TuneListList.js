@@ -13,32 +13,48 @@ export const TunesList = (props) => {
     // const [update, setUpdate] = useState(false)
     const history = useHistory()
 
-    const makeTabs = () => {
+    const [panes, setPanes] = useState([])
 
-    }
-    const tabs = userCollections.map(collection => {
-        return { menuItem: collection.name, render: () => <Tab.Pane>{ListCard(collection.tuneCollections)}</Tab.Pane>}
-    })
-
-    useEffect(() => {
-        getCollectionsByUserId(localStorage.getItem("tunes_user"))
-        .then(res => {
-            console.log("getCollectionsByUserId res", res)
-            return res.map(collection => {
-                return collection.tuneCollections.map( cTune =>{
-                    return getTuneById(cTune.tuneId)
-                })
-            })
+    useEffect(()=> {
+        if(userCollections){
+        let tabs = userCollections.map(collection => {
+            return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard tunesArr={collection.tuneCollections} />}</Tab.Pane>}
         })
-        .then(setUserCollections)
-        .then(console.log("userCollections", userCollections))
-    }, [ collections ])
+        console.log("tabs",tabs)
+        setPanes(tabs)
+    }
+    },[userCollections])
 
-    // useEffect(() => {
-    //     getTunesByUserId(localStorage.getItem("tunes_user"))
-    // },[collections])
+    useEffect(()=> {
+        getCollectionsByUserId(localStorage.getItem("tunes_user"))
+    }, [])
+    
+    useEffect(() => {
+        console.log("collections",collections)
+        async function mergeCollection() {
+            if (collections){
+                return collections.map(collection => {
+                    return collection.tuneCollections.map( async cTune =>{
+                        // console.log("cTune", cTune)
+                        let resTune = await getTuneById(cTune.tuneId)
+                        console.log("restUne",resTune)
+                        return resTune
+                    })
+                })
+                // console.log("mergedCollection", mergedCollection)
+                .then(mergedCollection => {
 
-    return (
-        <Tab panes={tabs} />
-    )
+                    setUserCollections(mergedCollection)
+                    console.log("userCollections", userCollections)
+                })
+            } else {
+                console.log("else - empty collections")
+            }
+        }
+        mergeCollection()
+        }, [ collections ])
+
+    return panes ? (
+        <Tab panes={panes} />
+    ) : null
 }

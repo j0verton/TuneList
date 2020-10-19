@@ -4,12 +4,12 @@ export const CollectionContext = createContext()
 
 export const CollectionProvider = props => {
 
-    const [collections, setcollections] = useState([])
+    const [collections, setCollections] = useState([])
+
     const getCollections = () => {
         return fetch('http://localhost:8088/collections?_expand=user')
         .then(response => response.json())
-        .then(res=> res.reverse())
-        .then(setcollections)
+        .then(setCollections)
     }
     
     // adds new collections to database
@@ -46,14 +46,11 @@ export const CollectionProvider = props => {
             .then(res => res.json())
     }
             
-            const getCollectionsByUserId = (userId) => {
-                return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
-                .then(res => res.json())
-                // .then(res => {
-                //     console.log("getCollectionsByUserId res", res)
-                //         return res
-                // })
-            }
+    const getCollectionsByUserId = (userId) => {
+        return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
+        .then(res => res.json())
+        .then(setCollections)
+    }
 
 
     return (
