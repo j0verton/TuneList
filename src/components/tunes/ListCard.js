@@ -10,6 +10,9 @@ export const ListCard = ({tunesArr}) => {
     const [ tuneObj,setTuneObj ] = useState({})
     const tuneRef= useRef(null)
 
+    function handleModal(newValue){
+        showModal(newValue)
+    }
     return tunesArr[0] ? (
         <>
         {tunesArr.map(tune => {
@@ -27,7 +30,7 @@ export const ListCard = ({tunesArr}) => {
                 </>
             })
     }
-    {modal ? <TuneCard id={tuneObj.id} tuneObj={tuneObj} onClose={()=>showModal(false)}/> : null }
+    {modal ? <><TuneCard id={tuneObj.id} tuneObj={tuneObj} open={modal} closemodal={handleModal}/></> : null }
     </>
     
     ) : null

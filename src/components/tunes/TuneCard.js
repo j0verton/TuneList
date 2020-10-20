@@ -4,7 +4,7 @@ import { Button, Container, Divider, Header, Icon, Modal } from 'semantic-ui-rea
 import { TuneContext } from "./TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
-export const TuneCard = ({tuneObj}, {closeModal}) => {
+export const TuneCard = ({props}) => {
     //useContext hook allows the use of functions form the tuneProvider
     const { tune, getTunesByUserId, getTuneById, deleteTune } = useContext(TuneContext)
 
@@ -12,19 +12,23 @@ export const TuneCard = ({tuneObj}, {closeModal}) => {
     const [ modal, showModal ] = useState(true)
     const tuneId = useParams()
     const [open, setOpen] = useState(true)
-
+    // function handleModal(event){
+    //     props.onClose
+    // }
+    function handleModal(value)
+    const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
     return (
         <Modal
         closeIcon
+        value={props.value}
         // onClick={closeModal}
         size="mini"
         open={modal}
-        closeModal={() => {showModal(false)}}
-        // onClose={() => {
-        //     showModal(false)
-        //     // setOpen(true)
-        // }}
+
+        onClose={() => {
+            showModal(false)
+        }}
         onOpen={() => showModal(true)}
         className="tune--container"
         >
