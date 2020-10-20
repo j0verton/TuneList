@@ -37,7 +37,7 @@ export const TuneProvider = props => {
     
     // removes Tune from database
     const deleteTune = tuneId => {
-        return fetch(`http://localhost:8088/news/${tuneId}`, {
+        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'DELETE'
         })
     }

@@ -129,7 +129,7 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.source}
                 />
-                <Form.Input
+                <Form.TextArea
                     label='Notes'
                     placeholder='Enter Any Notes Here...'
                     id='tuneNotes'

@@ -4,32 +4,37 @@ import { Button, Container, Divider, Header, Icon, Modal } from 'semantic-ui-rea
 import { TuneContext } from "./TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
-export const TuneCard = ({props}) => {
+export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
     const { tune, getTunesByUserId, getTuneById, deleteTune } = useContext(TuneContext)
 
     const history = useHistory()
-    const [ modal, showModal ] = useState(true)
+    // const [ modal, showModal ] = useState(true)
     const tuneId = useParams()
-    const [open, setOpen] = useState(true)
+    // const [open, setOpen] = useState(true)
     // function handleModal(event){
     //     props.onClose
     // }
-    function handleModal(value)
+    // function handleModal(value){
+    //     props.closeModal(value)
+    // }
+
     const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
     return (
         <Modal
         closeIcon
-        value={props.value}
+        // value={props.value}
         // onClick={closeModal}
         size="mini"
-        open={modal}
+        open={props.handleOpen} 
+        onClose={props.handleClose} 
 
-        onClose={() => {
-            showModal(false)
-        }}
-        onOpen={() => showModal(true)}
+        // onClose={() => {
+        //     props.handleModal()
+        //     showModal(false)
+        // }}
+        // onOpen={() => showModal(true)}
         className="tune--container"
         >
                 <Modal.Content className="tune--headercontainer">
@@ -46,7 +51,8 @@ export const TuneCard = ({props}) => {
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
                             deleteTune(tuneObj.id)
-                        }}><Icon name='trash alternate outline' /></Button>
+                            .then(history.push(`/tunes`))}}>
+                        <Icon name='trash alternate outline' /></Button>
                 </Modal.Actions>
             </Modal>
     )

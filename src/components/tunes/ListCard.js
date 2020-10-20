@@ -10,9 +10,13 @@ export const ListCard = ({tunesArr}) => {
     const [ tuneObj,setTuneObj ] = useState({})
     const tuneRef= useRef(null)
 
-    function handleModal(newValue){
-        showModal(newValue)
+
+    const handleOpen =() =>{
+        showModal(true)
     }
+    const handleClose =()=>{
+        showModal(false)
+    } 
     return tunesArr[0] ? (
         <>
         {tunesArr.map(tune => {
@@ -20,7 +24,7 @@ export const ListCard = ({tunesArr}) => {
             ref={tuneRef}
             key={tune.id}
             onClick={e=>{
-                showModal(true)
+                handleOpen()
                 setTuneObj(tune)
             }} 
                 id={tune.id} 
@@ -30,7 +34,7 @@ export const ListCard = ({tunesArr}) => {
                 </>
             })
     }
-    {modal ? <><TuneCard id={tuneObj.id} tuneObj={tuneObj} open={modal} closemodal={handleModal}/></> : null }
+    {modal ? <><TuneCard id={tuneObj.id} tuneObj={tuneObj} handleOpen={handleOpen} handleClose={handleClose}/></> : null }
     </>
     
     ) : null
