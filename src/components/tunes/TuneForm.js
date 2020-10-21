@@ -14,6 +14,7 @@ export const TuneForm = () => {
 
     const history = useHistory()
 
+
     const tuningOptions = [
         {
             key: 'D tuning',
@@ -119,7 +120,7 @@ export const TuneForm = () => {
                     selection
                     label='Tuning'
                     options={tuningOptions}
-                    defaultValue={tune?.tuning}
+                    value={tune?.tuning}
                 />
                 <Form.Input
                     label='Source'
@@ -148,13 +149,13 @@ export const TuneForm = () => {
                 <Checkbox 
                     name='learning'
                     label='Still learning this one?'
-                    checked={tune?.learning}
+                    defaultChecked={tune?.learning}
                 />
                 <Button
                     primary
                     type="submit"
-                    // disabled={isLoading}
-                    className="btn btn-primary">
+                    className="btn btn-primary"
+                    onClick={() => history.push(`/tunes`)}>
                     {tuneId ? <>Save Tune</> : <>Add Tune</>}
                 </Button>
                 <Button

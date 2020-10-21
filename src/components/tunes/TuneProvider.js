@@ -22,6 +22,16 @@ export const TuneProvider = props => {
             },
             body: JSON.stringify(tuneObj)
         })
+        .then(
+            ///need to add a tunescollection add here
+        )
+    }
+
+    const makeTunesCollectionObj
+    const addTunesCollection = tuneobj => {
+       switch (tuneObj.tuning) {
+           case tuneobj.tuning 
+       }
     }
     
     // allows user to edit their Tunes
@@ -45,7 +55,6 @@ export const TuneProvider = props => {
     const getTuneById = id => {
         return fetch(`http://localhost:8088/tunes/${id}`)
             .then(res => res.json())
-            .then(setTune)
     }
 
     const getTunesByUserId = (userId) => {
