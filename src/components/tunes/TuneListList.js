@@ -38,12 +38,20 @@ export const TunesList = (props) => {
     useEffect(() => {
         if (collections.length && tunes.length){
             // debugger
-            let mergedCollection = collections.map(collection => {
-                console.log("collection",collection)
+            let UserFilteredTuneCollection = collections.map(collection => collection.tuneCollections.map(tuneCollection=> {
+
+                console.log("tuneCollection",tuneCollection)
+                console.log(tuneCollection.filter(tune => tune.id===tuneCollection.tuneId))
+                return tuneCollection.filter(tune => tune.id===tuneCollection.tuneId)
+            }))
+            UserFilteredTuneCollection=UserFilteredTuneCollection.flat(2)
+            console.log("userfiltered after flat",UserFilteredTuneCollection)
+            let mergedCollection = UserFilteredTuneCollection.map(collection => {
+                // debugger
+                console.log("collection in merged",UserFilteredTuneCollection,collection.flat())
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
-                    console.log("cTune",cTune)
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
-                    if (resTune) { return resTune }
+                    return resTune
                 })
                 return collection
 
@@ -52,7 +60,7 @@ export const TunesList = (props) => {
             // console.log("mergedCollection", mergedCollection )
             // console.log("userCollections", userCollections)
         }
-        }, [ collections, tunes ])
+        }, [ collections ])
 
     return panes ? (
         <Tab panes={panes} />
