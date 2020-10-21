@@ -61,9 +61,9 @@ export const TuneForm = () => {
                 notes:tune.notes,
                 link:tune.link,
                 starred:false,
-                learning:tune.learning.checked
+                // learning:tune.learning.checked
             })
-            .then(() => history.push('/tune'))
+            .then(() => history.push('/tunes'))
         } else {
             console.log("save")
             saveTune({
@@ -75,9 +75,9 @@ export const TuneForm = () => {
                 notes:tune.notes,
                 link:tune.link,
                 starred:false,
-                learning:tune.learning.checked
+                // learning:tune.learning.checked
             })
-            .then(() => history.push('/tune'))
+            .then(() => history.push('/tunes'))
         }
 
     }
@@ -146,16 +146,17 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.link}
                 />
-                <Checkbox 
+                {/* <Checkbox 
                     name='learning'
                     label='Still learning this one?'
                     defaultChecked={tune?.learning}
-                />
+                /> */}
                 <Button
                     primary
                     type="submit"
                     className="btn btn-primary"
-                    onClick={() => history.push(`/tunes`)}>
+                    // onClick={() => history.push(`/tunes`)}
+                    >
                     {tuneId ? <>Save Tune</> : <>Add Tune</>}
                 </Button>
                 <Button
