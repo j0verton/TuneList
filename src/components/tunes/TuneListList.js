@@ -28,6 +28,7 @@ export const TunesList = (props) => {
     useEffect(()=> {
         getTunesByUserId(localStorage.getItem("tunes_user"))
         .then(allUserTunes => {
+            console.log("allUserTunes",allUserTunes)
             setTunes(allUserTunes)})
         .then(()=> {
             getCollectionsByUserId(localStorage.getItem("tunes_user"))
@@ -38,9 +39,11 @@ export const TunesList = (props) => {
         if (collections.length && tunes.length){
             // debugger
             let mergedCollection = collections.map(collection => {
+                console.log("collection",collection)
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
+                    console.log("cTune",cTune)
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
-                    return resTune
+                    if (resTune) { return resTune }
                 })
                 return collection
 

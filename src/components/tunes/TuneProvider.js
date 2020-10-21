@@ -15,6 +15,21 @@ export const TuneProvider = props => {
     
     // adds new Tunes to database
     const saveTune = tuneObj => {
+        let tuneCollectionsObj = {tuneId:tuneObj.id}
+        if (tuneObj.tuning==="Standard" && tuneObj.key==="G" ) {
+            tuneCollectionsObj.collectionId = 1
+        } else if (tuneObj.tuning==="Standard" && tuneObj.key==="C" ) {
+            tuneCollectionsObj.collectionId = 4
+        } else if (tuneObj.tuning==="Standard" && tuneObj.key==="F" ) {
+            tuneCollectionsObj.collectionId = 5
+        } else if (tuneObj.tuning==="Cross") {
+            tuneCollectionsObj.collectionId = 2
+        } else if (tuneObj.tuning==="High D"){
+            tuneCollectionsObj.collectionId = 3
+        } else {
+            tuneCollectionsObj.collectionId = 6
+        }
+        console.log(tuneCollectionsObj)
         return fetch('http://localhost:8088/tunes', {
             method: 'POST',
             headers: {
@@ -22,18 +37,23 @@ export const TuneProvider = props => {
             },
             body: JSON.stringify(tuneObj)
         })
-        .then(
-            ///need to add a tunescollection add here
+        .then(()=>{
+        addTuneCollections(tuneCollectionsObj)
+        }
+        ///need to add a tunescollection add here
         )
     }
-
-    const makeTunesCollectionObj
-    const addTunesCollection = tuneobj => {
-       switch (tuneObj.tuning) {
-           case tuneobj.tuning 
-       }
-    }
     
+    const addTuneCollections = tuneCollectionsObj => {
+        return fetch('http://localhost:8088/tunes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(tuneCollectionsObj)
+        })
+    }
+
     // allows user to edit their Tunes
     const editTune = tuneObj => {
         return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {

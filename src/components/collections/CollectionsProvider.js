@@ -34,6 +34,8 @@ export const CollectionProvider = props => {
         })
     }
     
+
+
     // removes collection from database
     const deleteCollection = collectionId => {
         return fetch(`http://localhost:8088/news/${collectionId}`, {
@@ -47,11 +49,10 @@ export const CollectionProvider = props => {
     }
             
     const getCollectionsByUserId = (userId) => {
-        return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
+        return fetch(`http://localhost:8088/collections?userId=${userId}&userId=0&_embed=tuneCollections`)
         .then(res => res.json())
         .then(setCollections)
     }
-
 
     return (
         <CollectionContext.Provider value={{
