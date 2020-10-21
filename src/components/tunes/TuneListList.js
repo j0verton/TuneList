@@ -33,22 +33,27 @@ export const TunesList = (props) => {
         .then(()=> {
             getCollectionsByUserId(localStorage.getItem("tunes_user"))
         })
-        }, []) 
+        }, [])
 
     useEffect(() => {
         if (collections.length && tunes.length){
             // debugger
-            let UserFilteredTuneCollection = collections.map(collection => collection.tuneCollections.map(tuneCollection=> {
+            const newCollections = [...collections]
+            const filteredCollections = [...collections]
+            console.log(newCollections)
+            let UserFilteredTuneCollection = newCollections.map(collection => {
 
-                console.log("tuneCollection",tuneCollection)
-                console.log(tuneCollection.filter(tune => tune.id===tuneCollection.tuneId))
-                return tuneCollection.filter(tune => tune.id===tuneCollection.tuneId)
-            }))
-            UserFilteredTuneCollection=UserFilteredTuneCollection.flat(2)
+                let filteredTuneCollections =collection.tuneCollections.filter(tuneCollection=> tunes.some(tune=> tune.id===tuneCollection.tuneId))
+                console.log(filteredTuneCollections, collection, "filteredCollections")
+                debugger
+                collection.tuneCollections = filteredTuneCollections
+                return collection
+                })
+            UserFilteredTuneCollection = UserFilteredTuneCollection.flat()
             console.log("userfiltered after flat",UserFilteredTuneCollection)
             let mergedCollection = UserFilteredTuneCollection.map(collection => {
                 // debugger
-                console.log("collection in merged",UserFilteredTuneCollection,collection.flat())
+                console.log("collection in merged",UserFilteredTuneCollection,collection)
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
                     return resTune
