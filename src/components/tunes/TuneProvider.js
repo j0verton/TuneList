@@ -15,6 +15,7 @@ export const TuneProvider = props => {
     
     // adds new Tunes to database
     const saveTune = tuneObj => {
+        console.log(tuneObj)
         let tuneCollectionsObj = {tuneId:tuneObj.id}
         if (tuneObj.tuning==="Standard" && tuneObj.key==="G" ) {
             tuneCollectionsObj.collectionId = 1
@@ -37,15 +38,16 @@ export const TuneProvider = props => {
             },
             body: JSON.stringify(tuneObj)
         })
-        .then(()=>{
-        addTuneCollections(tuneCollectionsObj)
-        }
-        ///need to add a tunescollection add here
-        )
+        .then(getLastTune)
+        .then(res => {
+            console.log(res)
+            tuneCollectionsObj.tuneId=res[0].id
+            addTuneCollections(tuneCollectionsObj)
+        })
     }
     
     const addTuneCollections = tuneCollectionsObj => {
-        return fetch('http://localhost:8088/tunes', {
+        return fetch('http://localhost:8088/tuneCollections', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,6 +55,11 @@ export const TuneProvider = props => {
             body: JSON.stringify(tuneCollectionsObj)
         })
     }
+    const getLastTune = () => {
+            return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
+            .then(response => response.json())
+    }
+
 
     // allows user to edit their Tunes
     const editTune = tuneObj => {

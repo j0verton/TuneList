@@ -83,8 +83,15 @@ export const TuneForm = () => {
     }
 
     const handleControlledInputChange = (event) => {
+        console.log(event.target)
         const newTune = { ...tune }
         newTune[event.target.name] = event.target.value
+        setTune(newTune)
+    }
+    const handleDropdown = (event, data)=> {
+        console.log(data)
+        const newTune = { ...tune }
+        newTune[data.name] = data.value
         setTune(newTune)
     }
 
@@ -118,16 +125,18 @@ export const TuneForm = () => {
                     placeholder='Select a Tuning'
                     fluid
                     selection
+                    name='tuning'
                     label='Tuning'
                     options={tuningOptions}
-                    value={tune?.tuning}
+                    defaultValue={tune?.tuning}
+                    onChange={handleDropdown}
                 />
                 <Form.Input
                     label='Source'
                     placeholder="What's your source?"
                     id='tuneSource'
                     name='source'
-                    onChange={handleControlledInputChange}
+                    onSelect={handleControlledInputChange}
                     defaultValue={tune?.source}
                 />
                 <Form.TextArea
@@ -146,11 +155,12 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.link}
                 />
-                {/* <Checkbox 
+                <Checkbox 
                     name='learning'
                     label='Still learning this one?'
+                    onChange={handleDropdown}
                     defaultChecked={tune?.learning}
-                /> */}
+                />
                 <Button
                     primary
                     type="submit"

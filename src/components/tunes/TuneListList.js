@@ -37,19 +37,26 @@ export const TunesList = (props) => {
 
     useEffect(() => {
         if (collections.length && tunes.length){
+
             // make a copy of the collections state
             const newCollections = [...collections]
+
             //makes a new array by .maping out copy of state
             //for each collection we filter out TuneCollections that don't match the id of a tune in the tunes state 
             //which contains only the current user's tunes 
             let UserFilteredTuneCollection = newCollections.map(collection => {
                 let filteredTuneCollections =collection.tuneCollections.filter(tuneCollection=> tunes.some(tune=> tune.id===tuneCollection.tuneId))
-                //filtered tuneCollections contains only the 
+                
+                //filtered tuneCollections contains only the current user's tuneCollection objects, 
+                //so i replace the tuneCOllections in the current collection with the filtered ones and return the whole object to the new array
                 collection.tuneCollections = filteredTuneCollections
                 return collection
                 })
+
+                //for whatever reason the array has an extra layer of array, so i needed to flatten it to just an array of objects
             UserFilteredTuneCollection = UserFilteredTuneCollection.flat()
-            
+
+            //now i replace each filtered tuneCOllection object in the embeded array with its corresponding tune
             let mergedCollection = UserFilteredTuneCollection.map(collection => {
                 collection.tuneCollections = collection.tuneCollections.map(cTune =>{
                     let resTune = tunes.find(tune => tune.id===cTune.tuneId)
