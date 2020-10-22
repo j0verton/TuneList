@@ -1,0 +1,20 @@
+.homeContainer {
+    height: 91vh;
+    background-image: url("./img/615059_4782632210821_909383358_o.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeInfo {
+    /* background-color: rgba(255, 255, 255, .9); */
+    padding: 50px;
+    border-radius: 25px;
+    flex-basis: 10%;
+}
+
+.homeInfo p {
+    margin-bottom: 0;
+}
