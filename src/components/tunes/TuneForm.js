@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Form, Header, Dropdown, Checkbox } from "semantic-ui-react";
+import { Button, Form, Header, Dropdown, Checkbox, Rating } from "semantic-ui-react";
 import "./Tune.css"
 import { TuneContext } from "./TuneProvider";
 
@@ -60,8 +60,8 @@ export const TuneForm = () => {
                 source: tune.source,
                 notes:tune.notes,
                 link:tune.link,
-                starred:false,
-                // learning:tune.learning.checked
+                starred:tune.starred,
+                learning:tune.learning
             })
             .then(() => history.push('/tunes'))
         } else {
@@ -74,12 +74,11 @@ export const TuneForm = () => {
                 source: tune.source,
                 notes:tune.notes,
                 link:tune.link,
-                starred:false,
-                // learning:tune.learning.checked
+                starred:tune.starred,
+                learning:tune.learning
             })
             .then(() => history.push('/tunes'))
         }
-
     }
 
     const handleControlledInputChange = (event) => {
@@ -92,6 +91,18 @@ export const TuneForm = () => {
         console.log(data)
         const newTune = { ...tune }
         newTune[data.name] = data.value
+        setTune(newTune)
+    }
+    const handleCheckbox = (event, data)=> {
+        console.log(data.name)
+        const newTune = { ...tune }
+        newTune[data.name] = data.checked
+        setTune(newTune)
+    }
+    const handleStar = (event, data)=> {
+        console.log(data.name)
+        const newTune = { ...tune }
+        newTune[data.name] = data.rating
         setTune(newTune)
     }
 
@@ -111,6 +122,11 @@ export const TuneForm = () => {
                     name='name'
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.name}
+                />
+                <Rating 
+                name="starred"
+                icon='star'
+                onRate={handleStar}
                 />
                 <Form.Input
                     required
@@ -158,7 +174,7 @@ export const TuneForm = () => {
                 <Checkbox 
                     name='learning'
                     label='Still learning this one?'
-                    onChange={handleDropdown}
+                    onChange={handleCheckbox}
                     defaultChecked={tune?.learning}
                 />
                 <Button

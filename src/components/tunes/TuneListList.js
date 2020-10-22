@@ -28,7 +28,6 @@ export const TunesList = (props) => {
     useEffect(()=> {
         getTunesByUserId(localStorage.getItem("tunes_user"))
         .then(allUserTunes => {
-            console.log("allUserTunes",allUserTunes)
             setTunes(allUserTunes)})
         .then(()=> {
             getCollectionsByUserId(localStorage.getItem("tunes_user"))

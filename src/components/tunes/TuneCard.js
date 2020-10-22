@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import "./Tune.css"
-import { Button, Container, Divider, Header, Icon, Modal } from 'semantic-ui-react'
+import { Button, Container, Divider, Header, Icon, Modal, Rating } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
@@ -40,6 +40,12 @@ export const TuneCard = (props) => {
                 <Modal.Content className="tune--headercontainer">
                 <Header as='h3'>{tuneObj.name}</Header>
                 <Header as='h4'>{tuneObj.key}/{tuneObj.tuning}</Header>
+                <Rating 
+                icon='star'
+                defaultRating={tuneObj.starred}
+                disabled
+
+                />
                 </Modal.Content>
                 <p>source: {tuneObj.source}</p>
                 <p>{tuneObj.notes}</p>

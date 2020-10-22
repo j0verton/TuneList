@@ -10,9 +10,11 @@ import { CollectionProvider } from "./components/collections/CollectionsProvider
 export const ApplicationViews = (props) => {
     return (
         <>
+        <TuneProvider>
             <Route exact path="/">
                 <Home />
             </Route>
+        </TuneProvider>
 
             <TuneProvider>
                 <Route exact path="/tunes/create">
