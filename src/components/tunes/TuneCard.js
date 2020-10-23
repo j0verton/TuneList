@@ -6,18 +6,9 @@ import { useHistory, useParams } from "react-router-dom"
 
 export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { tune, getTunesByUserId, getTuneById, deleteTune } = useContext(TuneContext)
-
+    const { tune, getTunesByUserId, saveTune, deleteTune } = useContext(TuneContext)
     const history = useHistory()
-    // const [ modal, showModal ] = useState(true)
     const tuneId = useParams()
-    // const [open, setOpen] = useState(true)
-    // function handleModal(event){
-    //     props.onClose
-    // }
-    // function handleModal(value){
-    //     props.closeModal(value)
-    // }
 
     const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
@@ -44,8 +35,8 @@ export const TuneCard = (props) => {
                 icon='star'
                 defaultRating={tuneObj.starred}
                 disabled
-
                 />
+
                 </Modal.Content>
                 <p>source: {tuneObj.source}</p>
                 <p>{tuneObj.notes}</p>
@@ -59,6 +50,17 @@ export const TuneCard = (props) => {
                             deleteTune(tuneObj.id)
                             .then(history.push(`/tunes`))}}>
                         <Icon name='trash alternate outline' /></Button>
+                        { tuneObj.userId !== parseInt(localStorage.getItem("tunes_user")) ? 
+                        <Button icon id="addTune--${tune.id}" className="addTune" onClick={
+                            () => {
+                                let newTuneObj = {...tuneObj}
+                                newTuneObj.userId = parseInt(localStorage.getItem("tunes_user"))
+                                delete newTuneObj.id
+                                newTuneObj.notes = ""
+                                saveTune(newTuneObj)
+                                .then(history.push(`/users`))}}>
+                            <Icon name='add circle' /></Button> : null
+                        }
                 </Modal.Actions>
             </Modal>
     )

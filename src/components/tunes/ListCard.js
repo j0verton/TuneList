@@ -11,8 +11,6 @@ export const ListCard = ({tunesArr}) => {
     const [ tuneObj,setTuneObj ] = useState({})
     const tuneRef= useRef(null)
 
-    const [ tunes, setTunes] = useState([])
-
     const handleOpen =() =>{
         showModal(true)
     }
@@ -29,7 +27,7 @@ export const ListCard = ({tunesArr}) => {
                 textAlign:"left"
             }}
         >
-        {tunesArr.filter(tune=> !tune.learning).map(tune => {
+        {tunesArr.filter(tune=> !tune.learning).sort((a, b) => a.name.localeCompare(b.name)).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
@@ -63,7 +61,7 @@ export const ListCard = ({tunesArr}) => {
                 textAlign:"left"
             }}
         >
-        {tunesArr.filter(tune=> tune.learning).map(tune => {
+        {tunesArr.filter(tune=> tune.learning).sort((a, b) => a.name.localeCompare(b.name)).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
@@ -89,3 +87,7 @@ export const ListCard = ({tunesArr}) => {
     ) : null
     
 }
+
+// .sort((a, b) => {
+//     return a.name - b.name;
+// })

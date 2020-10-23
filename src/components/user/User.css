@@ -1,13 +1,25 @@
 .usersContainer {
     margin: 10% 0 0 15%;
-    width: 40%;
+    width: 50%;
     color: #806040 !important;
+    border: 3px solid #177e89 !important;
+    border-radius: 5px !important;
+    padding: 2.5%
 }
 
 .title {
     color: #806040 !important;
+    font-size: 1.6em !important
 }
 
-.content:hover {
-    color: blue !important
+.user__tune {
+    padding-left:3%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.user__tune:hover {
+    color: #177e89 !important;
+    cursor: alias !important;
 }

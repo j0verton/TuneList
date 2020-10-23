@@ -28,9 +28,7 @@ export const UserList = () => {
     useEffect(() => {
         getUsers()
         .then(()=>{
-            setSortedUsers(users.sort((a, b) => {
-            return a.name - b.name;
-        }))
+            setSortedUsers(users.sort((a, b) => a.name.localeCompare(b.name)))
         })
     }, []);
 
@@ -49,20 +47,17 @@ export const UserList = () => {
                 <Accordion.Title
                     active={activeIndex === user.id}
                     index= {user.id}
-                    onClick={event=>{
-                        handleOpen()
-                        setTuneObj(tune)
-                        handleClick()
-                    }}
+                    onClick={handleClick}
                     >
                 <Icon name='dropdown' />
                     {user.name}
                 </Accordion.Title>
     
                 <Accordion.Content active={activeIndex === user.id}>
-                    {user.tunes.sort((a, b) => {
-                        return a.name - b.name;
-                    }).map(tune=> <p>{tune.name} - {tune.key}/{tune.tuning} {tune.source ? `- ${tune.source}` : null}</p>)
+                    {user.tunes.sort((a, b) => a.name.localeCompare(b.name))
+                    .map(tune=> <p class="user__tune" id="tune__" onClick={ ()=>{  
+                        handleOpen()
+                        setTuneObj(tune) }}>{tune.name} - {tune.key} / {tune.tuning} {tune.source ? `- ${tune.source}` : null}</p>)
                     }
                 </Accordion.Content>
             </>

@@ -17,6 +17,7 @@ export const TunesList = (props) => {
     const [panes, setPanes] = useState([])
 
     useEffect(()=> {
+        console.log(userCollections)
         if(userCollections){
         let tabs = userCollections.map(collection => {
             return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard tunesArr={collection.tuneCollections} />}</Tab.Pane>}
