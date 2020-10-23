@@ -4,6 +4,7 @@ import { Button, Container, Divider, Header, Icon } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
 import { Link, useHistory } from "react-router-dom"
 import { TuneCard } from "./TuneCard"
+import { findByLabelText } from "@testing-library/react"
 
 export const ListCard = ({tunesArr}) => {
     const [ modal, showModal ] = useState(false)
@@ -34,11 +35,21 @@ export const ListCard = ({tunesArr}) => {
     // }, [])
 
     return tunesArr[0] ? (
-        <>
+        <><Container
+            style={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                textAlign:"left"
+            }}
+        >
         {tunesArr.filter(tune=> !tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
+            style={{ 
+                textAlign:"left",
+                marginBottom: "2%"
+            }}
             onClick={e=>{
                 handleOpen()
                 setTuneObj(tune)
@@ -50,6 +61,7 @@ export const ListCard = ({tunesArr}) => {
             </>
         })
         }
+        </Container>
         {tunesArr.filter(tune=> tune.learning).length ? 
         <>
         <Divider horizontal>
@@ -57,6 +69,13 @@ export const ListCard = ({tunesArr}) => {
                 still learning
             </Header>
         </Divider>
+        <Container
+            style={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                textAlign:"left"
+            }}
+        >
         {tunesArr.filter(tune=> tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
@@ -72,6 +91,7 @@ export const ListCard = ({tunesArr}) => {
                 </>
             })
         }
+        </Container>
         </>
         : null
     }
