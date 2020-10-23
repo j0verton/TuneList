@@ -88,7 +88,7 @@ export const TuneForm = () => {
         setTune(newTune)
     }
     const handleDropdown = (event, data)=> {
-        console.log(data)
+        console.log("data",data)
         const newTune = { ...tune }
         newTune[data.name] = data.value
         setTune(newTune)
@@ -124,9 +124,9 @@ export const TuneForm = () => {
                     defaultValue={tune?.name}
                 />
                 <Rating 
-                name="starred"
-                icon='star'
-                onRate={handleStar}
+                    name="starred"
+                    icon='star'
+                    onRate={handleStar}
                 />
                 <Form.Input
                     required

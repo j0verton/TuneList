@@ -10,16 +10,51 @@ export const ListCard = ({tunesArr}) => {
     const [ tuneObj,setTuneObj ] = useState({})
     const tuneRef= useRef(null)
 
+    const [ knownTunes, setKnownTunes] = useState([])
+    const [ learningTunes, setLearningTunes] = useState([])
 
+    const learningTunesArray = tunesArr.filter(tune=> tune.learning)
+    const knownTunesArray = tunesArr.filter(tune=> !tune.learning)
+    
     const handleOpen =() =>{
         showModal(true)
     }
     const handleClose =()=>{
         showModal(false)
     } 
-    return tunesArr[0] ? (
+    
+    useEffect(() => {
+        setKnownTunes(tunesArr.filter(tune=> !tune.learning))
+        console.log("learning", learningTunes)
+        setLearningTunes(tunesArr.filter(tune=> tune.learning))
+        console.log("known", knownTunes)
+    }, [])
+
+    return knownTunes[0] ? (
         <>
-        {tunesArr.map(tune => {
+        {knownTunes.map(tune => {
+            return <><Button as='h3' 
+            ref={tuneRef}
+            key={tune.id}
+            onClick={e=>{
+                handleOpen()
+                setTuneObj(tune)
+            }} 
+            id={tune.id} 
+            className="tuneEntry">
+            {tune.name}
+            </Button>
+            </>
+        })
+        }
+        {learningTunes ? 
+        <>
+        <Divider horizontal>
+            <Header as='h4'>
+                still learning
+            </Header>
+        </Divider>
+        {learningTunes.map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
@@ -33,7 +68,11 @@ export const ListCard = ({tunesArr}) => {
                 </Button>
                 </>
             })
+        }
+        </>
+        : null
     }
+
     {modal ? <><TuneCard id={tuneObj.id} tuneObj={tuneObj} handleOpen={handleOpen} handleClose={handleClose}/></> : null }
     </>
     

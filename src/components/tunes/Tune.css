@@ -1,0 +1,31 @@
+/* #root {
+    display: flex;
+
+} */
+body {
+    margin: 0;
+    background-color:#ffc857 ;
+}
+
+#ListTabs, form {
+    padding:12%; 
+    /* display:flex */
+}
+/* 
+.ui.item.menuItem, .ui.item.menu .item{  
+    background-color: #FFC857;
+}
+
+.ui.item.menuItem .active.item{  
+    background-color: #FFC857; 
+} */
+
+.bottom {
+    display: flex;
+    color: #806040;
+    flex-flow: column nowrap;
+}
+
+button {
+    background-color: #ADA8BE;
+}

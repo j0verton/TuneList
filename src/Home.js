@@ -25,7 +25,6 @@ export const Home = () => {
             <Divider horizontal>
               <Header as='h4'>
                 <Icon name='star'color='yellow' />
-              
                 </Header>
             </Divider>
             <Container>

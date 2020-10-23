@@ -65,12 +65,10 @@ export const TunesList = (props) => {
 
             })
             setUserCollections(mergedCollection)
-            // console.log("mergedCollection", mergedCollection )
-            // console.log("userCollections", userCollections)
         }
         }, [ collections ])
 
     return panes ? (
-        <Tab panes={panes} />
+        <Tab id="ListTabs" panes={panes} />
     ) : null
 }
