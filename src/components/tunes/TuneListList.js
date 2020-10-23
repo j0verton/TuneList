@@ -69,6 +69,6 @@ export const TunesList = (props) => {
         }, [ collections ])
 
     return panes ? (
-        <Tab id="ListTabs" panes={panes} />
+        <Tab renderActiveOnly id="ListTabs" panes={panes} />
     ) : null
 }

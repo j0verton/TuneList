@@ -10,29 +10,32 @@ export const ListCard = ({tunesArr}) => {
     const [ tuneObj,setTuneObj ] = useState({})
     const tuneRef= useRef(null)
 
-    const [ knownTunes, setKnownTunes] = useState([])
-    const [ learningTunes, setLearningTunes] = useState([])
+    const [ tunes, setTunes] = useState([])
+    // const [ knownTunes, setKnownTunes] = useState([])
+    // const [ learningTunes, setLearningTunes] = useState([])
 
-    const learningTunesArray = tunesArr.filter(tune=> tune.learning)
-    const knownTunesArray = tunesArr.filter(tune=> !tune.learning)
+    // const learningTunesArray = tunesArr.filter(tune=> tune.learning)
+    // const knownTunesArray = tunesArr.filter(tune=> !tune.learning)
     
     const handleOpen =() =>{
         showModal(true)
     }
+
     const handleClose =()=>{
         showModal(false)
     } 
     
-    useEffect(() => {
-        setKnownTunes(tunesArr.filter(tune=> !tune.learning))
-        console.log("learning", learningTunes)
-        setLearningTunes(tunesArr.filter(tune=> tune.learning))
-        console.log("known", knownTunes)
-    }, [])
+    // useEffect(() => {
+    //     setTunes(tunesArr)
+    //     setKnownTunes(tunesArr.filter(tune=> !tune.learning))
+    //     console.log("learning", learningTunes)
+    //     setLearningTunes(tunesArr.filter(tune=> tune.learning))
+    //     console.log("known", knownTunes)
+    // }, [])
 
-    return knownTunes[0] ? (
+    return tunesArr[0] ? (
         <>
-        {knownTunes.map(tune => {
+        {tunesArr.filter(tune=> tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
@@ -47,14 +50,14 @@ export const ListCard = ({tunesArr}) => {
             </>
         })
         }
-        {learningTunes ? 
+        {tunesArr.filter(tune=> !tune.learning) ? 
         <>
         <Divider horizontal>
             <Header as='h4'>
                 still learning
             </Header>
         </Divider>
-        {learningTunes.map(tune => {
+        {tunesArr.filter(tune=> !tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}

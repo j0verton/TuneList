@@ -3,7 +3,7 @@
     background-image: url("./img/615059_4782632210821_909383358_o.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
+    /* display: flex; */
     justify-content: left;
     align-items: center;
 }
@@ -17,4 +17,8 @@
 
 .homeInfo p {
     margin-bottom: 0;
+}
+
+.tuneEntry {
+    width: 40%;
 }

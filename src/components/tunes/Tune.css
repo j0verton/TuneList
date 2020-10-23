@@ -7,10 +7,11 @@ body {
     background-color:#ffc857 ;
 }
 
-#ListTabs, form {
+/* #ListTabs, form {
     padding:12%; 
     /* display:flex */
-}
+/* }  */
+
 /* 
 .ui.item.menuItem, .ui.item.menu .item{  
     background-color: #FFC857;
@@ -20,11 +21,11 @@ body {
     background-color: #FFC857; 
 } */
 
-.bottom {
+/* .bottom {
     display: flex;
     color: #806040;
     flex-flow: column nowrap;
-}
+} */
 
 button {
     background-color: #ADA8BE;
