@@ -10,11 +10,10 @@ export const Home = () => {
   const [tunes, setTunes]= useState([])
   const [ modal, showModal ] = useState(false)
   const [ tuneObj,setTuneObj ] = useState({})
-  
+
   useEffect(()=> {
     getStarredTunesByUserId(localStorage.getItem("tunes_user"))
     .then(allUserTunes => {
-        console.log("allUserTunes",allUserTunes)
         setTunes(allUserTunes)})
     }, [])
 
