@@ -1,0 +1,104 @@
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.videoTag {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    opacity: .25;
+    z-index: -1;
+}
+
+.h1, h1 {
+    font-size: 2.5rem;
+}
+
+fieldset {
+    min-width: 0;
+    padding: 1rem 0;
+    margin: 0;
+    border: 0;
+}
+
+.form--login {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form--login > fieldset > input[type="email"] {
+    width: 25em;
+}
+
+.label--login {
+    width: 8rem;
+    display: inline-block;
+}
+
+.form-control {
+    display: block;
+    width: 94% !important;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ADA8BE;
+    border-radius: .25rem;
+    -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.container--login {
+    text-align: center;
+    background-color: rgba(255, 255, 255, .75);
+    padding: 50px;
+    border-radius: 25px;
+    width: 500px;
+}
+
+.about {
+    text-align: justify;
+}
+
+.form--login {
+    background-position-x: right;
+    z-index: 1;
+    min-height: 10rem;
+    min-width: 25rem;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+}
+
+.form--login h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form--login h2 {
+    margin-top: 25px;
+}
+
+.button--close {
+    position: relative;
+    bottom: -2rem;
+}
+
+.dialog {
+    min-width: 15rem;
+    min-height: 5rem;
+}
+
+.registerBtns {
+    display: flex;
+    flex-flow: row wrap;
+}

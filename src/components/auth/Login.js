@@ -1,9 +1,9 @@
 import React, { useRef } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
-import { Button, Divider } from "semantic-ui-react"
-// import logo from "../../img/logo_words.png"
-// import video from "../../video/video.mp4"
+import { Button, Divider, Image } from "semantic-ui-react"
+import logo from "../../img/TuneListLogo.png"
+import video from "../../video/tunes1.mov"
 import "./Login.css"
 
 export const Login = props => {
@@ -42,7 +42,7 @@ export const Login = props => {
 
                     <section>
                         <form className="form--login" onSubmit={handleLogin}>
-                            {/* <img src={logo} alt="tune list logo" className="logo" /> */}
+                        <Image src={logo} floated="left" size="medium" alt="TuneList logo, a fiddle over 3 sheets of paper" className="LogoNav" />
                             <h1>TuneList</h1>
 
                             <Divider />
@@ -72,9 +72,9 @@ export const Login = props => {
                     </section>
                 </main>
 
-                {/* <video className="videoTag" autoPlay loop muted>
-                    <source src={video} type="video/mp4" />
-                </video> */}
+                <video className="videoTag" autoPlay loop muted>
+                    <source src={video} type="video/mov" />
+                </video>
             </div>
         </>
     )

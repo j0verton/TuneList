@@ -50,7 +50,7 @@ export const ListCard = ({tunesArr}) => {
             </>
         })
         }
-        {tunesArr.filter(tune=> !tune.learning) ? 
+        {tunesArr.filter(tune=> tune.learning).length ? 
         <>
         <Divider horizontal>
             <Header as='h4'>
