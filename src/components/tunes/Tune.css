@@ -21,13 +21,15 @@ body {
 .ui.item.menuItem .active.item{  
     background-color: #FFC857; 
 } */
-
-.ui.segment {
-    display: flex;
-    color: #806040;
-    flex-flow: column nowrap;
+.item {
+    color: #806040 !important;
 }
 
+.tab, .active.item {
+    color: #ffc857 !important;
+    background-color:#177e89 !important;
+}
 .tuneEntry {
-    background-color: #ADA8BE;
+    background-color: #b9c6ae !important;
+    color: #806040 !important;
 }

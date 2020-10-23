@@ -1,0 +1,13 @@
+.usersContainer {
+    margin: 10% 0 0 15%;
+    width: 40%;
+    color: #806040 !important;
+}
+
+.title {
+    color: #806040 !important;
+}
+
+.content:hover {
+    color: blue !important
+}

@@ -15,25 +15,22 @@ export const NavBar = (props) => {
                     </Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/tunes"><Icon name="newspaper" />Tunes</Link>
+                    <Link className="navbar__link" to="/tunes"><Icon name="newspaper" /><p class="nav__text">Tunes</p></Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/friends"><Icon name="address book" />Friends</Link>
+                    <Link className="navbar__link" to="/users"><Icon name="address book" /><p class="nav__text">Users</p></Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/tasks"><Icon name="list alternate" />Message Board</Link>
+                    <Link className="navbar__link" to="/tasks"><Icon name="list alternate" /><p class="nav__text">Message Board</p></Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/messages"><Icon name="comments" />Messages</Link>
-                </li>
-                <li className="navbar__item active">
-                    <Link className="navbar__link" to="/tunes/create"><Icon name="comments" />Add a Tune</Link>
+                    <Link className="navbar__link" to="/tunes/create"><Icon name="comments" /><p class="nav__text">Add a Tune</p></Link>
                 </li>
                 <li className="navbar__item active logout">
                     <Link className="navbar__link" onClick={() => {
                         localStorage.removeItem("tunes_user")
                     }}
-                        to="/login"><Icon name="eject" />Logout</Link>
+                        to="/login"><Icon name="eject" /><p class="nav__text">Logout</p></Link>
                 </li>
             </ul>
         </section>

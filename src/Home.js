@@ -10,8 +10,7 @@ export const Home = () => {
   const [tunes, setTunes]= useState([])
   const [ modal, showModal ] = useState(false)
   const [ tuneObj,setTuneObj ] = useState({})
-  const tuneRef= useRef(null)
-
+  
   useEffect(()=> {
     getStarredTunesByUserId(localStorage.getItem("tunes_user"))
     .then(allUserTunes => {
@@ -43,7 +42,6 @@ export const Home = () => {
             return <>
             <Segment 
             raised
-            ref={tuneRef}
             key={tune.id}
             onClick={e=>{
               handleOpen()

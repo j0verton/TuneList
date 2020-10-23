@@ -137,9 +137,10 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.key}
                 />
-                <Dropdown
+                <Form.Dropdown
                     placeholder='Select a Tuning'
                     fluid
+                    required
                     selection
                     name='tuning'
                     label='Tuning'

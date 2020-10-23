@@ -1,7 +1,7 @@
 .mainContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: right;
     height: 100vh;
 }
 

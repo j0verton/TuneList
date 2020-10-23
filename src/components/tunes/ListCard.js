@@ -12,12 +12,7 @@ export const ListCard = ({tunesArr}) => {
     const tuneRef= useRef(null)
 
     const [ tunes, setTunes] = useState([])
-    // const [ knownTunes, setKnownTunes] = useState([])
-    // const [ learningTunes, setLearningTunes] = useState([])
 
-    // const learningTunesArray = tunesArr.filter(tune=> tune.learning)
-    // const knownTunesArray = tunesArr.filter(tune=> !tune.learning)
-    
     const handleOpen =() =>{
         showModal(true)
     }
@@ -25,14 +20,6 @@ export const ListCard = ({tunesArr}) => {
     const handleClose =()=>{
         showModal(false)
     } 
-    
-    // useEffect(() => {
-    //     setTunes(tunesArr)
-    //     setKnownTunes(tunesArr.filter(tune=> !tune.learning))
-    //     console.log("learning", learningTunes)
-    //     setLearningTunes(tunesArr.filter(tune=> tune.learning))
-    //     console.log("known", knownTunes)
-    // }, [])
 
     return tunesArr[0] ? (
         <><Container
@@ -65,7 +52,7 @@ export const ListCard = ({tunesArr}) => {
         {tunesArr.filter(tune=> tune.learning).length ? 
         <>
         <Divider horizontal>
-            <Header as='h4'>
+            <Header style={{color:"#ffc857"}}as='h4'>
                 still learning
             </Header>
         </Divider>

@@ -59,9 +59,9 @@
     } */
     
 @media screen and (max-width: 640px) {
-    .navbar__link.text {display:none}
+    .nav__text {display:none }
 }
 
 @media screen and (min-width: 641px) {
-    .navbar__link.text {display:inline-block}
+    .nav__text {display:inline-block}
 }
