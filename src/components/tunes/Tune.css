@@ -7,10 +7,11 @@ body {
     background-color:#ffc857 ;
 }
 
-/* #ListTabs, form {
-    padding:12%; 
-    /* display:flex */
-/* }  */
+#ListTabs, form {
+    padding:12%;
+    display:flex;
+    flex-flow: column nowrap;
+} 
 
 /* 
 .ui.item.menuItem, .ui.item.menu .item{  
@@ -21,12 +22,12 @@ body {
     background-color: #FFC857; 
 } */
 
-/* .bottom {
+.ui.segment {
     display: flex;
     color: #806040;
     flex-flow: column nowrap;
-} */
+}
 
-button {
+.tuneEntry {
     background-color: #ADA8BE;
 }

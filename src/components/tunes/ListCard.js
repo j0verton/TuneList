@@ -35,7 +35,7 @@ export const ListCard = ({tunesArr}) => {
 
     return tunesArr[0] ? (
         <>
-        {tunesArr.filter(tune=> tune.learning).map(tune => {
+        {tunesArr.filter(tune=> !tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
@@ -57,7 +57,7 @@ export const ListCard = ({tunesArr}) => {
                 still learning
             </Header>
         </Divider>
-        {tunesArr.filter(tune=> !tune.learning).map(tune => {
+        {tunesArr.filter(tune=> tune.learning).map(tune => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
