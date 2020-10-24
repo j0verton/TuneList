@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import "./Tune.css"
-import { useHistory } from "react-router-dom"
 import { Tab } from "semantic-ui-react"
 import { CollectionContext } from "../collections/CollectionsProvider"
 import { TuneContext } from "./TuneProvider"
@@ -11,13 +10,10 @@ export const TunesList = (props) => {
     const {collections, getCollectionsByUserId} = useContext(CollectionContext)
     const [tunes, setTunes]= useState([])
     const [ userCollections, setUserCollections ] = useState([])
-    // const [update, setUpdate] = useState(false)
-    const history = useHistory()
     
     const [panes, setPanes] = useState([])
 
     useEffect(()=> {
-        console.log(userCollections)
         if(userCollections){
         let tabs = userCollections.map(collection => {
             return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard tunesArr={collection.tuneCollections} />}</Tab.Pane>}

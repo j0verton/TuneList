@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import { Container, Divider, Segment, Header, Icon, Image } from "semantic-ui-react"
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Divider, Segment, Header, Icon } from "semantic-ui-react"
 import { TuneContext } from "./components/tunes/TuneProvider";
-import logo from "./img/TuneListLogo.png"
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
 

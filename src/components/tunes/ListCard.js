@@ -1,10 +1,7 @@
-import React, { useContext, useEffect, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import "./Tune.css"
-import { Button, Container, Divider, Header, Icon } from 'semantic-ui-react'
-import { TuneContext } from "./TuneProvider"
-import { Link, useHistory } from "react-router-dom"
+import { Button, Container, Divider, Header } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
-import { findByLabelText } from "@testing-library/react"
 
 export const ListCard = ({tunesArr}) => {
     const [ modal, showModal ] = useState(false)
@@ -50,7 +47,7 @@ export const ListCard = ({tunesArr}) => {
         {tunesArr.filter(tune=> tune.learning).length ? 
         <>
         <Divider horizontal>
-            <Header style={{color:"#ffc857"}}as='h4'>
+            <Header style={{color:"#FFF1D6"}}as='h4'>
                 still learning
             </Header>
         </Divider>
@@ -83,11 +80,5 @@ export const ListCard = ({tunesArr}) => {
 
     {modal ? <><TuneCard id={tuneObj.id} tuneObj={tuneObj} handleOpen={handleOpen} handleClose={handleClose}/></> : null }
     </>
-    
     ) : null
-    
 }
-
-// .sort((a, b) => {
-//     return a.name - b.name;
-// })

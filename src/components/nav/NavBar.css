@@ -19,12 +19,13 @@
 }
 
 .navbar a:hover {
-    color:   #ffc857;
+    color:   #FFF1D6;
 }
 
 .LogoNav {
     margin-top:-11%;
-    height: 40px;
+    height: 35px;
+    margin-left:-12%
 }
     
 .navbar__logo {
@@ -36,9 +37,10 @@
 }
 
 .logout {
-    background-color: #ffc857;
+    background-color: #b9c6ae;
     padding: 8px;
     border-radius: 5px;
+    /* text-shadow: 0 0 3px #177e89 !important */
 }
 
 .logout:hover {
@@ -60,8 +62,21 @@
     
 @media screen and (max-width: 640px) {
     .nav__text {display:none }
-}
+    .LogoNav {
+        transform: scale(0.7) !important;
+        margin-top:-18.9%;
 
+    } 
+}
+/* 
 @media screen and (min-width: 641px) {
     .nav__text {display:inline-block}
+} */
+/* 
+@media screen and (max-width: 770px) {
+    .LogoNav {height: 20px}
 }
+
+@media screen and (min-width: 771px) {
+    .LogoNav {height: 40px}
+} */

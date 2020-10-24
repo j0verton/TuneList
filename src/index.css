@@ -1,11 +1,12 @@
 body {
   margin: 0;
-  background-color:#ffc857 ;
+  background-color:#C9F0FF ;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:#084c61 !important
 }
 
 code {
@@ -17,5 +18,8 @@ code {
 {"Coyote Brown":"806040",
   "Metallic Seaweed":"177e89",
   "Midnight Green Eagle Green":"084c61",
-  "Maximum Yellow Red":"ffc857",
-  "Laurel Green":"b9c6ae"} */
+  "Maximum Yellow Red":"FFF1D6",
+  "Laurel Green":"b9c6ae"
+  "peach":"FFF1D6"
+FFF1D6}
+  */

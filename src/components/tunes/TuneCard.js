@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext } from "react"
 import "./Tune.css"
-import { Button, Container, Divider, Header, Icon, Modal, Rating } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Rating } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
 export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { tune, getTunesByUserId, saveTune, deleteTune } = useContext(TuneContext)
+    const { saveTune, deleteTune } = useContext(TuneContext)
     const history = useHistory()
-    const tuneId = useParams()
 
     const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31

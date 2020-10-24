@@ -4,7 +4,7 @@
 } */
 body {
     margin: 0;
-    background-color:#ffc857 ;
+    background-color:#e2e2cf;
 }
 
 #ListTabs, form {
@@ -13,23 +13,59 @@ body {
     flex-flow: column nowrap;
 } 
 
+#save {
+    background-color: #177E89 !important;
+}
 /* 
 .ui.item.menuItem, .ui.item.menu .item{  
-    background-color: #FFC857;
+    background-color: #FFF1D6;
 }
 
 .ui.item.menuItem .active.item{  
-    background-color: #FFC857; 
+    background-color: #FFF1D6; 
 } */
 .item {
     color: #806040 !important;
 }
 
 .tab, .active.item {
-    color: #ffc857 !important;
+    color: #FFF1D6 !important;
     background-color:#177e89 !important;
+    border: 2px solid #be7131
 }
 .tuneEntry {
     background-color: #b9c6ae !important;
     color: #806040 !important;
 }
+
+input, .selection, .menu, #tuneNotes   {
+    background-color: #b9c6ae !important;
+}
+
+label {
+    color: #084c61
+}
+
+/* color palette ideas 
+{"Coyote Brown":"806040",
+  "Metallic Seaweed":"177e89",
+  "Midnight Green Eagle Green":"084c61",
+  "Maximum Yellow Red":"FFF1D6",
+  "Laurel Green":"b9c6ae"
+  "peach":"FFF1D6"
+FFF1D6
+
+
+F1DAAA
+E66424
+
+DEDFCD
+C97A33
+
+d19c6f
+dfddb7
+
+e2e2cf
+be7131
+}
+  */

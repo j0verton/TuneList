@@ -25,7 +25,7 @@ export const ApplicationViews = (props) => {
             </TuneProvider>
 
             <TuneProvider>
-                <Route exact path="/tunes/edit/:tuneId(\d)">
+                <Route exact path="/tunes/edit/:tuneId">
                     <TuneForm />
                 </Route>
             </TuneProvider>

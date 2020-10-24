@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Form, Header, Dropdown, Checkbox, Rating } from "semantic-ui-react";
+import { Button, Form, Header, Checkbox, Rating } from "semantic-ui-react";
 import "./Tune.css"
 import { TuneContext } from "./TuneProvider";
 
@@ -35,10 +35,8 @@ export const TuneForm = () => {
 
     useEffect(() => {
         if(tuneId){
-            console.log(tuneId)
             getTuneById(tuneId)
             .then(tune => {
-                console.log("tune",tune)
                 setTune(tune)
                 setIsLoading(false)
             })
@@ -50,7 +48,6 @@ export const TuneForm = () => {
     const constructNewTune = () => {
         setIsLoading(true)
         if (tuneId) {
-            console.log("edit")
             editTune({
                 id: tune.id,
                 userId: parseInt(localStorage.getItem("tunes_user")),
@@ -65,12 +62,11 @@ export const TuneForm = () => {
             })
             .then(() => history.push('/tunes'))
         } else {
-            console.log("save")
             saveTune({
                 userId: parseInt(localStorage.getItem("tunes_user")),
                 name: tune.name,
                 key: tune.key,
-                tuning: tune.tuning,
+                tuning: tune.tuning ? tune.tuning : "Standard",
                 source: tune.source,
                 notes:tune.notes,
                 link:tune.link,
@@ -82,25 +78,21 @@ export const TuneForm = () => {
     }
 
     const handleControlledInputChange = (event) => {
-        console.log(event.target)
         const newTune = { ...tune }
         newTune[event.target.name] = event.target.value
         setTune(newTune)
     }
     const handleDropdown = (event, data)=> {
-        console.log("data",data)
         const newTune = { ...tune }
         newTune[data.name] = data.value
         setTune(newTune)
     }
     const handleCheckbox = (event, data)=> {
-        console.log(data.name)
         const newTune = { ...tune }
         newTune[data.name] = data.checked
         setTune(newTune)
     }
     const handleStar = (event, data)=> {
-        console.log(data.name)
         const newTune = { ...tune }
         newTune[data.name] = data.rating
         setTune(newTune)
@@ -139,6 +131,7 @@ export const TuneForm = () => {
                 />
                 <Form.Dropdown
                     placeholder='Select a Tuning'
+                    className="tuningdropdown"
                     fluid
                     required
                     selection
@@ -181,14 +174,17 @@ export const TuneForm = () => {
                 <Button
                     primary
                     type="submit"
-                    className="btn btn-primary"
+                    id="save"
+                    size="medium"
+                    className="btn btn-primary save"
                     // onClick={() => history.push(`/tunes`)}
                     >
                     {tuneId ? <>Save Tune</> : <>Add Tune</>}
                 </Button>
                 <Button
                     type="button"
-                    className="btn btn-primary"
+                    size="medium"
+                    className="btn btn-primary cancel"
                     onClick={() => history.push(`/tunes`)}>
                 Cancel </Button>
                 </Form>
