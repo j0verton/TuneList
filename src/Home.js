@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Divider, Segment, Header, Icon } from "semantic-ui-react"
+import { Container, Divider, Segment, Header, Icon, Rating } from "semantic-ui-react"
 import { TuneContext } from "./components/tunes/TuneProvider";
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
 
 export const Home = () => {
-  const { getStarredTunesByUserId } = useContext(TuneContext)
+  const { getStarredTunesByUserId, addStarToTune, removeStarFromTune } = useContext(TuneContext)
   const [tunes, setTunes]= useState([])
   const [ modal, showModal ] = useState(false)
   const [ tuneObj,setTuneObj ] = useState({})
+  const [ rating, setRating ] = useState()
 
   useEffect(()=> {
     getStarredTunesByUserId(localStorage.getItem("tunes_user"))
     .then(allUserTunes => {
         setTunes(allUserTunes)})
-    }, [])
+    }, [rating])
 
   const handleOpen =() =>{
     showModal(true)
@@ -22,6 +23,14 @@ export const Home = () => {
   const handleClose =()=>{
     showModal(false)
   } 
+
+  const handleStar = (event, data) => {
+    console.log("data",data)
+    console.log("event", event.target)
+    const [prefix, tuneId] = data.id.split("__")
+    console.log(tuneId)
+    data.rating === 0 ? removeStarFromTune(tuneId).then(()=> {setRating(tuneId)}): addStarToTune(tuneId).then(()=> {setRating(tuneId)})
+  }
 
   return (
     <>
@@ -39,15 +48,28 @@ export const Home = () => {
           {tunes.map(tune=>{
             return <>
             <Segment 
-            raised
-            key={tune.id}
-            onClick={e=>{
-              handleOpen()
-              setTuneObj(tune)
-            }} 
-            id={tune.id} 
-            className="tuneEntry">
-            {tune.name}
+              raised
+              key={tune.id}
+              id={tune.id} 
+              className="tuneEntry"
+            >
+              <p
+              key={tune.id}
+                onClick={e=>{
+                  handleOpen()
+                  setTuneObj(tune)
+                }
+                }
+              >
+                {tune.name}
+              </p>
+              <Rating 
+                name="starred"
+                icon='star'
+                id={`tune__${tune.id}`}
+                onRate={handleStar}
+                defaultRating={tune?.starred}
+              />
             </Segment>
           </>
           })

@@ -6,13 +6,6 @@ export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
 
-    // const getTunes = () => {
-    //     return fetch('http://localhost:8088/tunes?_expand=user')
-    //     .then(response => response.json())
-    //     .then(res=> res.reverse())
-    //     .then(setTunes)
-    // }
-    
     // adds new Tunes to database
     const saveTune = tuneObj => {
         console.log(tuneObj)
@@ -62,21 +55,67 @@ export const TuneProvider = props => {
 
 
     // allows user to edit their Tunes
-    const editTune = tuneObj => {
-        return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
-            method: 'PUT',
+    // const editTune = tuneObj => {
+    //     getTuneByIdWithTC(tuneObj.id).then(res => {
+    //         if (res.tuning === tuneObj.tuning || res.key === tuneObj.key) {
+    //             return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
+    //                 method: 'PUT',
+    //                 headers: {
+    //                     "Content-Type": "application/json"
+    //                 },
+    //                 body: JSON.stringify(tuneObj)
+    //             })
+    //         } else {
+    //             deleteTune(res.id)
+    //             .then(() => res.tuneCollections.forEach(tuneCollection => {
+    //                 deleteTuneCollections(tuneCollection.id)
+    //             }))
+    //             delete tuneObj.id
+    //             saveTune(tuneObj)
+    //         }
+    // })}
+    
+    const addStarToTune = (tuneId) => {
+        console.log("log inside add",tuneId)
+        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
+            method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(tuneObj)
+            body: JSON.stringify({
+                starred: 1
+            })
         })
     }
-    
+
+    const removeStarFromTune = (tuneId) => {
+        console.log("log inside remove",tuneId)
+        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                starred: 0
+            })
+        })
+    }
     // removes Tune from database
     const deleteTune = tuneId => {
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'DELETE'
         })
+    }
+
+    const deleteTuneCollections = tuneCollectionsId => {
+        return fetch(`http://http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
+            method: 'DELETE'
+        })
+    }
+
+    const getTuneByIdWithTC = id => {
+        return fetch(`http://localhost:8088/tunes/${id}`)
+            .then(res => res.json())
     }
 
     const getTuneById = id => {
@@ -98,7 +137,7 @@ export const TuneProvider = props => {
 
     return (
         <TuneContext.Provider value={{
-            tune, tunes, saveTune, deleteTune, editTune, getTuneById, getTunesByUserId, getStarredTunesByUserId
+            tune, tunes, saveTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune
         }}>
             {props.children}
         </TuneContext.Provider>

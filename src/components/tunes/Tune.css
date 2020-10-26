@@ -33,9 +33,14 @@ body {
     background-color:#177e89 !important;
     border: 2px solid #be7131
 }
+
 .tuneEntry {
     background-color: #b9c6ae !important;
     color: #806040 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around;
+    text-align: left !important;
 }
 
 input, .selection, .menu, #tuneNotes   {
@@ -44,6 +49,12 @@ input, .selection, .menu, #tuneNotes   {
 
 label {
     color: #084c61
+}
+
+tuneP {
+    margin-bottom: 0 !important;
+    align-self: flex-start !important;
+    text-align: left !important;
 }
 
 /* color palette ideas 

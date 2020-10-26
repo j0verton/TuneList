@@ -57,7 +57,7 @@ export const UserList = () => {
                     {user.tunes.sort((a, b) => a.name.localeCompare(b.name))
                     .map(tune=> <p key={`p${tune.id}`} className="user__tune" id="tune__" onClick={ ()=>{  
                         handleOpen()
-                        setTuneObj(tune) }}>{tune.name} - {tune.key} / {tune.tuning} {tune.source ? `- ${tune.source}` : null}</p>)
+                    setTuneObj(tune) }}>{tune.name} - {tune.key} {tune.tuning? "/": null } {tune.tuning} {tune.source ? `- ${tune.source}` : null}</p>)
                     }
                 </Accordion.Content>
             </>

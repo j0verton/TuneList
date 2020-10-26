@@ -98,6 +98,11 @@ export const TuneForm = () => {
         setTune(newTune)
     }
 
+    const handleAddition = (event, data) => {
+
+
+    }
+
     return (
         <>
             <div className="tuneFormContainer">
@@ -119,6 +124,7 @@ export const TuneForm = () => {
                     name="starred"
                     icon='star'
                     onRate={handleStar}
+                    defaultRating={tune?.starred}
                 />
                 <Form.Input
                     required
@@ -130,15 +136,19 @@ export const TuneForm = () => {
                     defaultValue={tune?.key}
                 />
                 <Form.Dropdown
+                    allowAdditions
+                    additionPosition= 'top'
+                    additionLabel = "add a Tuning"
+                    onAddItem={handleAddition}
                     placeholder='Select a Tuning'
                     className="tuningdropdown"
-                    fluid
-                    required
                     selection
+                    search
+                    required
                     name='tuning'
                     label='Tuning'
                     options={tuningOptions}
-                    defaultValue={tune?.tuning}
+                    defaultValue={tune.tuning}
                     onChange={handleDropdown}
                 />
                 <Form.Input
@@ -165,12 +175,20 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.link}
                 />
-                <Checkbox 
-                    name='learning'
-                    label='Still learning this one?'
-                    onChange={handleCheckbox}
-                    defaultChecked={tune?.learning}
-                />
+                {tune.learning?                 
+                    <Checkbox 
+                        name='learning'
+                        label='Still learning this one?'
+                        onChange={handleCheckbox}
+                        defaultChecked
+                    />
+                     : tune.id ?
+                     <Checkbox 
+                        name='learning'
+                        label='Still learning this one?'
+                        onChange={handleCheckbox}
+                    /> : null
+                }
                 <Button
                     primary
                     type="submit"
@@ -192,4 +210,5 @@ export const TuneForm = () => {
             </>
 
     )
+    
 }

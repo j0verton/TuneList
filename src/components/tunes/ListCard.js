@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useContext } from "react"
 import "./Tune.css"
-import { Button, Container, Divider, Header } from 'semantic-ui-react'
+import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
+import { TuneContext } from "./TuneProvider"
 
 export const ListCard = ({tunesArr}) => {
     const [ modal, showModal ] = useState(false)
     const [ tuneObj,setTuneObj ] = useState({})
+    const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
     const tuneRef= useRef(null)
 
     const handleOpen =() =>{
@@ -15,6 +17,14 @@ export const ListCard = ({tunesArr}) => {
     const handleClose =()=>{
         showModal(false)
     } 
+
+    const handleStar = (event, data) => {
+        console.log("data",data)
+        console.log("event", event.target)
+        const [prefix, tuneId] = data.id.split("__")
+        console.log(tuneId)
+        data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
+      }
 
     return tunesArr[0] ? (
         <><Container
@@ -32,13 +42,24 @@ export const ListCard = ({tunesArr}) => {
                 textAlign:"left",
                 marginBottom: "2%"
             }}
+            id={tune.id} 
+            className="tuneEntry">
+            <p
+            className="tuneP"             
             onClick={e=>{
                 handleOpen()
                 setTuneObj(tune)
-            }} 
-            id={tune.id} 
-            className="tuneEntry">
-            {tune.name}
+            }} >
+                {tune.name}
+            </p>
+            <Rating 
+                name="starred"
+                icon='star'
+                className="rating"
+                id={`tune__${tune.id}`}
+                onRate={handleStar}
+                defaultRating={tune?.starred}
+            />
             </Button>
             </>
         })
@@ -62,13 +83,22 @@ export const ListCard = ({tunesArr}) => {
             return <><Button as='h3' 
             ref={tuneRef}
             key={tune.id}
+                id={tune.id} 
+                className="tuneEntry">
+            <p             
             onClick={e=>{
                 handleOpen()
                 setTuneObj(tune)
-            }} 
-                id={tune.id} 
-                className="tuneEntry">
+            }} >
                 {tune.name}
+            </p>
+                <Rating 
+                    name="starred"
+                    icon='star'
+                    id={`tune__${tune.id}`}
+                    onRate={handleStar}
+                    defaultRating={tune?.starred}
+                />
                 </Button>
                 </>
             })

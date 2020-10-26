@@ -55,12 +55,11 @@
     color: #111;
 }
 
-/* .navbar__link (min-width: 641px) {
-        span.icon {display:none}
-        span.text {display:inline-block}
-    } */
+.navbar__link {
+    display: flex !important;
+    }
     
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 817px) {
     .nav__text {display:none }
     .LogoNav {
         transform: scale(0.7) !important;

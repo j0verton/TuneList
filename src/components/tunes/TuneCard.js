@@ -6,8 +6,16 @@ import { useHistory, useParams } from "react-router-dom"
 
 export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { saveTune, deleteTune } = useContext(TuneContext)
+    const { saveTune, deleteTune, addStarToTune, removeStarFromTune } = useContext(TuneContext)
     const history = useHistory()
+
+    const handleStar = (event, data) => {
+        console.log("data",data)
+        console.log("event", event.target)
+        const [prefix, tuneId] = data.id.split("__")
+        console.log(tuneObj.id)
+        data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
+    }
 
     const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
@@ -20,11 +28,6 @@ export const TuneCard = (props) => {
         open={props.handleOpen} 
         onClose={props.handleClose} 
 
-        // onClose={() => {
-        //     props.handleModal()
-        //     showModal(false)
-        // }}
-        // onOpen={() => showModal(true)}
         className="tune--container"
         >
                 <Modal.Content className="tune--headercontainer">
@@ -32,8 +35,9 @@ export const TuneCard = (props) => {
                 <Header as='h4'>{tuneObj.key}/{tuneObj.tuning}</Header>
                 <Rating 
                 icon='star'
+                id={`tune__${tuneObj.id}`}
                 defaultRating={tuneObj.starred}
-                disabled
+                onRate={handleStar}
                 />
 
                 </Modal.Content>

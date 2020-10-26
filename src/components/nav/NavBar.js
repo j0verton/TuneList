@@ -22,7 +22,7 @@ export const NavBar = (props) => {
                     <Link className="navbar__link" to="/users"><Icon name="address book" /><p className="nav__text">Users</p></Link>
                 </li>
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/tasks"><Icon name="list alternate" /><p className="nav__text">Message Board</p></Link>
+                    <Link className="navbar__link" to="/messages"><Icon name="list alternate" /><p className="nav__text">Message Board</p></Link>
                 </li>
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/tunes/create"><Icon name="add square" /><p className="nav__text">Add a Tune</p></Link>
