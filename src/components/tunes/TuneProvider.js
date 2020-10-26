@@ -1,14 +1,28 @@
 import React, { useState, createContext } from "react"
+import { CollectionContext } from "../collections/CollectionsProvider"
 
 export const TuneContext = createContext()
 
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-
+    const {getCollectionsByUserId} = useContext(CollectionContext)
     // adds new Tunes to database
-    const saveTune = tuneObj => {
-        console.log(tuneObj)
+    const saveTune = async tuneObj => {
+        let userCollections = await getCollectionsByUserId
+        let UserCollectionArray = userCollections.map(userCollections.name)
+        console.log("UserCollectionArray",UserCollectionArray)
+        if (tuneObj.tuning==="Standard" && !UserCollectionArray.includes(tuneObj.key) ) {
+            saveCollection(tuneObj.tuning, tuneObj.key)
+        }
+
+
+
+
+
+
+
+        console.log("coming into save", tuneObj)
         let tuneCollectionsObj = {tuneId:tuneObj.id}
         if (tuneObj.tuning==="Standard" && tuneObj.key==="G" ) {
             tuneCollectionsObj.collectionId = 1
@@ -24,19 +38,17 @@ export const TuneProvider = props => {
             tuneCollectionsObj.collectionId = 6
         }
         console.log(tuneCollectionsObj)
-        return fetch('http://localhost:8088/tunes', {
+        const result = await fetch('http://localhost:8088/tunes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(tuneObj)
         })
-        .then(getLastTune)
-        .then(res => {
-            console.log(res)
-            tuneCollectionsObj.tuneId=res[0].id
-            addTuneCollections(tuneCollectionsObj)
-        })
+        const res = await getLastTune(result)
+        console.log("res from get last tune", res)
+        tuneCollectionsObj.tuneId = res[0].id
+        addTuneCollections(tuneCollectionsObj)
     }
     
     const addTuneCollections = tuneCollectionsObj => {
@@ -57,7 +69,8 @@ export const TuneProvider = props => {
     // allows user to edit their Tunes
     const editTune = tuneObj => {
         getTuneByIdWithTC(tuneObj.id).then(res => {
-            if (res.tuning === tuneObj.tuning || res.key === tuneObj.key) {
+            if (res.tuning === tuneObj.tuning && res.key === tuneObj.key) {
+                console.log("put")
                 return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
                     method: 'PUT',
                     headers: {
@@ -66,12 +79,13 @@ export const TuneProvider = props => {
                     body: JSON.stringify(tuneObj)
                 })
             } else {
+                console.log("crazy one", res)
                 deleteTune(res.id)
-                .then(() => res.tuneCollections.forEach(tuneCollection => {
-                    deleteTuneCollections(tuneCollection.id)
-                }))
-                delete tuneObj.id
-                saveTune(tuneObj)
+                .then(()=> {
+                    delete tuneObj.id
+                    console.log("tuneobje pre save", tuneObj)
+                    saveTune(tuneObj)
+                })
             }
     })}
     
@@ -102,19 +116,21 @@ export const TuneProvider = props => {
     }
     // removes Tune from database
     const deleteTune = tuneId => {
+        console.log("delete", tuneId)
+        debugger
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'DELETE'
         })
     }
 
     const deleteTuneCollections = tuneCollectionsId => {
-        return fetch(`http://http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
+        return fetch(`http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
             method: 'DELETE'
         })
     }
 
     const getTuneByIdWithTC = id => {
-        return fetch(`http://http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
+        return fetch(`http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
             .then(res => res.json())
     }
 

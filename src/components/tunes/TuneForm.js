@@ -60,7 +60,7 @@ export const TuneForm = () => {
                 starred:tune.starred,
                 learning:tune.learning
             })
-            .then(() => history.push('/tunes'))
+            // .then(() => history.push('/tunes'))
         } else {
             saveTune({
                 userId: parseInt(localStorage.getItem("tunes_user")),
@@ -148,7 +148,7 @@ export const TuneForm = () => {
                     name='tuning'
                     label='Tuning'
                     options={tuningOptions}
-                    value={tune.tuning}
+                    defaultValue={tune.tuning}
                     onChange={handleDropdown}
                 />
                 <Form.Input

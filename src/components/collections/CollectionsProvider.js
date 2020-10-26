@@ -13,13 +13,23 @@ export const CollectionProvider = props => {
     }
     
     // adds new collections to database
-    const saveCollection = collectionObj => {
+    const saveCollection = (tuning, key, collectionName="") => {
+        if (collectionName===""){
+            if (tuning==="standard"){
+                collectionName = key.toUpperCase()
+            } else if (tuning !=="standard"){
+                collectionName = key.toUpperCase()/tuning
+            }
+        }        
         return fetch('http://localhost:8088/collections', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(collectionObj)
+            body: JSON.stringify({
+                userId: localStorage.getItem("tunes_user"),
+                name: collectionName
+            })
         })
     }
     
@@ -34,8 +44,6 @@ export const CollectionProvider = props => {
         })
     }
     
-
-
     // removes collection from database
     const deleteCollection = collectionId => {
         return fetch(`http://localhost:8088/news/${collectionId}`, {
@@ -49,7 +57,7 @@ export const CollectionProvider = props => {
     }
             
     const getCollectionsByUserId = (userId) => {
-        return fetch(`http://localhost:8088/collections?userId=${userId}&userId=0&_embed=tuneCollections`)
+        return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
         .then(res => res.json())
         .then(setCollections)
     }
