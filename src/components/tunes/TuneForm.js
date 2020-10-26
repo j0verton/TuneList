@@ -148,7 +148,7 @@ export const TuneForm = () => {
                     name='tuning'
                     label='Tuning'
                     options={tuningOptions}
-                    defaultValue={tune.tuning}
+                    value={tune.tuning}
                     onChange={handleDropdown}
                 />
                 <Form.Input

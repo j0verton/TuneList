@@ -55,25 +55,25 @@ export const TuneProvider = props => {
 
 
     // allows user to edit their Tunes
-    // const editTune = tuneObj => {
-    //     getTuneByIdWithTC(tuneObj.id).then(res => {
-    //         if (res.tuning === tuneObj.tuning || res.key === tuneObj.key) {
-    //             return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
-    //                 method: 'PUT',
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //                 body: JSON.stringify(tuneObj)
-    //             })
-    //         } else {
-    //             deleteTune(res.id)
-    //             .then(() => res.tuneCollections.forEach(tuneCollection => {
-    //                 deleteTuneCollections(tuneCollection.id)
-    //             }))
-    //             delete tuneObj.id
-    //             saveTune(tuneObj)
-    //         }
-    // })}
+    const editTune = tuneObj => {
+        getTuneByIdWithTC(tuneObj.id).then(res => {
+            if (res.tuning === tuneObj.tuning || res.key === tuneObj.key) {
+                return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(tuneObj)
+                })
+            } else {
+                deleteTune(res.id)
+                .then(() => res.tuneCollections.forEach(tuneCollection => {
+                    deleteTuneCollections(tuneCollection.id)
+                }))
+                delete tuneObj.id
+                saveTune(tuneObj)
+            }
+    })}
     
     const addStarToTune = (tuneId) => {
         console.log("log inside add",tuneId)
@@ -114,7 +114,7 @@ export const TuneProvider = props => {
     }
 
     const getTuneByIdWithTC = id => {
-        return fetch(`http://localhost:8088/tunes/${id}`)
+        return fetch(`http://http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
             .then(res => res.json())
     }
 
@@ -137,7 +137,7 @@ export const TuneProvider = props => {
 
     return (
         <TuneContext.Provider value={{
-            tune, tunes, saveTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune
+            tune, tunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune
         }}>
             {props.children}
         </TuneContext.Provider>
