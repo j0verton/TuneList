@@ -14,7 +14,20 @@ export const TuneProvider = props => {
         console.log("UserCollectionArray",UserCollectionArray)
         if (tuneObj.tuning==="Standard" && !UserCollectionArray.includes(tuneObj.key) ) {
             saveCollection(tuneObj.tuning, tuneObj.key)
+            .then(()=> {
+                return fetch('http://localhost:8088/tunes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(tuneObj)
+                })
+            })
+        } else if () {
+
+
         }
+        
 
 
 
@@ -38,13 +51,7 @@ export const TuneProvider = props => {
             tuneCollectionsObj.collectionId = 6
         }
         console.log(tuneCollectionsObj)
-        const result = await fetch('http://localhost:8088/tunes', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tuneObj)
-        })
+
         const res = await getLastTune(result)
         console.log("res from get last tune", res)
         tuneCollectionsObj.tuneId = res[0].id
