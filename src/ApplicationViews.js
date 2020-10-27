@@ -12,39 +12,38 @@ import { UserList } from "./components/user/UserList"
 export const ApplicationViews = (props) => {
     return (
         <>
+        <CollectionProvider>
         <TuneProvider>
             <Route exact path="/">
                 <Home />
             </Route>
-        </TuneProvider>
 
-            <TuneProvider>
+
+
                 <Route exact path="/tunes/create">
                     <TuneForm />
                 </Route>
-            </TuneProvider>
 
-            <TuneProvider>
+
+
                 <Route exact path="/tunes/edit/:tuneId">
                     <TuneForm />
                 </Route>
-            </TuneProvider>
-        
-            <TuneProvider>
-                <CollectionProvider>
+
                     <Route exact path="/tunes">
                         <TunesList />
                     </Route>
-                </CollectionProvider>
-            </TuneProvider>
+
+
 
             <UserProvider>
-                <TuneProvider>
+                
                     <Route exact path="/users">
                         <UserList />
                     </Route>
-                </TuneProvider>
             </UserProvider>
+                </TuneProvider>
+            </CollectionProvider>
         </>
     )
 }

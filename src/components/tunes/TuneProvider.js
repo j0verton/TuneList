@@ -8,14 +8,15 @@ export const TuneProvider = props => {
     const [tune, setTune] = useState({})
     const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
     // adds new Tunes to database
-    const saveTune = async tuneObj => {
-        let userCollections = await getCollectionsByUserId()
+    const saveTune  = async tuneObj => {
+        let userCollections = await getCollectionsByUserId(localStorage.getItem("tunes_user"))
+        console.log(userCollections)
         let UserCollectionArray = userCollections.map(userCollections.name)
         console.log("UserCollectionArray", UserCollectionArray)
         let tuneCollectionsObj = { tuneId: tuneObj.id }
         if (tuneObj.tuning === "Standard" && !UserCollectionArray.includes(tuneObj.key)) {
             saveCollection(tuneObj.tuning, tuneObj.key)
-                .then(getCollectionsByUserId)
+                .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
                 .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
                 .then(res=>{
                     tuneCollectionsObj.collectionId = res.id
@@ -31,7 +32,7 @@ export const TuneProvider = props => {
                 })
         } else if (!UserCollectionArray.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
             saveCollection(tuneObj.tuning, tuneObj.key)
-            .then(getCollectionsByUserId)
+            .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
             .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
             .then(res=>{
                 tuneCollectionsObj.collectionId = res.id
@@ -46,7 +47,7 @@ export const TuneProvider = props => {
                     })
                 })
         } else {
-            let userCollections = await getCollectionsByUserId()
+            let userCollections = await getCollectionsByUserId(localStorage.getItem("tunes_user"))
             let collection = userCollections.find(collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
             tuneCollectionsObj.collectionId = collection.id
             return fetch('http://localhost:8088/tunes', {
@@ -62,12 +63,6 @@ export const TuneProvider = props => {
         tuneCollectionsObj.tuneId = res[0].id
         addTuneCollections(tuneCollectionsObj)
     }
-
-
-
-
-
-
 
         // console.log("coming into save", tuneObj)
         // let tuneCollectionsObj = { tuneId: tuneObj.id }
@@ -102,7 +97,6 @@ export const TuneProvider = props => {
             .then(response => response.json())
     }
 
-
     // allows user to edit their Tunes
     const editTune = tuneObj => {
         getTuneByIdWithTC(tuneObj.id).then(res => {
@@ -120,7 +114,7 @@ export const TuneProvider = props => {
                 deleteTune(res.id)
                     .then(() => {
                         delete tuneObj.id
-                        console.log("tuneobje pre save", tuneObj)
+                        console.log("tuneobj pre save", tuneObj)
                         saveTune(tuneObj)
                     })
             }

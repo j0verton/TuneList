@@ -59,7 +59,10 @@ export const CollectionProvider = props => {
     const getCollectionsByUserId = (userId) => {
         return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
         .then(res => res.json())
-        .then(setCollections)
+        .then(res=> {
+            console.log(res)
+            setCollections(res)
+        })
     }
 
     return (
