@@ -10,13 +10,17 @@ export const TunesList = (props) => {
     const {collections, getCollectionsByUserId} = useContext(CollectionContext)
     const [tunes, setTunes]= useState([])
     const [ userCollections, setUserCollections ] = useState([])
-    
+    const [changes, setChanges] = useState([])
     const [panes, setPanes] = useState([])
+
+    const handleChange = () => {
+        setChanges(changes + 1)
+    }
 
     useEffect(()=> {
         if(userCollections){
         let tabs = userCollections.map(collection => {
-            return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard tunesArr={collection.tuneCollections} />}</Tab.Pane>}
+            return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard key={collection.id} tunesArr={collection.tuneCollections} />}</Tab.Pane>}
         })
         setPanes(tabs)
     }
@@ -29,7 +33,7 @@ export const TunesList = (props) => {
         .then(()=> {
             getCollectionsByUserId(localStorage.getItem("tunes_user"))
         })
-        }, [])
+        }, [changes])
 
     useEffect(() => {
         if (collections.length && tunes.length){
@@ -66,6 +70,6 @@ export const TunesList = (props) => {
         }, [ collections ])
 
     return panes ? (
-        <Tab renderActiveOnly id="ListTabs" panes={panes} />
+        <Tab renderActiveOnly id="ListTabs" onTabChange={handleChange} panes={panes} />
     ) : null
 }

@@ -41,9 +41,11 @@ export const TuneCard = (props) => {
                 />
 
                 </Modal.Content>
+                <Modal.Content>
                 <p>source: {tuneObj.source}</p>
                 <p>{tuneObj.notes}</p>
                 <a href={tuneObj.link}>listen</a>
+                </Modal.Content>
                 <Modal.Actions>
                     <Button icon onClick={() => {
                         history.push(`/tunes/edit/${tuneObj?.id}`)

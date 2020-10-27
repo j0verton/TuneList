@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, Header, Checkbox, Rating } from "semantic-ui-react";
+import { TuningContext } from "../tunings/TuningsProvider";
 import "./Tune.css"
 import { TuneContext } from "./TuneProvider";
 
 export const TuneForm = () => {
     const { saveTune, editTune, getTuneById } = useContext(TuneContext)
-
+    const {tunings, getTunings, addTuning } = useContext(TuningContext)
     const [ tune, setTune ] = useState({})
     const [ isLoading, setIsLoading ] = useState(true)
 
@@ -14,26 +15,8 @@ export const TuneForm = () => {
 
     const history = useHistory()
 
-
-    const tuningOptions = [
-        {
-            key: 'D tuning',
-            text: 'ADAE / D tuning / High Bass',
-            value: 'High Bass'
-        },
-        {
-            key: 'Cross tuning',
-            text: 'AEAE / Cross-tuning / Sawmill',
-            value: 'Cross'
-        },
-        {
-            key: 'Standard',
-            text: 'GDAE / Standard',
-            value: 'Standard'
-        }
-    ]
-
     useEffect(() => {
+        getTunings()
         if(tuneId){
             getTuneById(tuneId)
             .then(tune => {
@@ -45,10 +28,10 @@ export const TuneForm = () => {
         }
     }, [])
 
-    const constructNewTune = () => {
+    const constructNewTune = async () => {
         setIsLoading(true)
         if (tuneId) {
-            editTune({
+            await editTune({
                 id: tune.id,
                 userId: parseInt(localStorage.getItem("tunes_user")),
                 name: tune.name,
@@ -60,9 +43,9 @@ export const TuneForm = () => {
                 starred:tune.starred,
                 learning:tune.learning
             })
-            // .then(() => history.push('/tunes'))
+            history.push('/tunes')
         } else {
-            saveTune({
+            await saveTune({
                 userId: parseInt(localStorage.getItem("tunes_user")),
                 name: tune.name,
                 key: tune.key,
@@ -73,7 +56,7 @@ export const TuneForm = () => {
                 starred:tune.starred,
                 learning:tune.learning
             })
-            .then(() => history.push('/tunes'))
+            history.push('/tunes')
         }
     }
 
@@ -99,8 +82,14 @@ export const TuneForm = () => {
     }
 
     const handleAddition = (event, data) => {
-
-
+        console.log(data.value)
+        let newTuning = {
+            key: data.value,
+            text: data.value,
+            value: data.value
+        }
+        addTuning(newTuning)
+        .then(getTunings)
     }
 
     return (
@@ -135,19 +124,20 @@ export const TuneForm = () => {
                     onChange={handleControlledInputChange}
                     defaultValue={tune?.key}
                 />
-                <Form.Dropdown
+                <Form.Select
                     allowAdditions
                     additionPosition= 'top'
-                    additionLabel = "add a Tuning"
+                    additionLabel = "add Tuning - "
                     onAddItem={handleAddition}
-                    placeholder='Select a Tuning'
+                    // placeholder='Select a Tuning'
+                    placeholder={tune.tuning}
                     className="tuningdropdown"
                     selection
                     search
                     required
                     name='tuning'
                     label='Tuning'
-                    options={tuningOptions}
+                    options={tunings}
                     defaultValue={tune.tuning}
                     onChange={handleDropdown}
                 />

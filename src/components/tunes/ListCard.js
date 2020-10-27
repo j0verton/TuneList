@@ -19,12 +19,14 @@ export const ListCard = ({tunesArr}) => {
     } 
 
     const handleStar = (event, data) => {
+        console.log(tunesArr)
         console.log("data",data)
         console.log("event", event.target)
         const [prefix, tuneId] = data.id.split("__")
         console.log(tuneId)
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
       }
+      
 
     return tunesArr[0] ? (
         <><Container

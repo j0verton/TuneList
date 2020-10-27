@@ -8,6 +8,7 @@ import { TunesList } from "./components/tunes/TuneListList"
 import { CollectionProvider } from "./components/collections/CollectionsProvider"
 import { UserProvider } from "./components/user/UserProvider"
 import { UserList } from "./components/user/UserList"
+import { TuningProvider } from "./components/tunings/TuningsProvider"
 
 export const ApplicationViews = (props) => {
     return (
@@ -15,25 +16,27 @@ export const ApplicationViews = (props) => {
         <CollectionProvider>
             <TuneProvider>
                 <UserProvider>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-
-                    <Route exact path="/tunes/create">
-                        <TuneForm />
-                    </Route>
-
-                    <Route exact path="/tunes/edit/:tuneId">
-                        <TuneForm />
-                    </Route>
-
-                        <Route exact path="/tunes">
-                            <TunesList />
+                    <TuningProvider>
+                        <Route exact path="/">
+                            <Home />
                         </Route>
 
-                        <Route exact path="/users">
-                            <UserList />
+                        <Route exact path="/tunes/create">
+                            <TuneForm />
                         </Route>
+
+                        <Route exact path="/tunes/edit/:tuneId">
+                            <TuneForm />
+                        </Route>
+
+                            <Route exact path="/tunes">
+                                <TunesList />
+                            </Route>
+
+                            <Route exact path="/users">
+                                <UserList />
+                            </Route>
+                        </TuningProvider>
                     </UserProvider>
                 </TuneProvider>
             </CollectionProvider>
