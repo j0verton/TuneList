@@ -4,7 +4,7 @@ import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
 import { TuneContext } from "./TuneProvider"
 
-export const ListCard = ({tunesArr}) => {
+export const ListCard = ({tunesArr, parentCallback}) => {
     const [ modal, showModal ] = useState(false)
     const [ tuneObj,setTuneObj ] = useState({})
     const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
@@ -16,6 +16,7 @@ export const ListCard = ({tunesArr}) => {
 
     const handleClose =()=>{
         showModal(false)
+        parentCallback()
     } 
 
     const handleStar = (event, data) => {
