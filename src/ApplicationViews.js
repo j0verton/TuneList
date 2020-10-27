@@ -13,35 +13,28 @@ export const ApplicationViews = (props) => {
     return (
         <>
         <CollectionProvider>
-        <TuneProvider>
-            <Route exact path="/">
-                <Home />
-            </Route>
-
-
-
-                <Route exact path="/tunes/create">
-                    <TuneForm />
-                </Route>
-
-
-
-                <Route exact path="/tunes/edit/:tuneId">
-                    <TuneForm />
-                </Route>
-
-                    <Route exact path="/tunes">
-                        <TunesList />
+            <TuneProvider>
+                <UserProvider>
+                    <Route exact path="/">
+                        <Home />
                     </Route>
 
-
-
-            <UserProvider>
-                
-                    <Route exact path="/users">
-                        <UserList />
+                    <Route exact path="/tunes/create">
+                        <TuneForm />
                     </Route>
-            </UserProvider>
+
+                    <Route exact path="/tunes/edit/:tuneId">
+                        <TuneForm />
+                    </Route>
+
+                        <Route exact path="/tunes">
+                            <TunesList />
+                        </Route>
+
+                        <Route exact path="/users">
+                            <UserList />
+                        </Route>
+                    </UserProvider>
                 </TuneProvider>
             </CollectionProvider>
         </>

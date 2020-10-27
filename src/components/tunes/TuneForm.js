@@ -19,12 +19,12 @@ export const TuneForm = () => {
         {
             key: 'D tuning',
             text: 'ADAE / D tuning / High Bass',
-            value: 'D/High Bass'
+            value: 'High Bass'
         },
         {
             key: 'Cross tuning',
             text: 'AEAE / Cross-tuning / Sawmill',
-            value: 'A/Cross'
+            value: 'Cross'
         },
         {
             key: 'Standard',

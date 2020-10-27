@@ -14,11 +14,15 @@ export const CollectionProvider = props => {
     
     // adds new collections to database
     const saveCollection = (tuning, key, collectionName="") => {
+        console.log("save",tuning, key)
         if (collectionName===""){
-            if (tuning==="standard"){
+            console.log("save in if",collectionName)
+            if (tuning==="Standard"){
                 collectionName = key.toUpperCase()
+                console.log("save in standard",collectionName)
             } else if (tuning !=="standard"){
-                collectionName = key.toUpperCase()/tuning
+                collectionName = `${key.toUpperCase()}/${tuning}`
+                console.log("save in alt",collectionName)
             }
         }        
         return fetch('http://localhost:8088/collections', {
@@ -60,9 +64,9 @@ export const CollectionProvider = props => {
         return fetch(`http://localhost:8088/collections?userId=${userId}&_embed=tuneCollections`)
         .then(res => res.json())
         .then(res=> {
-            console.log("res in get coll", res)
+            console.log("res in get", res)
             setCollections(res)
-            return collections
+            return res
         })
     }
 

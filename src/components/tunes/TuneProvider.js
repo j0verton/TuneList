@@ -6,17 +6,23 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const { collections, getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
+    const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
 
     
     // adds new Tunes to database
     const saveTune  = tuneObj => {
+        //set up an object for the join table "tuneCollections"
         let tuneCollectionsObj = { tuneId: tuneObj.id }
+        // get all the users collections
         getCollectionsByUserId(localStorage.getItem("tunes_user"))
+        //
         .then(res => {
-            console.log("res", collections)
-            return collections.map(collections.name)})
-        .then(response=>{        
+            console.log("res", res)
+            return res.map(response => {
+                return response.name})
+            })
+        .then(response=>{  
+            //standard tuning and the collection doesn't exist
             if (tuneObj.tuning === "Standard" && !response.includes(tuneObj.key)) {
                 saveCollection(tuneObj.tuning, tuneObj.key)
                     .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
@@ -25,67 +31,64 @@ export const TuneProvider = props => {
                         tuneCollectionsObj.collectionId = res.id
                     })
                     .then(() => {
-                        return fetch('http://localhost:8088/tunes', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(tuneObj)
-                        })
+                        postNewTune(tuneObj, tuneCollectionsObj)
                     })
-            } else if (!response.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
+            //tune is in an alternate tuning and the collection doesn't exist
+            } else if (tuneObj.tuning !== "Standard" &&!response.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
+                console.log("tuneObj in else if",tuneObj)
                 saveCollection(tuneObj.tuning, tuneObj.key)
-                .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
-                .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
+                .then(()=> {
+                    return getCollectionsByUserId(localStorage.getItem("tunes_user"))
+                })
+                .then(collections => {
+                    
+                    console.log("collections",collections)
+                    return collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
+                }
+                    )
                 .then(res=>{
+                    console.log("res 50", res)
                     tuneCollectionsObj.collectionId = res.id
                 })    
                 .then(() => {
-                        return fetch('http://localhost:8088/tunes', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(tuneObj)
-                        })
+                    postNewTune(tuneObj, tuneCollectionsObj)
                     })
+            //collection exists
             } else {
-                let collection = response.find(collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
-                tuneCollectionsObj.collectionId = collection.id
-                return fetch('http://localhost:8088/tunes', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(tuneObj)
+                getCollectionsByUserId(localStorage.getItem("tunes_user"))
+                .then(collections=> {
+                    console.log("collections", collections)
+                    let foundCollection = collections.find(collection => {
+                        console.log(`${tuneObj.key}/${tuneObj.tuning}`)
+                        return collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}`
+                    })
+                    return foundCollection
+                })
+                .then(foundCollection=> {
+                    console.log("foundCollection", foundCollection )
+                    tuneCollectionsObj.collectionId = foundCollection.id
+                    postNewTune(tuneObj, tuneCollectionsObj)
+                       
                 })
             }})
-        .then(getLastTune)
-            .then(res => {
-                tuneCollectionsObj.tuneId = res[0].id
-                addTuneCollections(tuneCollectionsObj)
-        })
     }
 
-        // console.log("coming into save", tuneObj)
-        // let tuneCollectionsObj = { tuneId: tuneObj.id }
-        // if (tuneObj.tuning === "Standard" && tuneObj.key === "G") {
-        //     tuneCollectionsObj.collectionId = 1
-        // } else if (tuneObj.tuning === "Standard" && tuneObj.key === "C") {
-        //     tuneCollectionsObj.collectionId = 4
-        // } else if (tuneObj.tuning === "Standard" && tuneObj.key === "F") {
-        //     tuneCollectionsObj.collectionId = 5
-        // } else if (tuneObj.tuning === "Cross") {
-        //     tuneCollectionsObj.collectionId = 2
-        // } else if (tuneObj.tuning === "High D") {
-        //     tuneCollectionsObj.collectionId = 3
-        // } else {
-        //     tuneCollectionsObj.collectionId = 6
-        // }
-        // console.log(tuneCollectionsObj)
-
-
-
+    const postNewTune =(tuneObj, tuneCollectionsObj)=> {
+        return fetch('http://localhost:8088/tunes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(tuneObj)
+        })
+        .then(getLastTune)
+        .then(res => {
+            console.log(res)
+            tuneCollectionsObj.tuneId=res[0].id
+            addTuneCollections(tuneCollectionsObj)
+        })
+    }
+    
     const addTuneCollections = tuneCollectionsObj => {
         return fetch('http://localhost:8088/tuneCollections', {
             method: 'POST',
@@ -97,9 +100,9 @@ export const TuneProvider = props => {
     }
     const getLastTune = () => {
         return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
-            .then(response => response.json())
+        .then(response => response.json())
     }
-
+    
     // allows user to edit their Tunes
     const editTune = tuneObj => {
         getTuneByIdWithTC(tuneObj.id).then(res => {
@@ -115,15 +118,15 @@ export const TuneProvider = props => {
             } else {
                 console.log("crazy one", res)
                 deleteTune(res.id)
-                    .then(() => {
-                        delete tuneObj.id
-                        console.log("tuneobj pre save", tuneObj)
-                        saveTune(tuneObj)
-                    })
+                .then(() => {
+                    delete tuneObj.id
+                    console.log("tuneobj pre save", tuneObj)
+                    saveTune(tuneObj)
+                })
             }
         })
     }
-
+    
     const addStarToTune = (tuneId) => {
         console.log("log inside add", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
@@ -136,7 +139,7 @@ export const TuneProvider = props => {
             })
         })
     }
-
+    
     const removeStarFromTune = (tuneId) => {
         console.log("log inside remove", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
@@ -157,35 +160,35 @@ export const TuneProvider = props => {
             method: 'DELETE'
         })
     }
-
+    
     const deleteTuneCollections = tuneCollectionsId => {
         return fetch(`http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
             method: 'DELETE'
         })
     }
-
+    
     const getTuneByIdWithTC = id => {
         return fetch(`http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
-            .then(res => res.json())
+        .then(res => res.json())
     }
-
+    
     const getTuneById = id => {
         return fetch(`http://localhost:8088/tunes/${id}`)
-            .then(res => res.json())
+        .then(res => res.json())
     }
-
+    
     const getTunesByUserId = (userId) => {
         return fetch(`http://localhost:8088/tunes/?userId=${userId}`)
-            .then(res => res.json())
+        .then(res => res.json())
         // .then(setTunes)
     }
-
+    
     const getStarredTunesByUserId = (userId) => {
         return fetch(`http://localhost:8088/tunes/?userId=${userId}&starred=1`)
-            .then(res => res.json())
+        .then(res => res.json())
         // .then(setTunes)
     }
-
+    
     return (
         <TuneContext.Provider value={{
             tune, tunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune
@@ -194,3 +197,21 @@ export const TuneProvider = props => {
         </TuneContext.Provider>
     )
 }
+
+
+// console.log("coming into save", tuneObj)
+// let tuneCollectionsObj = { tuneId: tuneObj.id }
+// if (tuneObj.tuning === "Standard" && tuneObj.key === "G") {
+//     tuneCollectionsObj.collectionId = 1
+// } else if (tuneObj.tuning === "Standard" && tuneObj.key === "C") {
+//     tuneCollectionsObj.collectionId = 4
+// } else if (tuneObj.tuning === "Standard" && tuneObj.key === "F") {
+//     tuneCollectionsObj.collectionId = 5
+// } else if (tuneObj.tuning === "Cross") {
+//     tuneCollectionsObj.collectionId = 2
+// } else if (tuneObj.tuning === "High D") {
+//     tuneCollectionsObj.collectionId = 3
+// } else {
+//     tuneCollectionsObj.collectionId = 6
+// }
+// console.log(tuneCollectionsObj)
