@@ -6,14 +6,16 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
+    const { collections, getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
 
     
     // adds new Tunes to database
-    const saveTune  = async tuneObj => {
+    const saveTune  = tuneObj => {
         let tuneCollectionsObj = { tuneId: tuneObj.id }
         getCollectionsByUserId(localStorage.getItem("tunes_user"))
-        .then(res => res.map(res.name))
+        .then(res => {
+            console.log("res", collections)
+            return collections.map(collections.name)})
         .then(response=>{        
             if (tuneObj.tuning === "Standard" && !response.includes(tuneObj.key)) {
                 saveCollection(tuneObj.tuning, tuneObj.key)
