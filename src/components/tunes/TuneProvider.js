@@ -6,58 +6,88 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const {getCollectionsByUserId} = useContext(CollectionContext)
+    const { getCollectionsByUserId } = useContext(CollectionContext)
     // adds new Tunes to database
     const saveTune = async tuneObj => {
         let userCollections = await getCollectionsByUserId
         let UserCollectionArray = userCollections.map(userCollections.name)
-        console.log("UserCollectionArray",UserCollectionArray)
-        if (tuneObj.tuning==="Standard" && !UserCollectionArray.includes(tuneObj.key) ) {
+        console.log("UserCollectionArray", UserCollectionArray)
+        let tuneCollectionsObj = { tuneId: tuneObj.id }
+        if (tuneObj.tuning === "Standard" && !UserCollectionArray.includes(tuneObj.key)) {
             saveCollection(tuneObj.tuning, tuneObj.key)
-            .then(()=> {
-                return fetch('http://localhost:8088/tunes', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(tuneObj)
+                .then(getCollectionsByUserId)
+                .then(collections => collections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}`)))
+                .then(res=>{
+                    tuneCollectionsObj.collectionId = res.id
                 })
-            })
-        } else if () {
-
-
-        }
-        
-
-
-
-
-
-
-
-        console.log("coming into save", tuneObj)
-        let tuneCollectionsObj = {tuneId:tuneObj.id}
-        if (tuneObj.tuning==="Standard" && tuneObj.key==="G" ) {
-            tuneCollectionsObj.collectionId = 1
-        } else if (tuneObj.tuning==="Standard" && tuneObj.key==="C" ) {
-            tuneCollectionsObj.collectionId = 4
-        } else if (tuneObj.tuning==="Standard" && tuneObj.key==="F" ) {
-            tuneCollectionsObj.collectionId = 5
-        } else if (tuneObj.tuning==="Cross") {
-            tuneCollectionsObj.collectionId = 2
-        } else if (tuneObj.tuning==="High D"){
-            tuneCollectionsObj.collectionId = 3
+                .then(() => {
+                    return fetch('http://localhost:8088/tunes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(tuneObj)
+                    })
+                })
+        } else if (!UserCollectionArray.includes(`${tuneObj.key}/${tuneObjtuning}`))  {
+            saveCollection(tuneObj.tuning, tuneObj.key)
+            .then(getCollectionsByUserId)
+            .then(collections => collections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}`))
+            .then(res=>{
+                tuneCollectionsObj.collectionId = res.id
+            })    
+            .then(() => {
+                    return fetch('http://localhost:8088/tunes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(tuneObj)
+                    })
+                })
         } else {
-            tuneCollectionsObj.collectionId = 6
+            let userCollections = await getCollectionsByUserId()
+            let collection = userCollections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}` || collection.name === `${tuneObj.key}/${tuneObjtuning}`)
+            tuneCollectionsObj.collectionId = collection.id
+            return fetch('http://localhost:8088/tunes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tuneObj)
+            })
         }
-        console.log(tuneCollectionsObj)
-
         const res = await getLastTune(result)
         console.log("res from get last tune", res)
         tuneCollectionsObj.tuneId = res[0].id
         addTuneCollections(tuneCollectionsObj)
     }
-    
+
+
+
+
+
+
+
+        // console.log("coming into save", tuneObj)
+        // let tuneCollectionsObj = { tuneId: tuneObj.id }
+        // if (tuneObj.tuning === "Standard" && tuneObj.key === "G") {
+        //     tuneCollectionsObj.collectionId = 1
+        // } else if (tuneObj.tuning === "Standard" && tuneObj.key === "C") {
+        //     tuneCollectionsObj.collectionId = 4
+        // } else if (tuneObj.tuning === "Standard" && tuneObj.key === "F") {
+        //     tuneCollectionsObj.collectionId = 5
+        // } else if (tuneObj.tuning === "Cross") {
+        //     tuneCollectionsObj.collectionId = 2
+        // } else if (tuneObj.tuning === "High D") {
+        //     tuneCollectionsObj.collectionId = 3
+        // } else {
+        //     tuneCollectionsObj.collectionId = 6
+        // }
+        // console.log(tuneCollectionsObj)
+
+
+
     const addTuneCollections = tuneCollectionsObj => {
         return fetch('http://localhost:8088/tuneCollections', {
             method: 'POST',
@@ -68,7 +98,7 @@ export const TuneProvider = props => {
         })
     }
     const getLastTune = () => {
-            return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
+        return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
             .then(response => response.json())
     }
 
@@ -88,16 +118,17 @@ export const TuneProvider = props => {
             } else {
                 console.log("crazy one", res)
                 deleteTune(res.id)
-                .then(()=> {
-                    delete tuneObj.id
-                    console.log("tuneobje pre save", tuneObj)
-                    saveTune(tuneObj)
-                })
+                    .then(() => {
+                        delete tuneObj.id
+                        console.log("tuneobje pre save", tuneObj)
+                        saveTune(tuneObj)
+                    })
             }
-    })}
-    
+        })
+    }
+
     const addStarToTune = (tuneId) => {
-        console.log("log inside add",tuneId)
+        console.log("log inside add", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'PATCH',
             headers: {
@@ -110,7 +141,7 @@ export const TuneProvider = props => {
     }
 
     const removeStarFromTune = (tuneId) => {
-        console.log("log inside remove",tuneId)
+        console.log("log inside remove", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'PATCH',
             headers: {
@@ -149,13 +180,13 @@ export const TuneProvider = props => {
     const getTunesByUserId = (userId) => {
         return fetch(`http://localhost:8088/tunes/?userId=${userId}`)
             .then(res => res.json())
-            // .then(setTunes)
+        // .then(setTunes)
     }
 
     const getStarredTunesByUserId = (userId) => {
         return fetch(`http://localhost:8088/tunes/?userId=${userId}&starred=1`)
             .then(res => res.json())
-            // .then(setTunes)
+        // .then(setTunes)
     }
 
     return (
