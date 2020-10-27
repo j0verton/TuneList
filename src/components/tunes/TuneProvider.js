@@ -7,61 +7,62 @@ export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
     const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
+
+    
     // adds new Tunes to database
     const saveTune  = async tuneObj => {
-        let userCollections = await getCollectionsByUserId(localStorage.getItem("tunes_user"))
-        console.log(userCollections)
-        let UserCollectionArray = userCollections.map(userCollections.name)
-        console.log("UserCollectionArray", UserCollectionArray)
         let tuneCollectionsObj = { tuneId: tuneObj.id }
-        if (tuneObj.tuning === "Standard" && !UserCollectionArray.includes(tuneObj.key)) {
-            saveCollection(tuneObj.tuning, tuneObj.key)
+        getCollectionsByUserId(localStorage.getItem("tunes_user"))
+        .then(res => res.map(res.name))
+        .then(response=>{        
+            if (tuneObj.tuning === "Standard" && !response.includes(tuneObj.key)) {
+                saveCollection(tuneObj.tuning, tuneObj.key)
+                    .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
+                    .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
+                    .then(res=>{
+                        tuneCollectionsObj.collectionId = res.id
+                    })
+                    .then(() => {
+                        return fetch('http://localhost:8088/tunes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(tuneObj)
+                        })
+                    })
+            } else if (!response.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
+                saveCollection(tuneObj.tuning, tuneObj.key)
                 .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
                 .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
                 .then(res=>{
                     tuneCollectionsObj.collectionId = res.id
-                })
+                })    
                 .then(() => {
-                    return fetch('http://localhost:8088/tunes', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(tuneObj)
+                        return fetch('http://localhost:8088/tunes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(tuneObj)
+                        })
                     })
+            } else {
+                let collection = response.find(collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
+                tuneCollectionsObj.collectionId = collection.id
+                return fetch('http://localhost:8088/tunes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(tuneObj)
                 })
-        } else if (!UserCollectionArray.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
-            saveCollection(tuneObj.tuning, tuneObj.key)
-            .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
-            .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
-            .then(res=>{
-                tuneCollectionsObj.collectionId = res.id
-            })    
-            .then(() => {
-                    return fetch('http://localhost:8088/tunes', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(tuneObj)
-                    })
-                })
-        } else {
-            let userCollections = await getCollectionsByUserId(localStorage.getItem("tunes_user"))
-            let collection = userCollections.find(collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
-            tuneCollectionsObj.collectionId = collection.id
-            return fetch('http://localhost:8088/tunes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(tuneObj)
-            })
-        }
-        const res = await getLastTune()
-        console.log("res from get last tune", res)
-        tuneCollectionsObj.tuneId = res[0].id
-        addTuneCollections(tuneCollectionsObj)
+            }})
+        .then(getLastTune)
+            .then(res => {
+                tuneCollectionsObj.tuneId = res[0].id
+                addTuneCollections(tuneCollectionsObj)
+        })
     }
 
         // console.log("coming into save", tuneObj)
