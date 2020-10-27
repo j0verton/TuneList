@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react"
+import React, { useState, createContext, useContext } from "react"
 import { CollectionContext } from "../collections/CollectionsProvider"
 
 export const TuneContext = createContext()
@@ -6,17 +6,17 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const { getCollectionsByUserId } = useContext(CollectionContext)
+    const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
     // adds new Tunes to database
     const saveTune = async tuneObj => {
-        let userCollections = await getCollectionsByUserId
+        let userCollections = await getCollectionsByUserId()
         let UserCollectionArray = userCollections.map(userCollections.name)
         console.log("UserCollectionArray", UserCollectionArray)
         let tuneCollectionsObj = { tuneId: tuneObj.id }
         if (tuneObj.tuning === "Standard" && !UserCollectionArray.includes(tuneObj.key)) {
             saveCollection(tuneObj.tuning, tuneObj.key)
                 .then(getCollectionsByUserId)
-                .then(collections => collections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}`)))
+                .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
                 .then(res=>{
                     tuneCollectionsObj.collectionId = res.id
                 })
@@ -29,10 +29,10 @@ export const TuneProvider = props => {
                         body: JSON.stringify(tuneObj)
                     })
                 })
-        } else if (!UserCollectionArray.includes(`${tuneObj.key}/${tuneObjtuning}`))  {
+        } else if (!UserCollectionArray.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
             saveCollection(tuneObj.tuning, tuneObj.key)
             .then(getCollectionsByUserId)
-            .then(collections => collections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}`))
+            .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
             .then(res=>{
                 tuneCollectionsObj.collectionId = res.id
             })    
@@ -47,7 +47,7 @@ export const TuneProvider = props => {
                 })
         } else {
             let userCollections = await getCollectionsByUserId()
-            let collection = userCollections.find(collection.name === `${tuneObj.key}/${tuneObjtuning}` || collection.name === `${tuneObj.key}/${tuneObjtuning}`)
+            let collection = userCollections.find(collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
             tuneCollectionsObj.collectionId = collection.id
             return fetch('http://localhost:8088/tunes', {
                 method: 'POST',
@@ -57,7 +57,7 @@ export const TuneProvider = props => {
                 body: JSON.stringify(tuneObj)
             })
         }
-        const res = await getLastTune(result)
+        const res = await getLastTune()
         console.log("res from get last tune", res)
         tuneCollectionsObj.tuneId = res[0].id
         addTuneCollections(tuneCollectionsObj)
