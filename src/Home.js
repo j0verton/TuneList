@@ -3,6 +3,7 @@ import { Container, Divider, Segment, Header, Icon, Rating, Embed } from "semant
 import { TuneContext } from "./components/tunes/TuneProvider";
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
+import { AudioPlayer } from "./components/AudioPlayer";
 
 export const Home = () => {
   const { getStarredTunesByUserId, addStarToTune, removeStarFromTune } = useContext(TuneContext)
@@ -64,11 +65,13 @@ export const Home = () => {
                 {tune.name}
               </p>
               {tune.audioUpload ?
-                <audio controls>
-                  <source src={tune.audioUpload} type="audio/mpeg" />
-                </audio>
+                // <audio controls>
+                //   <source src={tune.audioUpload} type="audio/mpeg" />
+                // </audio>
+                <AudioPlayer url={tune.audioUpload}/>
                 : null
               }
+
               {/* <Embed
                 icon='right circle arrow'
                 // placeholder='/images/image-16by9.png'

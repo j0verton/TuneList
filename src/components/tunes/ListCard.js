@@ -4,6 +4,7 @@ import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
 import { TuneContext } from "./TuneProvider"
 import { CollectionContext } from "../collections/CollectionsProvider"
+import { AudioPlayer } from "../AudioPlayer"
 
 export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
     const [ modal, showModal ] = useState(false)
@@ -57,12 +58,10 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                 {tune.name}
             </p>
             {tune.audioUpload ?
-                <audio currentTime>
-                  <source src={tune.audioUpload} type="audio/mpeg" />
-
-                </audio>
+                <AudioPlayer url={tune.audioUpload}/>
                 : null
               }
+
             <Rating 
                 name="starred"
                 icon='star'
@@ -103,9 +102,7 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
             }} >
                 {tune.name}
                 {tune.audioUpload ?
-                <audio controls>
-                  <source src={tune.audioUpload} type="audio/mpeg" />
-                </audio>
+                <AudioPlayer url={tune.audioUpload}/>
                 : null
               }
             </p>
