@@ -64,19 +64,11 @@ export const Home = () => {
               >
                 {tune.name}
               </p>
+              <div className="buttonContainer">
               {tune.audioUpload ?
-                // <audio controls>
-                //   <source src={tune.audioUpload} type="audio/mpeg" />
-                // </audio>
-                <AudioPlayer url={tune.audioUpload}/>
+                <AudioPlayer className="playButton" url={tune.audioUpload}/>
                 : null
               }
-
-              {/* <Embed
-                icon='right circle arrow'
-                // placeholder='/images/image-16by9.png'
-                url='https://res.cloudinary.com/banjo/video/upload/v1603896932/15_Cecil_Plum_s_Waco_pmpiko.mp3'
-              /> */}
               <Rating 
                 name="starred"
                 icon='star'
@@ -84,6 +76,7 @@ export const Home = () => {
                 onRate={handleStar}
                 defaultRating={tune?.starred}
               />
+              </div>
             </Segment>
           </>
           })

@@ -16,14 +16,7 @@ body {
 #save {
     background-color: #177E89 !important;
 }
-/* 
-.ui.item.menuItem, .ui.item.menu .item{  
-    background-color: #FFF1D6;
-}
 
-.ui.item.menuItem .active.item{  
-    background-color: #FFF1D6; 
-} */
 .item {
     color: #806040 !important;
 }
@@ -39,8 +32,9 @@ body {
     color: #806040 !important;
     display: flex !important;
     flex-direction: row !important;
-    justify-content: space-around;
+    justify-content: space-between!important;
     text-align: left !important;
+    align-items: center;
 }
 
 input, .selection, .menu, #tuneNotes   {
@@ -56,9 +50,17 @@ tuneP {
     align-self: flex-start !important;
     text-align: left !important;
 }
-audio {
-    /* height: 20% */
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
+
+.playButton {
+    padding-right: 15%!important;
+}
+
 
 /* color palette ideas 
 {"Coyote Brown":"806040",

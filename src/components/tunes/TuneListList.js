@@ -19,7 +19,9 @@ export const TunesList = (props) => {
 
     useEffect(()=> {
         if(userCollections){
-        let tabs = userCollections.map(collection => {
+
+console.log(userCollections)
+        let tabs = userCollections.sort((a, b) =>  b.tuneCollections.length - a.tuneCollections.length).map(collection => {
             return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard key={collection.id} parentCallback={handleChange} collectionId={collection.id} tunesArr={collection.tuneCollections} />}</Tab.Pane>}
         })
         setPanes(tabs)

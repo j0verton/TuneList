@@ -57,8 +57,9 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
             }} >
                 {tune.name}
             </p>
+            <div className="buttonContainer">
             {tune.audioUpload ?
-                <AudioPlayer url={tune.audioUpload}/>
+                <AudioPlayer className="playButton" url={tune.audioUpload}/>
                 : null
               }
 
@@ -70,6 +71,7 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                 onRate={handleStar}
                 defaultRating={tune?.starred}
             />
+            </div>
             </Button>
             </>
         })
@@ -102,7 +104,8 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
             }} >
                 {tune.name}
             </p>
-                {tune.audioUpload ? <AudioPlayer url={tune.audioUpload}/>: null}
+            <div className="buttonContainer">
+                {tune.audioUpload ? <AudioPlayer className="playButton" url={tune.audioUpload}/>: null}
                 <Rating 
                     name="starred"
                     icon='star'
@@ -110,6 +113,7 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                     onRate={handleStar}
                     defaultRating={tune?.starred}
                 />
+                </div>
                 </Button>
                 </>
             })
