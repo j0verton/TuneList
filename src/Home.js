@@ -46,7 +46,7 @@ export const Home = () => {
             </Header>
         </Divider>
         <Container>
-          {tunes.map(tune=>{
+          {tunes.sort((a, b) => a.name.localeCompare(b.name)).map(tune=>{
             return <>
             <Segment 
               raised

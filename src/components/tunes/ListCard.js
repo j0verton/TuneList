@@ -101,11 +101,8 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                 setTuneObj(tune)
             }} >
                 {tune.name}
-                {tune.audioUpload ?
-                <AudioPlayer url={tune.audioUpload}/>
-                : null
-              }
             </p>
+                {tune.audioUpload ? <AudioPlayer url={tune.audioUpload}/>: null}
                 <Rating 
                     name="starred"
                     icon='star'

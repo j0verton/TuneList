@@ -252,16 +252,18 @@ const [loading, setLoading] = useState(false)
                         <img src={image} style={{width : "300px"}} />
                         )}
                 </div>
-                <Button
+                {loading ? 
+                        (<h3>Loading...</h3>) : 
+                (<Button
                     primary
                     type="submit"
                     id="save"
                     size="medium"
                     className="btn btn-primary save"
                     // onClick={() => history.push(`/tunes`)}
-                    >
+                >
                     {tuneId ? <>Save Tune</> : <>Add Tune</>}
-                </Button>
+                </Button>)}
                 <Button
                     type="button"
                     size="medium"
