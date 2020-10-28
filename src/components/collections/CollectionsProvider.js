@@ -70,9 +70,19 @@ export const CollectionProvider = props => {
         })
     }
 
+    const getTuneCollectionsByCollecionIdWithTunes = (id) => {
+        return fetch(`http://localhost:8088/tuneCollections?collectionId=${id}&_expand=tune`)
+        .then(res => res.json())
+        .then(res=> {
+            console.log("res in get", res)
+            setCollections(res)
+            return res
+        })
+    }
+
     return (
         <CollectionContext.Provider value={{
-            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId
+            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollecionIdWithTunes
         }}>
             {props.children}
         </CollectionContext.Provider>

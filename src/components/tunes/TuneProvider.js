@@ -81,10 +81,10 @@ export const TuneProvider = props => {
             },
             body: JSON.stringify(tuneObj)
         })
-        .then(getLastTune)
+        .then(res=> res.json())
         .then(res => {
             console.log(res)
-            tuneCollectionsObj.tuneId=res[0].id
+            tuneCollectionsObj.tuneId=res.id
             addTuneCollections(tuneCollectionsObj)
         })
     }

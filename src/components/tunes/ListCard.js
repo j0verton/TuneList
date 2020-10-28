@@ -3,11 +3,13 @@ import "./Tune.css"
 import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
 import { TuneContext } from "./TuneProvider"
+import { CollectionContext } from "../collections/CollectionsProvider"
 
-export const ListCard = ({tunesArr, parentCallback}) => {
+export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
     const [ modal, showModal ] = useState(false)
     const [ tuneObj,setTuneObj ] = useState({})
     const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
+    const { getTuneCollectionsByCollecionIdWithTunes } =useContext(CollectionContext)
     const tuneRef= useRef(null)
 
     const handleOpen =() =>{
@@ -28,7 +30,6 @@ export const ListCard = ({tunesArr, parentCallback}) => {
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
       }
       
-
     return tunesArr[0] ? (
         <><Container
             style={{ 
