@@ -14,7 +14,8 @@ export const TuneForm = () => {
     const { tuneId } = useParams()
 
     const history = useHistory()
-
+const [ image, setImage ] =useState('')
+const [loading, setLoading] = useState(false)
     useEffect(() => {
         getTunings()
         if(tuneId){
@@ -27,6 +28,24 @@ export const TuneForm = () => {
             setIsLoading(false)
         }
     }, [])
+
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', "tunelist")
+        setLoading(true)
+        const response = await fetch(
+            'https://api.cloudinary.com/v1_1/banjo/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await response.json()
+        setImage(file.secure_url)   
+        setLoading(false) 
+    }
 
     const constructNewTune = async () => {
         setIsLoading(true)
@@ -179,6 +198,19 @@ export const TuneForm = () => {
                         onChange={handleCheckbox}
                     /> : null
                 }
+                <div className="imageUpload">
+                    <h1>Upload Image</h1>
+                    <input type="file"
+                        name="file"
+                        placeholder="upload an Image"
+                        onChange={uploadImage}
+                    />
+                    {loading ? (
+                        <h3>Loading...</h3>
+                        ): (
+                        <img src={image} style={{width : "300px"}} />
+                        )}
+                </div>
                 <Button
                     primary
                     type="submit"
