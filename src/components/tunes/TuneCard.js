@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import "./Tune.css"
-import { Button, Header, Icon, Modal, Rating } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Rating, Image } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
@@ -44,7 +44,17 @@ export const TuneCard = (props) => {
                 <Modal.Content>
                 <p>source: {tuneObj.source}</p>
                 <p>{tuneObj.notes}</p>
-                <a href={tuneObj.link}>listen</a>
+                {tuneObj.link ? <a href={tuneObj.link}>listen</a>: null}
+                {tuneObj.audioUpload ?
+                <audio controls>
+                  <source src={tuneObj.audioUpload} type="audio/mpeg" />
+                </audio>
+                : null
+              }
+              {tuneObj.imageUpload ?
+               <Image src={tuneObj.imageUpload} size='small' />
+                : null
+              }
                 </Modal.Content>
                 <Modal.Actions>
                     <Button icon onClick={() => {
