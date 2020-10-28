@@ -56,6 +56,9 @@ tuneP {
     align-self: flex-start !important;
     text-align: left !important;
 }
+audio {
+    /* height: 20% */
+}
 
 /* color palette ideas 
 {"Coyote Brown":"806040",

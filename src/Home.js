@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Divider, Segment, Header, Icon, Rating } from "semantic-ui-react"
+import { Container, Divider, Segment, Header, Icon, Rating, Embed } from "semantic-ui-react"
 import { TuneContext } from "./components/tunes/TuneProvider";
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
@@ -63,6 +63,17 @@ export const Home = () => {
               >
                 {tune.name}
               </p>
+              {tune.audioUpload ?
+                <audio controls>
+                  <source src={tune.audioUpload} type="audio/mpeg" />
+                </audio>
+                : null
+              }
+              {/* <Embed
+                icon='right circle arrow'
+                // placeholder='/images/image-16by9.png'
+                url='https://res.cloudinary.com/banjo/video/upload/v1603896932/15_Cecil_Plum_s_Waco_pmpiko.mp3'
+              /> */}
               <Rating 
                 name="starred"
                 icon='star'

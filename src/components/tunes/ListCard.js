@@ -56,6 +56,12 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
             }} >
                 {tune.name}
             </p>
+            {tune.audioUpload ?
+                <audio controls>
+                  <source src={tune.audioUpload} type="audio/mpeg" />
+                </audio>
+                : null
+              }
             <Rating 
                 name="starred"
                 icon='star'
@@ -95,6 +101,12 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                 setTuneObj(tune)
             }} >
                 {tune.name}
+                {tune.audioUpload ?
+                <audio controls>
+                  <source src={tune.audioUpload} type="audio/mpeg" />
+                </audio>
+                : null
+              }
             </p>
                 <Rating 
                     name="starred"

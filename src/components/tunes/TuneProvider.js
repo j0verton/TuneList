@@ -26,8 +26,11 @@ export const TuneProvider = props => {
             if (tuneObj.tuning === "Standard" && !response.includes(tuneObj.key)) {
                 saveCollection(tuneObj.tuning, tuneObj.key)
                     .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
-                    .then(collections => collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`))
+                    .then(collections => {
+                        return collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`)}
+                        )
                     .then(res=>{
+                        console.log(res)//error hitting here-res is undefined
                         tuneCollectionsObj.collectionId = res.id
                     })
                     .then(() => {
@@ -139,6 +142,19 @@ export const TuneProvider = props => {
             })
         })
     }
+
+    const addAudioToTune = (id, url) => {
+        console.log("log inside add",id, url)
+        return fetch(`http://localhost:8088/tunes/${id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                audioUpload: url
+            })
+        })
+    }
     
     const removeStarFromTune = (tuneId) => {
         console.log("log inside remove", tuneId)
@@ -191,7 +207,7 @@ export const TuneProvider = props => {
     
     return (
         <TuneContext.Provider value={{
-            tune, tunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune
+            tune, tunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune
         }}>
             {props.children}
         </TuneContext.Provider>

@@ -6,7 +6,7 @@ import "./Tune.css"
 import { TuneContext } from "./TuneProvider";
 
 export const TuneForm = () => {
-    const { saveTune, editTune, getTuneById } = useContext(TuneContext)
+    const { saveTune, editTune, getTuneById, addAudioToTune } = useContext(TuneContext)
     const {tunings, getTunings, addTuning } = useContext(TuningContext)
     const [ tune, setTune ] = useState({})
     const [ isLoading, setIsLoading ] = useState(true)
@@ -15,7 +15,9 @@ export const TuneForm = () => {
 
     const history = useHistory()
 const [ image, setImage ] =useState('')
+const [ audio, setAudio ] =useState('')
 const [loading, setLoading] = useState(false)
+
     useEffect(() => {
         getTunings()
         if(tuneId){
@@ -23,6 +25,8 @@ const [loading, setLoading] = useState(false)
             .then(tune => {
                 setTune(tune)
                 setIsLoading(false)
+                setAudio(tune.audioUpload)
+                setImage(tune.imageUpload)
             })
         } else {
             setIsLoading(false)
@@ -47,6 +51,26 @@ const [loading, setLoading] = useState(false)
         setLoading(false) 
     }
 
+    const uploadAudio = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', "tunelist")
+        setLoading(true)
+        const response = await fetch(
+            'https://api.cloudinary.com/v1_1/banjo/video/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await response.json()
+        setAudio(file.secure_url)   
+        addAudioToTune(audio)
+        setLoading(false) 
+        console.log(audio)
+    }
+
     const constructNewTune = async () => {
         setIsLoading(true)
         if (tuneId) {
@@ -60,7 +84,9 @@ const [loading, setLoading] = useState(false)
                 notes:tune.notes,
                 link:tune.link,
                 starred:tune.starred,
-                learning:tune.learning
+                learning:tune.learning,
+                audioUpload:audio,
+                imageUpload:image
             })
             history.push('/tunes')
         } else {
@@ -73,7 +99,9 @@ const [loading, setLoading] = useState(false)
                 notes:tune.notes,
                 link:tune.link,
                 starred:tune.starred,
-                learning:tune.learning
+                learning:tune.learning,
+                audioUpload:audio,
+                imageUpload:image
             })
             history.push('/tunes')
         }
@@ -197,9 +225,22 @@ const [loading, setLoading] = useState(false)
                         label='Still learning this one?'
                         onChange={handleCheckbox}
                     /> : null
-                }
+                }                
+                <div className="audioUpload">
+                <h4>Upload Audio</h4>
+                <input type="file"
+                    name="file"
+                    placeholder="upload a recording"
+                    onChange={uploadAudio}
+                />
+                {loading ? (
+                    <h4>Loading...</h4>
+                    ): audio ? (
+                    <audio src={audio} controls /> 
+                    ): null}
+            </div>
                 <div className="imageUpload">
-                    <h1>Upload Image</h1>
+                    <h4>Upload Image</h4>
                     <input type="file"
                         name="file"
                         placeholder="upload an Image"
