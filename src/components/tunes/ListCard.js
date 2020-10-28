@@ -57,8 +57,9 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
                 {tune.name}
             </p>
             {tune.audioUpload ?
-                <audio controls>
+                <audio currentTime>
                   <source src={tune.audioUpload} type="audio/mpeg" />
+
                 </audio>
                 : null
               }
