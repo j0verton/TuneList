@@ -6,11 +6,12 @@ import { TuneContext } from "./TuneProvider"
 import { CollectionContext } from "../collections/CollectionsProvider"
 import { AudioPlayer } from "../AudioPlayer"
 
-export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
+export const ListCard = ({ collectionId, parentCallback}) => {
     const [ modal, showModal ] = useState(false)
     const [ tuneObj,setTuneObj ] = useState({})
     const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
-    const { getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
+    const { tuneCollections, getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
+    const [ tunesArr, setTunesArr] = useState([])
     const tuneRef= useRef(null)
 
     const handleOpen =() =>{
@@ -31,10 +32,15 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
       }
       
-    //   useEffect(()=> {
-    //     getTuneCollectionsByCollectionIdWithTunes(collectionId)
-    //     .then(response=>console.log("TC by B with T",response))
-    //     }, [])
+      useEffect(()=> {
+        getTuneCollectionsByCollectionIdWithTunes(collectionId)
+        .then()
+        .then(response=>console.log("TC by B with T",response))
+        }, [])
+
+        useEffect(()=> {
+            setTunesArr(tuneCollections.map(entry=> entry.tune))
+        }, [tuneCollections])
 
     return tunesArr[0] ? (
         <><Container
