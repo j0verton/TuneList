@@ -30,6 +30,7 @@ fieldset {
     display: inline-block;
     margin: 0 auto;
     text-align: left;
+    padding:12%
 }
 
 .form--login > fieldset > input[type="email"] {
@@ -107,8 +108,6 @@ fieldset {
     padding-bottom: 5% !important;
 }
 .logoNav {
-    margin-top: -14% !important;
-    padding-right: -20% !important;
     max-height:15% !important
 }
 .link--register {
