@@ -33,7 +33,7 @@ fieldset {
 }
 
 .form--login > fieldset > input[type="email"] {
-    width: 25em;
+    width: 15em;
 }
 
 .label--login {
@@ -45,7 +45,7 @@ fieldset {
     display: block;
     width: 94% !important;
     height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
+    padding: .275rem .75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -61,7 +61,7 @@ fieldset {
 .container--login {
     text-align: center;
     background-color: rgba(255, 255, 255, .75);
-    padding: 50px;
+    padding: 0 3% 0 3% ;
     border-radius: 25px;
     width: 500px;
 }
@@ -73,19 +73,19 @@ fieldset {
 .form--login {
     background-position-x: right;
     z-index: 1;
-    min-height: 10rem;
-    min-width: 25rem;
+    min-height: 8rem;
+    min-width: 20rem;
     background-blend-mode: overlay;
     background-repeat: no-repeat;
 }
 
 .form--login h1 {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px!important;
 }
 
 .form--login h2 {
-    margin-top: 25px;
+    margin-top: 5px!important;
 }
 
 .button--close {
@@ -103,6 +103,17 @@ fieldset {
     flex-flow: row wrap;
 }
 
+.form {
+    padding-bottom: 5% !important;
+}
+.logoNav {
+    margin-top: -14% !important;
+    padding-right: -20% !important;
+    max-height:15% !important
+}
+.link--register {
+    margin-top: -14%;
+}
 /* color palette ideas 
 {"Coyote Brown":"806040",
   "Metallic Seaweed":"177e89",
