@@ -42,7 +42,7 @@ export const TuneCard = (props) => {
 
                 </Modal.Content>
                 <Modal.Content>
-                <p>source: {tuneObj.source}</p>
+                {tuneObj.source? <p>source: {tuneObj.source}</p>: null}
                 <p>{tuneObj.notes}</p>
                 {tuneObj.link ? <a href={tuneObj.link}>listen</a>: null}
                 {tuneObj.audioUpload ?
