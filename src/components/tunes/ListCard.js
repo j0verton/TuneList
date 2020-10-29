@@ -10,7 +10,7 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
     const [ modal, showModal ] = useState(false)
     const [ tuneObj,setTuneObj ] = useState({})
     const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
-    const { getTuneCollectionsByCollectionIdWithTunes } =useContext(CollectionContext)
+    const { getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
     const tuneRef= useRef(null)
 
     const handleOpen =() =>{
@@ -31,10 +31,10 @@ export const ListCard = ({tunesArr, collectionId, parentCallback}) => {
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
       }
       
-      useEffect(()=> {
-        getTuneCollectionsByCollectionIdWithTunes(collectionId)
-        .then(response=>console.log("TC by B with T",response))
-        }, [])
+    //   useEffect(()=> {
+    //     getTuneCollectionsByCollectionIdWithTunes(collectionId)
+    //     .then(response=>console.log("TC by B with T",response))
+    //     }, [])
 
     return tunesArr[0] ? (
         <><Container
