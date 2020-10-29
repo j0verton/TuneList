@@ -7,7 +7,7 @@ body {
     background-color:#e2e2cf;
 }
 
-#ListTabs, .tuneForm {
+#ListTabs, form {
     padding:12%;
     display:flex;
     flex-flow: column nowrap;
@@ -39,10 +39,6 @@ body {
 
 input, .selection, .menu, #tuneNotes   {
     background-color: #b9c6ae !important;
-}
-
-input {
-    width: 20%!important;
 }
 
 label {
@@ -85,6 +81,29 @@ tuneP {
 
 .playButton {
     padding-right: 15%!important;
+}
+
+.imageUpload {
+padding-bottom: 5%;
+}
+
+.audioUpload {
+    padding-bottom: 5%;
+}
+
+.save {
+    margin-bottom: 5%!important;
+    width:30%!important
+}
+.cancel {
+    margin-top: 5%;
+    width:25%!important
+    
+}
+
+.tuneButtonContainer {
+    display:flex !important;
+    flex-direction: row 
 }
 
 
