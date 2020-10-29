@@ -6,7 +6,7 @@ export const TuneContext = createContext()
 export const TuneProvider = props => {
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const { getCollectionsByUserId, saveCollection } = useContext(CollectionContext)
+    const { getCollectionsByUserId, saveCollection, deleteUnusedCollections } = useContext(CollectionContext)
 
     
     // adds new Tunes to database
@@ -27,7 +27,7 @@ export const TuneProvider = props => {
                 saveCollection(tuneObj.tuning, tuneObj.key)
                     .then(()=> getCollectionsByUserId(localStorage.getItem("tunes_user")))
                     .then(collections => {
-                        return collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`)}
+                        return collections.find(collection=> collection.name === tuneObj.key)}
                         )
                     .then(res=>{
                         console.log(res)//error hitting here-res is undefined
@@ -170,11 +170,10 @@ export const TuneProvider = props => {
     }
     // removes Tune from database
     const deleteTune = tuneId => {
-        console.log("delete", tuneId)
-        debugger
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'DELETE'
         })
+        .then(deleteUnusedCollections)
     }
     
     const deleteTuneCollections = tuneCollectionsId => {

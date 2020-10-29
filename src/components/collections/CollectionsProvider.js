@@ -7,9 +7,8 @@ export const CollectionProvider = props => {
     const [collections, setCollections] = useState([])
 
     const getCollections = () => {
-        return fetch('http://localhost:8088/collections?_expand=user')
+        return fetch('http://localhost:8088/collections?_embed=tuneCollections')
         .then(response => response.json())
-        .then(setCollections)
     }
     
     // adds new collections to database
@@ -50,7 +49,7 @@ export const CollectionProvider = props => {
     
     // removes collection from database
     const deleteCollection = collectionId => {
-        return fetch(`http://localhost:8088/news/${collectionId}`, {
+        return fetch(`http://localhost:8088/collections/${collectionId}`, {
             method: 'DELETE'
         }).then(getCollections)
     }
@@ -70,7 +69,7 @@ export const CollectionProvider = props => {
         })
     }
 
-    const getTuneCollectionsByCollecionIdWithTunes = (id) => {
+    const getTuneCollectionsByCollectionIdWithTunes = (id) => {
         return fetch(`http://localhost:8088/tuneCollections?collectionId=${id}&_expand=tune`)
         .then(res => res.json())
         .then(res=> {
@@ -79,10 +78,24 @@ export const CollectionProvider = props => {
             return res
         })
     }
+    const deleteUnusedCollections = () => {
+        getCollections()
+        .then(allCollections=> {
+            console.log("allcollections", allCollections)
+            return collections.filter(collection =>{
+                return collection.tuneCollections.length === 0
+            })
+        })
+        .then(response=> {
+            response.forEach(element => {
+                deleteCollection(element.id)
+            })   
+            })
+        }
 
     return (
         <CollectionContext.Provider value={{
-            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollecionIdWithTunes
+            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections
         }}>
             {props.children}
         </CollectionContext.Provider>

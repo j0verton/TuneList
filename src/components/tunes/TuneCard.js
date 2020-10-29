@@ -56,7 +56,7 @@ export const TuneCard = (props) => {
                 : null
               }
                 </Modal.Content>
-                <Modal.Actions>
+                <Modal.Actions >
                     <Button icon onClick={() => {
                         history.push(`/tunes/edit/${tuneObj?.id}`)
                     }}><Icon name='edit outline' /></Button>
@@ -73,7 +73,7 @@ export const TuneCard = (props) => {
                                 delete newTuneObj.id
                                 newTuneObj.notes = ""
                                 saveTune(newTuneObj)
-                                .then(history.push(`/users`))}}>
+                                history.push(`/users`)}}>
                             <Icon name='add circle' /></Button> : null
                         }
                 </Modal.Actions>
