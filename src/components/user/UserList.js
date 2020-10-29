@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
-import { Icon, Divider, Accordion } from "semantic-ui-react"
+import { Icon, Divider, Accordion,Image } from "semantic-ui-react"
 import "./User.css";
 import { TuneCard } from "../tunes/TuneCard";
 
@@ -50,6 +50,7 @@ export const UserList = () => {
                     onClick={handleClick}
                     >
                 <Icon name='dropdown' />
+                {/* <Image circular src='../../img/TuneListLogo.png' /> */}
                     {user.name}
                 </Accordion.Title>
     

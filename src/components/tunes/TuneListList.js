@@ -12,8 +12,11 @@ export const TunesList = (props) => {
     const [ userCollections, setUserCollections ] = useState([])
     const [changes, setChanges] = useState([])
     const [panes, setPanes] = useState([])
+    const [activeIndex, setActiveIndex] = useState()
 
-    const handleChange = () => {
+    const handleChange = (event, data) => {
+        data ? localStorage.setItem("active_index", data.activeIndex): localStorage.setItem("active_index", 0)
+        console.log("data", data)
         setChanges(changes + 1)
     }
 
@@ -72,6 +75,6 @@ console.log(userCollections)
         }, [ collections ])
 
     return panes ? (
-        <Tab renderActiveOnly id="ListTabs" onTabChange={handleChange} panes={panes} />
+        <Tab renderActiveOnly id="ListTabs"  activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />
     ) : null
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import { Button, Divider, Image } from "semantic-ui-react"
 import logo from "../../img/TuneListLogo.png"
-import video from "../../video/tunes1.mov"
+// import video from "https://res.cloudinary.com/banjo/video/upload/v1604000786/MOV04365_elnyos.mp4"
 import "./Login.css"
 
 export const Login = props => {
@@ -42,10 +42,8 @@ export const Login = props => {
 
                     <section>
                         <form className="form--login" onSubmit={handleLogin}>
-                        <Image src={logo} floated="left" size="medium" alt="TuneList logo, a fiddle over 3 sheets of paper" className="LogoNav" />
-                            <h1>TuneList</h1>
-
-                            <Divider />
+                        <Image src={logo} size="medium" alt="TuneList logo, a fiddle over 3 sheets of paper" className="LogoNav" />
+                             <Divider />
 
                             <p className="about">TuneList is an app that fiddle players can use to store and organize their tune list and tune information.</p>
 
@@ -73,7 +71,7 @@ export const Login = props => {
                 </main>
 
                 <video className="videoTag" autoPlay loop muted>
-                    <source src={video} type="video/mov" />
+                    <source src={'https://res.cloudinary.com/banjo/video/upload/v1604000786/MOV04365_elnyos.mp4'} type="video/mp4" />
                 </video>
             </div>
         </>

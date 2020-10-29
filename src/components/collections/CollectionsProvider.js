@@ -5,6 +5,7 @@ export const CollectionContext = createContext()
 export const CollectionProvider = props => {
 
     const [collections, setCollections] = useState([])
+    const[tuneCollections, setTuneCollections]= useState([])
 
     const getCollections = () => {
         return fetch('http://localhost:8088/collections?_embed=tuneCollections')
@@ -74,7 +75,7 @@ export const CollectionProvider = props => {
         .then(res => res.json())
         .then(res=> {
             console.log("res in get", res)
-            setCollections(res)
+            setTuneCollections(res)
             return res
         })
     }
@@ -95,7 +96,7 @@ export const CollectionProvider = props => {
 
     return (
         <CollectionContext.Provider value={{
-            collections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections
+            collections, tuneCollections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections
         }}>
             {props.children}
         </CollectionContext.Provider>
