@@ -42,7 +42,7 @@ input, .selection, .menu, #tuneNotes   {
 }
 
 input {
-    width: 20%!important;
+    background-color: #b9c6ae !important;
 }
 
 label {
