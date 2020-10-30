@@ -56,12 +56,13 @@ export const Home = () => {
         </Header> */}
       <div className="homeContainer" style={{backgroundImage: `url(${background.url})`}}>
         <div className="homeInfo">
-          <h3 className="totdHeader">Tune of the Day</h3>
-          <Segment 
+          <div className="totdHeader">
+            <h3 className="totdH3">Tune of the Day</h3>
+          <p
               raised
               key={tuneOfTheDay.id}
               id={tuneOfTheDay.id} 
-              className="tuneEntry"
+              className="tuneEntry totd"
               >
               <p
               key={tuneOfTheDay.id}
@@ -73,6 +74,7 @@ export const Home = () => {
               >
                 {tuneOfTheDay.name}
               </p>
+              <Divider />
               <p>posted by: {tuneOfTheDay?.user?.username}</p>
               <div className="buttonContainer">
               {tuneOfTheDay.link ?
@@ -84,7 +86,8 @@ export const Home = () => {
                 : null
               }
               </div>
-            </Segment>
+            </p>
+            </div>
         </div>
         <Divider horizontal>
           <Header as='h4'>
