@@ -39,12 +39,24 @@ body {
 
 input, .selection, .menu, #tuneNotes   {
     background-color: #b9c6ae !important;
+
 }
 
 input {
     background-color: #b9c6ae !important;
+    color: #806040 !important;
+}
+.search{
+    color: #806040 !important;
+} 
+.search::placeholder {
+    color: #806040 !important;
+    opacity: 1 !important;
 }
 
+input::-webkit-input-placeholder {  
+    color: #806040;  
+  }  
 label {
     color: #084c61
 }
@@ -67,7 +79,7 @@ label {
 
 ::-webkit-scrollbar-thumb
 {
-	background-color: #b9c6ae!important;
+	background-color: #806040!important;
 }
 
 

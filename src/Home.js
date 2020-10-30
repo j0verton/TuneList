@@ -65,6 +65,10 @@ export const Home = () => {
                 {tune.name}
               </p>
               <div className="buttonContainer">
+              {tune.link ?
+                <a className="playButton" target="_blank" href={tune.link}>link</a>
+                : null
+              }
               {tune.audioUpload ?
                 <AudioPlayer className="playButton" url={tune.audioUpload}/>
                 : null

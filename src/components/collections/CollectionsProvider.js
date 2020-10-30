@@ -18,10 +18,10 @@ export const CollectionProvider = props => {
         if (collectionName===""){
             console.log("save in if",collectionName)
             if (tuning==="Standard"){
-                collectionName = key.toUpperCase()
+                collectionName = key.charAt(0).toUpperCase() + key.slice(1)
                 console.log("save in standard",collectionName)
             } else if (tuning !=="standard"){
-                collectionName = `${key.toUpperCase()}/${tuning}`
+                collectionName = `${key.charAt(0).toUpperCase() + key.slice(1)}/${tuning}`
                 console.log("save in alt",collectionName)
             }
         }        

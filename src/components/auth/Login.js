@@ -56,7 +56,7 @@ export const Login = props => {
                                     id="email"
                                     className="form-control"
                                     placeholder="Email address"
-                                    required autoFocus />
+                                    required />
                             </fieldset>
                             <fieldset>
                                 <Button primary type="submit">

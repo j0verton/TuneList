@@ -52,7 +52,7 @@ export const TuneCard = (props) => {
                 : null
               }
               {tuneObj.imageUpload ?
-               <Image src={tuneObj.imageUpload} size='small' />
+               <Image src={tuneObj.imageUpload} href={tuneObj.imageUpload} target="_blank" size='small' />
                 : null
               }
                 </Modal.Content>
@@ -63,7 +63,7 @@ export const TuneCard = (props) => {
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
                             deleteTune(tuneObj.id)
-                            .then(history.push(`/tunes`))}}>
+                                .then(props.handleClose)}}>
                         <Icon name='trash alternate outline' /></Button>
                         { tuneObj.userId !== parseInt(localStorage.getItem("tunes_user")) ? 
                         <Button icon id="addTune--${tune.id}" className="addTune" onClick={
