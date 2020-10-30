@@ -9,6 +9,7 @@ import { CollectionProvider } from "./components/collections/CollectionsProvider
 import { UserProvider } from "./components/user/UserProvider"
 import { UserList } from "./components/user/UserList"
 import { TuningProvider } from "./components/tunings/TuningsProvider"
+import { PhotoProvider } from "./components/photo/PhotoProvider"
 
 export const ApplicationViews = (props) => {
     return (
@@ -17,6 +18,7 @@ export const ApplicationViews = (props) => {
             <TuneProvider>
                 <UserProvider>
                     <TuningProvider>
+                    <PhotoProvider>
                         <Route exact path="/">
                             <Home />
                         </Route>
@@ -36,6 +38,7 @@ export const ApplicationViews = (props) => {
                             <Route exact path="/users">
                                 <UserList />
                             </Route>
+                            </PhotoProvider>
                         </TuningProvider>
                     </UserProvider>
                 </TuneProvider>
