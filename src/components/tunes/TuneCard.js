@@ -57,9 +57,11 @@ export const TuneCard = (props) => {
               }
                 </Modal.Content>
                 <Modal.Actions >
-                    <Button icon onClick={() => {
+                { tuneObj.userId === parseInt(localStorage.getItem("tunes_user")) ? 
+                 <Button icon onClick={() => {
                         history.push(`/tunes/edit/${tuneObj?.id}`)
                     }}><Icon name='edit outline' /></Button>
+                    : null }
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
                             deleteTune(tuneObj.id)

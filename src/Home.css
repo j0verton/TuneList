@@ -11,9 +11,11 @@
 
 .homeInfo {
     /* background-color: rgba(255, 255, 255, .9); */
-    padding: 50px;
+    padding: 1%;
     border-radius: 25px;
     flex-basis: 10%;
+    display:flex;
+    justify-content:flex-end
 }
 
 .homeInfo p {
@@ -28,4 +30,11 @@
 }
 p {
     margin-bottom: 0 !important
+}
+
+.totdHeader {
+    margin-top: 25px !important;
+    background-color: #806040!important;
+    border-radius: 3px;
+    padding: 7px;
 }
