@@ -9,6 +9,11 @@ export const TuneProvider = props => {
     const { getCollectionsByUserId, saveCollection, deleteUnusedCollections } = useContext(CollectionContext)
 
     
+            const getTunes = () => {
+                return fetch('http://localhost:8088/tunes/?_expand=user')
+                .then(response => response.json())
+            }
+    
     // adds new Tunes to database
     const saveTune  = tuneObj => {
         //set up an object for the join table "tuneCollections"
@@ -206,7 +211,7 @@ export const TuneProvider = props => {
     
     return (
         <TuneContext.Provider value={{
-            tune, tunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune
+            tune, tunes, getTunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune
         }}>
             {props.children}
         </TuneContext.Provider>

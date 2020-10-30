@@ -1,18 +1,21 @@
 .homeContainer {
     height: 90.2vh;
-    background-image: url("./img/615059_4782632210821_909383358_o.jpg");
+    /* background-image: url("./img/615059_4782632210821_909383358_o.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex; */
+    /* display: flex;
+    flex-direction: column; */
     justify-content: left;
     align-items: center;
 }
 
 .homeInfo {
     /* background-color: rgba(255, 255, 255, .9); */
-    padding: 50px;
+    padding: 1%;
     border-radius: 25px;
     flex-basis: 10%;
+    display:flex;
+    justify-content:flex-end
 }
 
 .homeInfo p {
@@ -27,4 +30,32 @@
 }
 p {
     margin-bottom: 0 !important
+}
+
+.totdHeader {
+   
+    background-color: #806040!important;
+    border-radius: 3px;
+    padding: 7px;
+    margin-right: 5px;
+    display:flex;
+    flex-direction: row;
+    width:50%;
+    align-items: center
+}
+
+totdH3 {
+    display:flex;
+    text-align: center!important;
+    align-items: center;
+    margin-bottom:0!important;
+    align-self:flex-end!important
+
+}
+
+.totd{ 
+    border-radius: 3px;
+    width:70%;
+    padding: 7px;
+    flex-basis:max-content!important
 }
