@@ -7,12 +7,14 @@ https://res.cloudinary.com/banjo/raw/upload/v1604589120/database.json
 
 To to run the project:
 
-Clone this repository
+Clone this repository,
+
 cd into the directory
 
 Install the necessary packages:
 `npm install
-npm install react react-dom react-router-dom`
+npm install react react-dom react-router-dom
+npm install -g json-server`
 
 Once you have created the file and directory, and installed JSON server, React, and React Router DOM
 run `json-server -w database.json -p 8088` in the projects root directory.
