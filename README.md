@@ -12,9 +12,9 @@ Clone this repository,
 cd into the directory
 
 Install the necessary packages:
-`npm install
+`npm install`
 
-npm install react react-dom react-router-dom`
+`npm install react react-dom react-router-dom`
 
 
 `npm install -g json-server`
