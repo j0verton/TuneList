@@ -1,4 +1,4 @@
-project uses JSON server, React and React Semantic UI
+This project uses JSON server, React and React Semantic UI
 
 create an "api" directory in the root directory of the project and create a fie 'database.json'
 
