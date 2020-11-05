@@ -13,6 +13,7 @@ cd into the directory
 
 Install the necessary packages:
 `npm install
+
 npm install react react-dom react-router-dom`
 
 
