@@ -5,6 +5,8 @@ create an "api" directory in the root directory of the project and create a file
 to start the project with some example data, download this file and add it to your api directory 
 https://res.cloudinary.com/banjo/raw/upload/v1604589120/database.json
 
+Once you have created the file and directory, and installed JSON server, React, and React Router DOM
+run `json-server -w database.json -p 8088` in the projects root directory.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
