@@ -1,0 +1,32 @@
+.optionsContainer {
+    margin:20%
+}
+
+.imageWrapper {
+    display:flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.imageDelete {
+margin-left:-20%!important
+}
+
+.imageWrapper  .imageDelete {
+    position: absolute;
+    top: 88%;
+    left: 88%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #806040;
+    color: #084c61;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .imageWrapper .imageDelete:hover {
+    background-color: #b9c6ae;
+  }

@@ -10,34 +10,41 @@ import { UserProvider } from "./components/user/UserProvider"
 import { UserList } from "./components/user/UserList"
 import { TuningProvider } from "./components/tunings/TuningsProvider"
 import { PhotoProvider } from "./components/photo/PhotoProvider"
+import { OptionsList } from "./components/options/OptionsList"
 
 export const ApplicationViews = (props) => {
     return (
         <>
-        <CollectionProvider>
-            <TuneProvider>
-                <UserProvider>
-                    <TuningProvider>
-                    <PhotoProvider>
-                        <Route exact path="/">
-                            <Home />
-                        </Route>
+            <CollectionProvider>
+                <TuneProvider>
+                    <UserProvider>
+                        <TuningProvider>
+                            <PhotoProvider>
+                                
+                                <Route exact path="/">
+                                    <Home />
+                                </Route>
 
-                        <Route exact path="/tunes/create">
-                            <TuneForm />
-                        </Route>
+                                <Route exact path="/tunes/create">
+                                    <TuneForm />
+                                </Route>
 
-                        <Route exact path="/tunes/edit/:tuneId">
-                            <TuneForm />
-                        </Route>
+                                <Route exact path="/tunes/edit/:tuneId">
+                                    <TuneForm />
+                                </Route>
 
-                            <Route exact path="/tunes">
-                                <TunesList />
-                            </Route>
+                                <Route exact path="/tunes">
+                                    <TunesList />
+                                </Route>
 
-                            <Route exact path="/users">
-                                <UserList />
-                            </Route>
+                                <Route exact path="/users">
+                                    <UserList />
+                                </Route>
+
+                                <Route exact path="/tunes/options">
+                                    <OptionsList />
+                                </Route>
+
                             </PhotoProvider>
                         </TuningProvider>
                     </UserProvider>

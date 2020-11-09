@@ -25,8 +25,15 @@ export const Home = () => {
     useEffect(()=> {
       getPhotos()
       .then(response=> {
-        let num = Math.floor(Math.random() * response.length)
-        setBackground(response[num])
+        let userBackgrounds = response.filter(photo => photo.userId)
+        console.log(userBackgrounds)
+        if(userBackgrounds.length) {
+          let num = Math.floor(Math.random() * userBackgrounds.length)
+          setBackground(userBackgrounds[num])
+        } else {
+          let num = Math.floor(Math.random() * response.length)
+          setBackground(response[num])
+        }
       })
       getTunes()
       .then(response=> {
@@ -75,7 +82,7 @@ export const Home = () => {
                 {tuneOfTheDay.name}
               </p>
               <Divider />
-              <p>posted by: {tuneOfTheDay?.user?.username}</p>
+              <p style={{fontSize:".7rem"}}>posted by: {tuneOfTheDay?.user?.username}</p>
               <div className="buttonContainer">
               {tuneOfTheDay.link ?
                 <a className="playButton" target="_blank" href={tuneOfTheDay.link}>link</a>
