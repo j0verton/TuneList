@@ -78,7 +78,7 @@ export const TuneCard = (props) => {
                                 newTuneObj.notes = ""
                                 saveTune(newTuneObj)
                                 history.push(`/users`)}}>
-                            <Icon name='add circle' /></Button> : null
+                            Add This Tune to your Tune List</Button> : null
                         }
                 </Modal.Actions>
             </Modal>
