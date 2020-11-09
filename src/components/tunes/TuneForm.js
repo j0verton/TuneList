@@ -37,8 +37,11 @@ const [customCollection, setCustomCollection]=useState('')
     }, [])
 
     useEffect(() => {
-        getCustomCollectionsByUserId(parseInt(localStorage.getItem("tunes_user")))
+        getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
         .then(setCustomCollections)
+        .then(()=>{
+            console.log(customCollections)
+        })
     }, [])
 
     const uploadImage = async e => {
@@ -99,7 +102,7 @@ const [customCollection, setCustomCollection]=useState('')
             .then(()=>{
                 addTuneCollections(
                     {
-                        
+
                     }
                 )
             })
@@ -216,7 +219,7 @@ const [customCollection, setCustomCollection]=useState('')
                                     //additionLabel = "add Tuning - "
                                     //onAddItem={handleAddition}
                                     // placeholder='Select a Tuning'
-                                    placeholder={tune.tuning}
+                                    // placeholder={tune.tuning}
                                     className="customCollectionsdropdown"
                                     selection
                                     search

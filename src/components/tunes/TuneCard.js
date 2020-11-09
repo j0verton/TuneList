@@ -62,11 +62,13 @@ export const TuneCard = (props) => {
                         history.push(`/tunes/edit/${tuneObj?.id}`)
                     }}><Icon name='edit outline' /></Button>
                     : null }
+                    { tuneObj.userId === parseInt(localStorage.getItem("tunes_user")) ?
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
                             deleteTune(tuneObj.id)
                                 .then(props.handleClose)}}>
                         <Icon name='trash alternate outline' /></Button>
+                        : null }
                         { tuneObj.userId !== parseInt(localStorage.getItem("tunes_user")) ? 
                         <Button icon id="addTune--${tune.id}" className="addTune" onClick={
                             () => {
