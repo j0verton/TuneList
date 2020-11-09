@@ -224,7 +224,7 @@ export const TuneForm = () => {
                     onChange={handleDropdown}
                 />
                                
-                    { customCollections.length ?
+                    { tuneId ? customCollections.length ?
                         <Form.Select
                         //allowAdditions
                         //additionPosition= 'top'
@@ -239,7 +239,7 @@ export const TuneForm = () => {
                         options={customCollections}
                         // defaultValue={}
                         onChange={handleCCDropdown}
-                        /> : null
+                        /> : null : null
                     }
                 <Form.Input
                     label='Source'
