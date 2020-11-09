@@ -27,6 +27,9 @@ export const NavBar = (props) => {
                 <li className="navbar__item active">
                     <Link className="navbar__link" to="/tunes/create"><Icon name="add square" /><p className="nav__text">Add a Tune</p></Link>
                 </li>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/tunes/options"><Icon name="settings" /><p className="nav__text">Options</p></Link>
+                </li>
                 <li className="navbar__item active logout">
                     <Link className="navbar__link" onClick={() => {
                         localStorage.removeItem("tunes_user")

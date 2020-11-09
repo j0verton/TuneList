@@ -25,8 +25,15 @@ export const Home = () => {
     useEffect(()=> {
       getPhotos()
       .then(response=> {
-        let num = Math.floor(Math.random() * response.length)
-        setBackground(response[num])
+        let userBackgrounds = response.filter(photo => photo.userId)
+        console.log(userBackgrounds)
+        if(userBackgrounds.length) {
+          let num = Math.floor(Math.random() * userBackgrounds.length)
+          setBackground(userBackgrounds[num])
+        } else {
+          let num = Math.floor(Math.random() * response.length)
+          setBackground(response[num])
+        }
       })
       getTunes()
       .then(response=> {
