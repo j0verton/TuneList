@@ -74,7 +74,7 @@ console.log(userCollections)
         }
         }, [ collections ])
 
-    return panes ? (
+    return panes.length ? (
         <Tab renderActiveOnly id="ListTabs"  activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />
-    ) : null
+    ) : <h3 className="emptyTunes">No Tunes Added Yet!</h3>
 }

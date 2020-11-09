@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 // import "./Tune.css"
-import { Icon, Container, Divider, Header, Rating } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 export const AudioPlayer = ({url}) => {
     const [playing, setPlaying] = useState(false);

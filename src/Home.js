@@ -75,7 +75,7 @@ export const Home = () => {
                 {tuneOfTheDay.name}
               </p>
               <Divider />
-              <p>posted by: {tuneOfTheDay?.user?.username}</p>
+              <p style={{fontSize:".7rem"}}>posted by: {tuneOfTheDay?.user?.username}</p>
               <div className="buttonContainer">
               {tuneOfTheDay.link ?
                 <a className="playButton" target="_blank" href={tuneOfTheDay.link}>link</a>

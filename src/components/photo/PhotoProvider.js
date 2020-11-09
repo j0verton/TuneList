@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react"
+import React, { createContext } from "react"
 
 export const PhotoContext = createContext()
 
@@ -10,7 +10,7 @@ export const PhotoProvider = props => {
             .then(response => response.json())
         }
 
-        
+
         return (
         <PhotoContext.Provider value={{
             getPhotos
