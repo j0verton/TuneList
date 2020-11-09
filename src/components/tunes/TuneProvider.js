@@ -211,7 +211,7 @@ export const TuneProvider = props => {
     
     return (
         <TuneContext.Provider value={{
-            tune, tunes, getTunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune
+            tune, tunes, getTunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune, addTuneCollections
         }}>
             {props.children}
         </TuneContext.Provider>
