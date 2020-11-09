@@ -64,7 +64,7 @@ export const Home = () => {
       <div className="homeContainer" style={{backgroundImage: `url(${background.url})`}}>
         <div className="homeInfo">
           <div className="totdHeader">
-            <h3 className="totdH3">Tune of the Day</h3>
+            <h4 className="totdH3">Tune <br /> of the <br /> Day</h4>
           <p
               raised
               key={tuneOfTheDay.id}
