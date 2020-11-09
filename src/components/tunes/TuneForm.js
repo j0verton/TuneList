@@ -1,23 +1,27 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, Header, Checkbox, Rating } from "semantic-ui-react";
+import { CollectionContext } from "../collections/CollectionsProvider";
 import { TuningContext } from "../tunings/TuningsProvider";
 import "./Tune.css"
 import { TuneContext } from "./TuneProvider";
 
 export const TuneForm = () => {
-    const { saveTune, editTune, getTuneById, addAudioToTune } = useContext(TuneContext)
+    const { saveTune, editTune, getTuneById, addAudioToTune, addTuneCollections } = useContext(TuneContext)
     const {tunings, getTunings, addTuning } = useContext(TuningContext)
+    const {addCustomCollection, editCollection, getCustomCollectionsByUserId} = useContext(CollectionContext)
     const [ tune, setTune ] = useState({})
     const [ isLoading, setIsLoading ] = useState(true)
 
     const { tuneId } = useParams()
-
+    let userCustomCollections
+    let currentCollection 
     const history = useHistory()
-const [ image, setImage ] =useState('')
-const [ audio, setAudio ] =useState('')
-const [loading, setLoading] = useState(false)
-
+    const [ image, setImage ] =useState('')
+    const [ audio, setAudio ] =useState('')
+    const [loading, setLoading] = useState(false)
+    const [customCollections, setCustomCollections] = useState([])
+    const [customCollection, setCustomCollection] = useState()
     useEffect(() => {
         getTunings()
         if(tuneId){
@@ -31,6 +35,25 @@ const [loading, setLoading] = useState(false)
         } else {
             setIsLoading(false)
         }
+    }, [])
+
+    useEffect(() => {
+        getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
+        .then(res => {
+            console.log("res before set",res)
+            userCustomCollections = res 
+            //chain is breaking here loosing the data
+            let collectionOptions = userCustomCollections.map(collection=>{
+                collection.text=collection.name
+                collection.value=collection.id
+                return collection
+            })
+            setCustomCollections(collectionOptions)
+            })
+        
+        // .then(setCustomCollections)
+        .then(()=>{
+        })
     }, [])
 
     const uploadImage = async e => {
@@ -88,6 +111,11 @@ const [loading, setLoading] = useState(false)
                 audioUpload:audio,
                 imageUpload:image
             })
+            addTuneCollections({
+                    tuneId: tune.id,
+                    collectionId: customCollection
+                }
+            )
             history.push('/tunes')
         } else {
             await saveTune({
@@ -104,6 +132,7 @@ const [loading, setLoading] = useState(false)
                 imageUpload:image
             })
             history.push('/tunes')
+
         }
     }
 
@@ -116,6 +145,12 @@ const [loading, setLoading] = useState(false)
         const newTune = { ...tune }
         newTune[data.name] = data.value
         setTune(newTune)
+    }
+
+    const handleCCDropdown = (event, data)=> {
+        setCustomCollection(data.value)
+        currentCollection = data.value
+        console.log(currentCollection)
     }
     const handleCheckbox = (event, data)=> {
         const newTune = { ...tune }
@@ -188,6 +223,24 @@ const [loading, setLoading] = useState(false)
                     defaultValue={tune.tuning}
                     onChange={handleDropdown}
                 />
+                               
+                    { customCollections.length ?
+                        <Form.Select
+                        //allowAdditions
+                        //additionPosition= 'top'
+                        //additionLabel = "add Tuning - "
+                        //onAddItem={handleAddition}
+                        // placeholder='Select a Tuning'
+                        // placeholder={tune.tuning}
+                        className="customCollectionsdropdown"
+                        selection
+                        name='customCollections'
+                        label='Add Tune to a Custom Collection '
+                        options={customCollections}
+                        // defaultValue={}
+                        onChange={handleCCDropdown}
+                        /> : null
+                    }
                 <Form.Input
                     label='Source'
                     placeholder="What's your source?"

@@ -40,16 +40,17 @@ p {
     margin-right: 5px;
     display:flex;
     flex-direction: row;
-    width:50%;
+    width:auto;
     align-items: center
 }
 
-totdH3 {
+.totdH3 {
     display:flex;
     text-align: center!important;
     align-items: center;
     margin-bottom:0!important;
-    align-self:flex-end!important
+    align-self:flex-end!important;
+    padding-right:4%
 
 }
 

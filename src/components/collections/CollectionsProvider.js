@@ -11,6 +11,25 @@ export const CollectionProvider = props => {
         return fetch('http://localhost:8088/collections?_embed=tuneCollections')
         .then(response => response.json())
     }
+
+    const getCustomCollectionsByUserId = (userId) => {
+        return fetch(`http://localhost:8088/collections/?userId=${userId}&custom=true&_embed=tuneCollections`)
+        .then(response => response.json())
+    }
+
+    const addCustomCollection = (collectionName) => {
+        return fetch('http://localhost:8088/collections', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: parseInt(localStorage.getItem("tunes_user")),
+                name: collectionName,
+                custom:true
+            })
+        })
+    }
     
     // adds new collections to database
     const saveCollection = (tuning, key, collectionName="") => {
@@ -31,7 +50,7 @@ export const CollectionProvider = props => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userId: localStorage.getItem("tunes_user"),
+                userId: parseInt(localStorage.getItem("tunes_user")),
                 name: collectionName
             })
         })
@@ -96,7 +115,7 @@ export const CollectionProvider = props => {
 
     return (
         <CollectionContext.Provider value={{
-            collections, tuneCollections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections
+            collections, tuneCollections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections, addCustomCollection, editCollection, getCustomCollectionsByUserId
         }}>
             {props.children}
         </CollectionContext.Provider>

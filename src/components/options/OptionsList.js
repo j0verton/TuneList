@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PhotoContext } from "../photo/PhotoProvider";
-import {Button, Header, Image} from "semantic-ui-react"
+import {Button, Header, Image, Input, Form} from "semantic-ui-react"
 import "./Options.css"
+import { CollectionContext } from "../collections/CollectionsProvider";
 export const OptionsList = () => {
-
+    const {addCustomCollection, editCollection, getCustomCollectionsByUserId} = useContext(CollectionContext)
     const {getPhotosByUserId, addPhoto, deletePhoto} = useContext(PhotoContext)
+    
+    const [ collection, setCollection ] = useState({})
     const [ images,  setImages] =useState([])
     const [ loading, setLoading ] = useState(false)
+    const [ customCollections, setCustomCollections] = useState([])
 
     const uploadImage = async e => {
         const files = e.target.files
@@ -27,6 +31,9 @@ export const OptionsList = () => {
         // setImages(photos)
         setLoading(false) 
     }
+    const handleSave = (e, d) => {
+        console.log(d)
+    }
     const handleDelete = (e, data) => {
         setLoading(true)
         deletePhoto(data.id)
@@ -35,17 +42,42 @@ export const OptionsList = () => {
         })
     }
 
+    const handleControlledInputChange = (event) => {
+        const newCollection = { ...collection }
+        newCollection[event.target.name] = event.target.value
+        setCollection(newCollection)
+    }
+
     useEffect(()=> {
         getPhotosByUserId(localStorage.getItem("tunes_user"))
         .then(setImages)
     }, [loading])
 
+    useEffect(()=> {
+        getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
+        .then(setCustomCollections)
+    }, [loading])
+    
 
     return (
         <section className="optionsContainer">
             <Header as="h2">create a custom collection</Header>
+            <Form onSubmit={handleSave}>
+                <Input 
+                    type="text"
+                    onChange={handleControlledInputChange}/>
+                <Button
+                    primary
+                    type="submit"
+                    id="save"
+                    size="medium"
+                    className="btn btn-primary save"
+                >Save Collection</Button>
+                </Form>
+
+
             <Header as="h2">upload a backgound photo</Header>
-            <input type="file"
+            <Input type="file"
                 name="file"
                 placeholder="upload an Image"
                 onChange={uploadImage}

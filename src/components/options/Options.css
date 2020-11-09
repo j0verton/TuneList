@@ -6,6 +6,9 @@
     display:flex;
     flex-direction: row;
     position: relative;
+    /* width: auto; */
+    position: relative;
+    width: 60%;
 }
 
 .imageDelete {
@@ -30,3 +33,5 @@ margin-left:-20%!important
   .imageWrapper .imageDelete:hover {
     background-color: #b9c6ae;
   }
+
+  
