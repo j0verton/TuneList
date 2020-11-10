@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PhotoContext } from "../photo/PhotoProvider";
-import {Button, Header, Image, Input, Form} from "semantic-ui-react"
+import {Button, Header, Image, Input, Form, Modal} from "semantic-ui-react"
 import "./Options.css"
 import { CollectionContext } from "../collections/CollectionsProvider";
 export const OptionsList = () => {
     const {addCustomCollection, editCollection, getCustomCollectionsByUserId} = useContext(CollectionContext)
     const {getPhotosByUserId, addPhoto, deletePhoto} = useContext(PhotoContext)
-    
+    const [ alert, showAlert ] = useState(false)
+
     const [ collection, setCollection ] = useState({})
     const [ images,  setImages] =useState([])
     const [ loading, setLoading ] = useState(false)
     const [ customCollections, setCustomCollections] = useState([])
 
+    const handleAlert = () => {
+        showAlert(false)
+    }
     const uploadImage = async e => {
         const files = e.target.files
         const data = new FormData()
@@ -32,7 +36,9 @@ export const OptionsList = () => {
         setLoading(false) 
     }
     const handleSave = (e, d) => {
-        console.log(d)
+        console.log(d, e)
+        console.log(collection)
+        addCustomCollection(collection.name)
     }
     const handleDelete = (e, data) => {
         setLoading(true)
@@ -61,11 +67,15 @@ export const OptionsList = () => {
 
     return (
         <section className="optionsContainer">
-            <Header as="h2">create a custom collection</Header>
-            <Form onSubmit={handleSave}>
+            <Header as="h2">Create a Custom Collection</Header>
+            <Form onSubmit={()=>{
+                handleSave()
+                showAlert(true)}}>
                 <Input 
+                    onChange={handleControlledInputChange}
+                    name='name'
                     type="text"
-                    onChange={handleControlledInputChange}/>
+                    />
                 <Button
                     primary
                     type="submit"
@@ -74,9 +84,23 @@ export const OptionsList = () => {
                     className="btn btn-primary save"
                 >Save Collection</Button>
                 </Form>
-
-
-            <Header as="h2">upload a backgound photo</Header>
+                <Modal
+                    open={alert}
+                    size="large"
+                    onClose={handleAlert}>
+                    <Header className="alert"> Collection Added</Header>
+                </Modal>
+                <section>
+                    <h2>Custom Collections</h2>
+        { customCollections.length ?
+                customCollections.map(collection => {
+                    console.log("collection", collection)
+                    return <p>{collection.name}</p>
+                })
+             : null
+        }
+        </section>
+            <Header as="h2">Upload a Backgound Photo</Header>
             <Input type="file"
                 name="file"
                 placeholder="upload an Image"

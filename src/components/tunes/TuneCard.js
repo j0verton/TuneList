@@ -1,29 +1,27 @@
-import React, { useContext } from "react"
+import React, { useContext, useState  } from "react"
 import "./Tune.css"
 import { Button, Header, Icon, Modal, Rating, Image } from 'semantic-ui-react'
 import { TuneContext } from "./TuneProvider"
-import { useHistory, useParams } from "react-router-dom"
+import { useHistory, useParams} from "react-router-dom"
 
 export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
     const { saveTune, deleteTune, addStarToTune, removeStarFromTune } = useContext(TuneContext)
     const history = useHistory()
-
+    const [ alert, showAlert ] = useState(false)
     const handleStar = (event, data) => {
-        console.log("data",data)
-        console.log("event", event.target)
         const [prefix, tuneId] = data.id.split("__")
-        console.log(tuneObj.id)
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
     }
 
+    const handleAlert = () => {
+        showAlert(false)
+    }
     const tuneObj = props.tuneObj
     //returns an tune in semantic Ui elements, pass as a prop a function that will set modal to false line 31
     return (
         <Modal
         closeIcon
-        // value={props.value}
-        // onClick={closeModal}
         size="mini"
         open={props.handleOpen} 
         onClose={props.handleClose} 
@@ -77,10 +75,18 @@ export const TuneCard = (props) => {
                                 delete newTuneObj.id
                                 newTuneObj.notes = ""
                                 saveTune(newTuneObj)
+                                showAlert(true)
                                 history.push(`/users`)}}>
                             Add This Tune to your Tune List</Button> : null
                         }
+                        <Modal
+                        open={alert}
+                        size="large"
+                        onClose={handleAlert}>
+                            <Header className="alert">Tune Added</Header>
+                        </Modal>
                 </Modal.Actions>
             </Modal>
+            
     )
 }

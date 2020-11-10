@@ -22,7 +22,6 @@ export const TuneProvider = props => {
         getCollectionsByUserId(localStorage.getItem("tunes_user"))
         //
         .then(res => {
-            console.log("res", res)
             return res.map(response => {
                 return response.name})
             })
@@ -35,7 +34,6 @@ export const TuneProvider = props => {
                         return collections.find(collection=> collection.name === tuneObj.key)}
                         )
                     .then(res=>{
-                        console.log(res)//error hitting here-res is undefined
                         tuneCollectionsObj.collectionId = res.id
                     })
                     .then(() => {
@@ -43,19 +41,16 @@ export const TuneProvider = props => {
                     })
             //tune is in an alternate tuning and the collection doesn't exist
             } else if (tuneObj.tuning !== "Standard" &&!response.includes(`${tuneObj.key}/${tuneObj.tuning}`))  {
-                console.log("tuneObj in else if",tuneObj)
                 saveCollection(tuneObj.tuning, tuneObj.key)
                 .then(()=> {
                     return getCollectionsByUserId(localStorage.getItem("tunes_user"))
                 })
                 .then(collections => {
                     
-                    console.log("collections",collections)
                     return collections.find(collection=> collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
                 }
                     )
                 .then(res=>{
-                    console.log("res 50", res)
                     tuneCollectionsObj.collectionId = res.id
                 })    
                 .then(() => {
@@ -65,15 +60,12 @@ export const TuneProvider = props => {
             } else {
                 getCollectionsByUserId(localStorage.getItem("tunes_user"))
                 .then(collections=> {
-                    console.log("collections", collections)
                     let foundCollection = collections.find(collection => {
-                        console.log(`${tuneObj.key}/${tuneObj.tuning}`)
                         return collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}`
                     })
                     return foundCollection
                 })
                 .then(foundCollection=> {
-                    console.log("foundCollection", foundCollection )
                     tuneCollectionsObj.collectionId = foundCollection.id
                     postNewTune(tuneObj, tuneCollectionsObj)
                        
@@ -91,7 +83,6 @@ export const TuneProvider = props => {
         })
         .then(res=> res.json())
         .then(res => {
-            console.log(res)
             tuneCollectionsObj.tuneId=res.id
             addTuneCollections(tuneCollectionsObj)
         })
@@ -115,7 +106,6 @@ export const TuneProvider = props => {
     const editTune = tuneObj => {
         getTuneByIdWithTC(tuneObj.id).then(res => {
             if (res.tuning === tuneObj.tuning && res.key === tuneObj.key) {
-                console.log("put")
                 return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
                     method: 'PUT',
                     headers: {
@@ -124,11 +114,9 @@ export const TuneProvider = props => {
                     body: JSON.stringify(tuneObj)
                 })
             } else {
-                console.log("crazy one", res)
                 deleteTune(res.id)
                 .then(() => {
                     delete tuneObj.id
-                    console.log("tuneobj pre save", tuneObj)
                     saveTune(tuneObj)
                 })
             }
@@ -136,7 +124,6 @@ export const TuneProvider = props => {
     }
     
     const addStarToTune = (tuneId) => {
-        console.log("log inside add", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'PATCH',
             headers: {
@@ -149,7 +136,6 @@ export const TuneProvider = props => {
     }
 
     const addAudioToTune = (id, url) => {
-        console.log("log inside add",id, url)
         return fetch(`http://localhost:8088/tunes/${id}`, {
             method: 'PATCH',
             headers: {
@@ -162,7 +148,6 @@ export const TuneProvider = props => {
     }
     
     const removeStarFromTune = (tuneId) => {
-        console.log("log inside remove", tuneId)
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'PATCH',
             headers: {
@@ -217,21 +202,3 @@ export const TuneProvider = props => {
         </TuneContext.Provider>
     )
 }
-
-
-// console.log("coming into save", tuneObj)
-// let tuneCollectionsObj = { tuneId: tuneObj.id }
-// if (tuneObj.tuning === "Standard" && tuneObj.key === "G") {
-//     tuneCollectionsObj.collectionId = 1
-// } else if (tuneObj.tuning === "Standard" && tuneObj.key === "C") {
-//     tuneCollectionsObj.collectionId = 4
-// } else if (tuneObj.tuning === "Standard" && tuneObj.key === "F") {
-//     tuneCollectionsObj.collectionId = 5
-// } else if (tuneObj.tuning === "Cross") {
-//     tuneCollectionsObj.collectionId = 2
-// } else if (tuneObj.tuning === "High D") {
-//     tuneCollectionsObj.collectionId = 3
-// } else {
-//     tuneCollectionsObj.collectionId = 6
-// }
-// console.log(tuneCollectionsObj)

@@ -1,5 +1,5 @@
 .optionsContainer {
-    margin:20%
+    margin:10% 20% 20% 20%
 }
 
 .imageWrapper {
@@ -34,4 +34,7 @@ margin-left:-20%!important
     background-color: #b9c6ae;
   }
 
+  #photoUploadsHeader {
+      margin-top: 5%;
+  }
   
