@@ -20,7 +20,6 @@ export const ListCard = ({ collectionId, parentCallback}) => {
 
     const handleClose =()=>{
         showModal(false)
-        // parentCallback()
     } 
 
     const handleStar = (event, data) => {

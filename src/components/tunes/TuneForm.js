@@ -43,10 +43,12 @@ export const TuneForm = () => {
             userCustomCollections = res 
             //chain is breaking here loosing the data
             let collectionOptions = userCustomCollections.map(collection=>{
+                console.log(collection)
                 collection.text=collection.name
                 collection.value=collection.id
                 return collection
             })
+            console.log(collectionOptions)
             setCustomCollections(collectionOptions)
             })
         

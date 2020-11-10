@@ -22,8 +22,6 @@ export const TuneCard = (props) => {
     return (
         <Modal
         closeIcon
-        // value={props.value}
-        // onClick={closeModal}
         size="mini"
         open={props.handleOpen} 
         onClose={props.handleClose} 

@@ -26,7 +26,7 @@ export const TunesList = (props) => {
         })
         setPanes(tabs)
     }
-    },[userCollections, tunes])
+    },[userCollections, tunes, collections, changes])
     
     useEffect(()=> {
         getTunesByUserId(localStorage.getItem("tunes_user"))
@@ -69,7 +69,7 @@ export const TunesList = (props) => {
             })
             setUserCollections(mergedCollection)
         }
-        }, [ collections ])
+        }, [ collections])
 
     return panes.length ? (
         <Tab renderActiveOnly id="ListTabs"  activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />
