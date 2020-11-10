@@ -32,6 +32,9 @@ export const OptionsList = () => {
         setLoading(false) 
     }
     const handleSave = (e, d) => {
+        console.log(d, e)
+        console.log(collection)
+        addCustomCollection(collection)
     }
     const handleDelete = (e, data) => {
         setLoading(true)
@@ -63,8 +66,9 @@ export const OptionsList = () => {
             <Header as="h2">create a custom collection</Header>
             <Form onSubmit={handleSave}>
                 <Input 
-                    type="text"
-                    onChange={handleControlledInputChange}/>
+                    onChange={handleControlledInputChange}
+                    name='name'
+                    type="text"/>
                 <Button
                     primary
                     type="submit"
@@ -73,8 +77,12 @@ export const OptionsList = () => {
                     className="btn btn-primary save"
                 >Save Collection</Button>
                 </Form>
-
-
+        { customCollections.length ?
+            <section>
+                {customCollections.map(collection => {
+                    return collection.name})}
+            </section> : null
+        }
             <Header as="h2">upload a backgound photo</Header>
             <Input type="file"
                 name="file"
@@ -88,6 +96,7 @@ export const OptionsList = () => {
                 <h3>Loading...</h3>
             ): 
             images.map(imageObj=>  {
+            console.log(imageObj)
             return <div className="imageWrapper"><Image className="backgroundPhoto" src={imageObj.url} style={{width : "300px"}} />
             <Button id={imageObj.id} onClick={handleDelete} className="imageDelete">delete</Button></div>}) 
                     : <p>Add photos for a custom background on the Home page!</p>
