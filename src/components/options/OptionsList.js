@@ -32,7 +32,6 @@ export const OptionsList = () => {
         setLoading(false) 
     }
     const handleSave = (e, d) => {
-        console.log(d)
     }
     const handleDelete = (e, data) => {
         setLoading(true)
@@ -89,7 +88,6 @@ export const OptionsList = () => {
                 <h3>Loading...</h3>
             ): 
             images.map(imageObj=>  {
-            console.log(imageObj)
             return <div className="imageWrapper"><Image className="backgroundPhoto" src={imageObj.url} style={{width : "300px"}} />
             <Button id={imageObj.id} onClick={handleDelete} className="imageDelete">delete</Button></div>}) 
                     : <p>Add photos for a custom background on the Home page!</p>

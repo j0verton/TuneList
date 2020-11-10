@@ -10,10 +10,7 @@ export const TuneCard = (props) => {
     const history = useHistory()
     const [ alert, showAlert ] = useState(false)
     const handleStar = (event, data) => {
-        console.log("data",data)
-        console.log("event", event.target)
         const [prefix, tuneId] = data.id.split("__")
-        console.log(tuneObj.id)
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
     }
 

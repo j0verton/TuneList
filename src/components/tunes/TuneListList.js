@@ -16,14 +16,11 @@ export const TunesList = (props) => {
 
     const handleChange = (event, data) => {
         data ? localStorage.setItem("active_index", data.activeIndex): localStorage.setItem("active_index", 0)
-        console.log("data", data)
         setChanges(changes + 1)
     }
 
     useEffect(()=> {
         if(userCollections){
-
-console.log(userCollections)
         let tabs = userCollections.sort((a, b) =>  b.tuneCollections.length - a.tuneCollections.length).map(collection => {
             return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard key={collection.id} parentCallback={handleChange} collectionId={collection.id} tunesArr={collection.tuneCollections} />}</Tab.Pane>}
         })

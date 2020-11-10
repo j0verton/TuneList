@@ -25,9 +25,8 @@ export const Home = () => {
     useEffect(()=> {
       getPhotos()
       .then(response=> {
-        let userBackgrounds = response.filter(photo => photo.userId)
-        console.log(userBackgrounds)
-        if(userBackgrounds.length) {
+        let userBackgrounds = response.filter(photo => photo.userId === parseInt(localStorage.getItem("tunes_user")))
+        if(userBackgrounds.length ) {
           let num = Math.floor(Math.random() * userBackgrounds.length)
           setBackground(userBackgrounds[num])
         } else {
@@ -50,17 +49,12 @@ export const Home = () => {
   } 
 
   const handleStar = (event, data) => {
-    console.log("data",data)
-    console.log("event", event.target)
     const [prefix, tuneId] = data.id.split("__")
-    console.log(tuneId)
     data.rating === 0 ? removeStarFromTune(tuneId).then(()=> {setRating(tuneId)}): addStarToTune(tuneId).then(()=> {setRating(tuneId)})
   }
 
   return (
     <>
-        {/* <Header><Image src={logo} floated="left" size="medium" alt="TuneList logo, a fiddle over 3 sheets of paper" className="LogoHome" />
-        </Header> */}
       <div className="homeContainer" style={{backgroundImage: `url(${background.url})`}}>
         <div className="homeInfo">
           <div className="totdHeader">

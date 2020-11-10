@@ -24,18 +24,12 @@ export const ListCard = ({ collectionId, parentCallback}) => {
     } 
 
     const handleStar = (event, data) => {
-        console.log(tunesArr)
-        console.log("data",data)
-        console.log("event", event.target)
         const [prefix, tuneId] = data.id.split("__")
-        console.log(tuneId)
         data.rating === 0 ? removeStarFromTune(tuneId): addStarToTune(tuneId)
       }
       
       useEffect(()=> {
         getTuneCollectionsByCollectionIdWithTunes(collectionId)
-        .then()
-        .then(response=>console.log("TC by B with T",response))
         }, [])
 
         useEffect(()=> {

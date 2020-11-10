@@ -40,7 +40,6 @@ export const TuneForm = () => {
     useEffect(() => {
         getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
         .then(res => {
-            console.log("res before set",res)
             userCustomCollections = res 
             //chain is breaking here loosing the data
             let collectionOptions = userCustomCollections.map(collection=>{
@@ -91,7 +90,6 @@ export const TuneForm = () => {
         setAudio(file.secure_url)   
         addAudioToTune(audio)
         setLoading(false) 
-        console.log(audio)
     }
 
     const constructNewTune = async () => {
@@ -150,7 +148,6 @@ export const TuneForm = () => {
     const handleCCDropdown = (event, data)=> {
         setCustomCollection(data.value)
         currentCollection = data.value
-        console.log(currentCollection)
     }
     const handleCheckbox = (event, data)=> {
         const newTune = { ...tune }
@@ -164,7 +161,6 @@ export const TuneForm = () => {
     }
 
     const handleAddition = (event, data) => {
-        console.log(data.value)
         let newTuning = {
             key: data.value,
             text: data.value,
