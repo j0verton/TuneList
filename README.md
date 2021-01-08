@@ -20,7 +20,7 @@ Install the necessary packages:
 `npm install -g json-server`
 
 Once you have created the file and directory, and installed JSON server, React, and React Router DOM
-run `json-server -w database.json -p 8088` in the project's root directory.
+run `json-server -w database.json -p 8088` in the project's API directory.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
