@@ -1,0 +1,614 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Joe",
+      "name": "Joe Overton",
+      "email": "me@me.com"
+    },
+    {
+      "id": 2,
+      "username": "Jeff",
+      "name": "Jeff Jeffity Jeff",
+      "email": "Jeff@jeffityjeff.com"
+    },
+    {
+      "id": 3,
+      "username": "Sue",
+      "name": "Sue Shu",
+      "email": "sue_1982317@aol.com"
+    }
+  ],
+  "tunes": [
+    {
+      "userId": 1,
+      "name": "The Old Yellow Dog Come A Trotting Through the Meeting House",
+      "key": "G",
+      "tuning": "Standard",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 3,
+      "starred": 0
+    },
+    {
+      "userId": 1,
+      "name": "Possum up a Gum Stump",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "Allen Alsop",
+      "notes": "Learned this from the H.B. Mississippi Fiddle Tunes book",
+      "audioUpload": "",
+      "imageUpload": "https://res.cloudinary.com/banjo/image/upload/v1604000169/tunelist/n1feqvi9mimdsagldy0g.jpg",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "name": "Cindy Gal",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Joe Thompson",
+      "link": "https://www.youtube.com/watch?v=GMGZuxUs1e4",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 5,
+      "starred": 0
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "name": "Acorn Stomp",
+      "key": "F",
+      "tuning": "Standard",
+      "source": "",
+      "audioUpload": "",
+      "imageUpload": "https://res.cloudinary.com/banjo/image/upload/v1604083685/tunelist/ebwpty081pye3shqnwmc.gif"
+    },
+    {
+      "userId": 1,
+      "name": "Icy Mountain",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "",
+      "notes": "I learned this from the Improbabillies record.",
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604003661/tunelist/ricvqd6720sqhkkdtufy.mp4",
+      "imageUpload": "",
+      "id": 7,
+      "starred": 1
+    },
+    {
+      "id": 8,
+      "userId": 1,
+      "name": "Liberty off of a Corn Liquor Still in Georgia",
+      "key": "G",
+      "tuning": "Standard",
+      "source": "Clayton McMichen",
+      "notes": "From Gid Tanner and the Skillet Lickers",
+      "starred": 1,
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604004016/tunelist/jpwkj6mjv2r86apftcqt.mp3",
+      "imageUpload": ""
+    },
+    {
+      "userId": 2,
+      "name": "Cindy Gal",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Joe Thompson",
+      "link": "https://www.youtube.com/watch?v=GMGZuxUs1e4",
+      "audioUpload": "",
+      "imageUpload": "",
+      "starred": 1,
+      "notes": "",
+      "id": 9
+    },
+    {
+      "userId": 2,
+      "name": "Icy Mountain",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "",
+      "notes": "",
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604003661/tunelist/ricvqd6720sqhkkdtufy.mp4",
+      "imageUpload": "",
+      "id": 10
+    },
+    {
+      "userId": 2,
+      "name": "Liberty off of the Corn Liquor Still in Georgia",
+      "key": "G",
+      "tuning": "Standard",
+      "source": "Clayton McMichen",
+      "notes": "",
+      "starred": 0,
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604004016/tunelist/jpwkj6mjv2r86apftcqt.mp3",
+      "imageUpload": "",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "name": "Calico",
+      "key": "A",
+      "tuning": "AEAC#",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "name": "Black and White Rag",
+      "key": "Bb",
+      "tuning": "Standard",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 15
+    },
+    {
+      "id": 16,
+      "userId": 1,
+      "name": "Sweet Bama",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "Stanley Bailey",
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604020093/tunelist/krlkia8rpcjmp4csc5b8.mp3",
+      "imageUpload": "",
+      "starred": 0
+    },
+    {
+      "id": 17,
+      "userId": 1,
+      "name": "Dinah",
+      "key": "A",
+      "tuning": "Cross",
+      "source": " Henry Reed",
+      "notes": "I learned it from Rick Martin",
+      "audioUpload": "",
+      "imageUpload": "",
+      "starred": 0
+    },
+    {
+      "userId": 1,
+      "name": "Walk Along John to Kansas",
+      "key": "A",
+      "tuning": "Cross",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 18
+    },
+    {
+      "id": 19,
+      "userId": 1,
+      "name": "Old Bunch of Keys",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "Tommy Jarrell",
+      "audioUpload": "",
+      "imageUpload": ""
+    },
+    {
+      "id": 20,
+      "userId": 1,
+      "name": "Hunting the Buffalo",
+      "key": "A",
+      "tuning": "Cross",
+      "audioUpload": "",
+      "imageUpload": ""
+    },
+    {
+      "userId": 1,
+      "name": "Squirrel Heads and Gravy",
+      "key": "A",
+      "tuning": "Cross",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 21
+    },
+    {
+      "id": 22,
+      "userId": 1,
+      "name": "Give the Fiddler a Dram",
+      "key": "A",
+      "tuning": "Cross",
+      "audioUpload": "",
+      "imageUpload": ""
+    },
+    {
+      "id": 23,
+      "userId": 1,
+      "name": "Oscar's Piece #3",
+      "key": "A",
+      "tuning": "Cross",
+      "source": "Oscar Overturf",
+      "notes": "",
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604019332/tunelist/ikkmbsbpvdovdtfwad4g.mp3",
+      "imageUpload": ""
+    },
+    {
+      "id": 24,
+      "userId": 1,
+      "name": "Paddy wont you have some good old cider",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Charlie Acuff",
+      "audioUpload": "",
+      "imageUpload": "",
+      "starred": 0
+    },
+    {
+      "userId": 1,
+      "name": "Polecat Blues",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Greg Hooven",
+      "notes": "I learned this from the Freight Hoppers originally",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 25,
+      "starred": 0
+    },
+    {
+      "id": 26,
+      "userId": 1,
+      "name": "Five Miles from Town",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Clyde Davenport",
+      "link": "https://www.slippery-hill.com/recording/five-miles-town",
+      "starred": 1,
+      "audioUpload": "",
+      "imageUpload": ""
+    },
+    {
+      "userId": 1,
+      "name": "Sally Anne",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Tommy Jarrell",
+      "notes": "The Mt Airy national anthem",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 27
+    },
+    {
+      "id": 28,
+      "userId": 1,
+      "name": "Blackberry Blossom",
+      "key": "G",
+      "tuning": "Standard",
+      "starred": 0,
+      "audioUpload": "",
+      "imageUpload": ""
+    },
+    {
+      "id": 29,
+      "userId": 1,
+      "name": "Wolf Creek",
+      "key": "G",
+      "tuning": "Standard",
+      "source": "",
+      "notes": "Learned from the Rafe Stefanini record",
+      "starred": 1,
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604080026/tunelist/ypesp3elwwphunmsmtiz.mp4",
+      "imageUpload": ""
+    },
+    {
+      "userId": 1,
+      "name": "I'm Gonna Go A-Hunting For The Buffalo",
+      "key": "Em",
+      "tuning": "BEGB",
+      "source": "Jimmy Driftwood",
+      "notes": "What?! so cool...",
+      "audioUpload": "https://res.cloudinary.com/banjo/video/upload/v1604022115/tunelist/bvmmdjdxv8h7rjkmriww.mp3",
+      "imageUpload": "",
+      "id": 30,
+      "starred": 0
+    },
+    {
+      "userId": 1,
+      "name": "Pickin' the Devils Eye",
+      "key": "A",
+      "tuning": "AEAC#",
+      "source": "",
+      "notes": "I learned this from Mike Bryant",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 31
+    },
+    {
+      "userId": 2,
+      "name": "Sally Anne",
+      "key": "D",
+      "tuning": "ADAE",
+      "source": "Tommy Jarrell",
+      "notes": "",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 32,
+      "starred": 1
+    },
+    {
+      "userId": 2,
+      "name": "Sleepy Joe",
+      "key": "E",
+      "tuning": "Standard",
+      "audioUpload": "",
+      "imageUpload": "",
+      "id": 33
+    }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "A/Cross"
+    },
+    {
+      "userId": "1",
+      "name": "G",
+      "id": 2
+    },
+    {
+      "userId": "1",
+      "name": "D/ADAE",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "name": "F",
+      "id": 4
+    },
+    {
+      "userId": "2",
+      "name": "D/ADAE",
+      "id": 5
+    },
+    {
+      "userId": "2",
+      "name": "A/Cross",
+      "id": 6
+    },
+    {
+      "userId": "2",
+      "name": "G",
+      "id": 7
+    },
+    {
+      "userId": "1",
+      "name": "A/AEAC#",
+      "id": 8
+    },
+    {
+      "userId": "1",
+      "name": "Bb",
+      "id": 9
+    },
+    {
+      "userId": "1",
+      "name": "Em/BEGB",
+      "id": 11
+    },
+    {
+      "userId": "1",
+      "name": "C/GDAD",
+      "id": 12
+    },
+    {
+      "userId": "2",
+      "name": "E",
+      "id": 13
+    }
+  ],
+  "tuneCollections": [
+    {
+      "tuneId": 3,
+      "collectionId": 2,
+      "id": 3
+    },
+    {
+      "tuneId": 4,
+      "collectionId": 1,
+      "id": 4
+    },
+    {
+      "tuneId": 5,
+      "collectionId": 3,
+      "id": 5
+    },
+    {
+      "tuneId": 6,
+      "collectionId": 4,
+      "id": 6
+    },
+    {
+      "tuneId": 7,
+      "collectionId": 1,
+      "id": 7
+    },
+    {
+      "tuneId": 8,
+      "collectionId": 2,
+      "id": 8
+    },
+    {
+      "tuneId": 9,
+      "collectionId": 5,
+      "id": 9
+    },
+    {
+      "tuneId": 10,
+      "collectionId": 6,
+      "id": 10
+    },
+    {
+      "tuneId": 12,
+      "collectionId": 7,
+      "id": 12
+    },
+    {
+      "tuneId": 13,
+      "collectionId": 8,
+      "id": 13
+    },
+    {
+      "tuneId": 15,
+      "collectionId": 9,
+      "id": 15
+    },
+    {
+      "tuneId": 16,
+      "collectionId": 1,
+      "id": 16
+    },
+    {
+      "tuneId": 17,
+      "collectionId": 1,
+      "id": 17
+    },
+    {
+      "tuneId": 18,
+      "collectionId": 1,
+      "id": 18
+    },
+    {
+      "tuneId": 19,
+      "collectionId": 1,
+      "id": 19
+    },
+    {
+      "tuneId": 20,
+      "collectionId": 1,
+      "id": 20
+    },
+    {
+      "tuneId": 21,
+      "collectionId": 1,
+      "id": 21
+    },
+    {
+      "tuneId": 22,
+      "collectionId": 1,
+      "id": 22
+    },
+    {
+      "tuneId": 23,
+      "collectionId": 1,
+      "id": 23
+    },
+    {
+      "tuneId": 24,
+      "collectionId": 3,
+      "id": 24
+    },
+    {
+      "tuneId": 25,
+      "collectionId": 3,
+      "id": 25
+    },
+    {
+      "tuneId": 26,
+      "collectionId": 3,
+      "id": 26
+    },
+    {
+      "tuneId": 27,
+      "collectionId": 3,
+      "id": 27
+    },
+    {
+      "tuneId": 28,
+      "collectionId": 2,
+      "id": 28
+    },
+    {
+      "tuneId": 29,
+      "collectionId": 2,
+      "id": 29
+    },
+    {
+      "tuneId": 30,
+      "collectionId": 11,
+      "id": 30
+    },
+    {
+      "tuneId": 31,
+      "collectionId": 8,
+      "id": 31
+    },
+    {
+      "tuneId": 32,
+      "collectionId": 5,
+      "id": 32
+    },
+    {
+      "tuneId": 33,
+      "collectionId": 13,
+      "id": 33
+    }
+  ],
+  "tunings": [
+    {
+      "key": "Standard",
+      "text": "GDAE / Standard",
+      "value": "Standard",
+      "id": 1
+    },
+    {
+      "key": "Cross tuning",
+      "text": "AEAE / Cross-tuning / Sawmill",
+      "value": "Cross",
+      "id": 2
+    },
+    {
+      "key": "ADAE",
+      "text": "ADAE",
+      "value": "ADAE",
+      "id": 3
+    },
+    {
+      "key": "AEAC#",
+      "text": "AEAC#",
+      "value": "AEAC#",
+      "id": 4
+    },
+    {
+      "key": "BEGB",
+      "text": "BEGB",
+      "value": "BEGB",
+      "id": 5
+    },
+    {
+      "key": "GDAD",
+      "text": "GDAD",
+      "value": "GDAD",
+      "id": 6
+    }
+  ],
+  "photos": [
+    {
+      "id": 1,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604077419/DSC04362_xtmbod.jpg"
+    },
+    {
+      "id": 2,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604077418/615059_4782632210821_909383358_o_mb4mmb.jpg"
+    },
+    {
+      "id": 3,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604077418/254126_10150209288705773_3334529_n_lonaeb.jpg"
+    },
+    {
+      "id": 4,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604077418/564927_10151043243077242_471246640_n_ebtspw.jpg"
+    },
+    {
+      "id": 5,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604077418/11817123_10153495924565030_5026181015286445267_n_cw6c6d.jpg"
+    },
+    {
+      "id": 6,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604081643/1270317_10202335393773317_1774884711_o_luikhv.jpg"
+    },
+    {
+      "id": 7,
+      "url": "https://res.cloudinary.com/banjo/image/upload/v1604081643/857125_10205020035687512_8077124020092329385_o_kdpagw.jpg"
+    }
+  ]
+}
