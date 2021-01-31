@@ -1,3 +1,4 @@
+![TuneListScreen](./Tunelist_screen.JPG)
 This project uses JSON server, React, React Router DOM, Cloudinary and React Semantic UI
 
 create an "api" directory in the root directory of the project and create a file 'database.json'
@@ -20,7 +21,7 @@ Install the necessary packages:
 `npm install -g json-server`
 
 Once you have created the file and directory, and installed JSON server, React, and React Router DOM
-run `json-server -w database.json -p 8088` in the projects root directory.
+run `json-server -w database.json -p 8088` in the project's API directory.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
